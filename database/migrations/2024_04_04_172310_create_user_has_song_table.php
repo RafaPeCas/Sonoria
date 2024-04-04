@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_has_song', function (Blueprint $table) {
+        Schema::create('user_song', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('song_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
