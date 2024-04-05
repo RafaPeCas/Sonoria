@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('playlists', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50);
+            $table->string('visibility', 20);
+            $table->string('description', 20);
+            $table->text('image', 300)->nullable();
+            $table->boolean('fav')->default(false);
             $table->timestamps();
         });
     }
