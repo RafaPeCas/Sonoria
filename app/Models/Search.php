@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Search extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'search',
+        'user_id',
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

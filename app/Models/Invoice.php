@@ -20,4 +20,12 @@ class Invoice extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function payMethod()
+    {
+        return $this->belongsTo(PayMethod::class);
+    }
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }

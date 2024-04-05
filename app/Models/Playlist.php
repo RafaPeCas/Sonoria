@@ -12,7 +12,17 @@ class Playlist extends Model
     protected $fillable = [
         'name',
         'visibility',
-    
-    
+        'description',
+        'image',
+        'fav',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    public function songs()
+    {
+        return $this->belongsToMany(Song::class);
+    }
 }
