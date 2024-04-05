@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'birth',
     ];
 
     /**
@@ -54,5 +56,33 @@ class User extends Authenticatable
     public function paymentMethod()
     {
         return $this->hasOne(PayMethod::class);
+    }
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+    public function searches()
+    {
+        return $this->hasMany(Search::class);
+    }
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
+    }
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class, 'user_playlist');
+    }
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
+    public function reproductions()
+    {
+        return $this->hasMany(UserReproduction::class);
     }
 }

@@ -17,12 +17,12 @@ class Playlist extends Model
         'fav',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_playlist');
     }
     public function songs()
     {
-        return $this->belongsToMany(Song::class);
+        return $this->belongsToMany(Song::class, 'playlist_song');
     }
 }
