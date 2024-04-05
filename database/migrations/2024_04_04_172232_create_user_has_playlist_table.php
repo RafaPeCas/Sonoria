@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_has_playlist', function (Blueprint $table) {
+        Schema::create('user_playlist', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('playlist_id')->constrained()->onDelete('cascade');
+            $table->string('role', 20);
             $table->timestamps();
         });
     }
