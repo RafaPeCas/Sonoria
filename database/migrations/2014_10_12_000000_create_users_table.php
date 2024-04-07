@@ -15,7 +15,9 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('name', 80);
             $table->text('email', 100)->unique();
+            $table->datetime('email_verified_at')->nullable();
             $table->text('password');
+            $table->text('remember_token')->nullable();
             $table->text('gender', 30)->nullable();
             $table->date('birth')->nullable();
             $table->timestamps();

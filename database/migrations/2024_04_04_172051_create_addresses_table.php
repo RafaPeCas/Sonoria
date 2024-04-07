@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('city', 45);
             $table->string('street', 60);
             $table->integer('number');
-            $table->integer('pc');
+            $table->string('pc', 20);
             $table->string('country', 45);
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class PayMethod extends Model
         'card_number',
         'cvv',
         'deleted',
-       
+
     ];
 
 
@@ -32,4 +32,6 @@ public function invoices()
     {
         return $this->hasMany(Invoice::class);
     }
+    protected $table = 'PayMethods';
 }
+

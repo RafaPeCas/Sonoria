@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('visibility', 20);
-            $table->string('description', 20);
+            $table->string('description', 150);
             $table->text('image', 300)->nullable();
             $table->boolean('fav')->default(false);
             $table->timestamps();

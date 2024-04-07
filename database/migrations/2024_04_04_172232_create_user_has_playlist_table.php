@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('playlist_id')->constrained()->onDelete('cascade');
-            $table->string('role', 20);
+            $table->string('role', 20)->default('Guest');
             $table->timestamps();
         });
     }
