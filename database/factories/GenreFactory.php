@@ -15,8 +15,7 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->randomElement(['pop', 'rock', 'rap', 'hip-hop', 'alternative']),
-            // Define aquí otros atributos si los tienes
+            'name' => $this->faker->unique()->word(), // Opción aleatoria si es necesario
         ];
     }
 }
