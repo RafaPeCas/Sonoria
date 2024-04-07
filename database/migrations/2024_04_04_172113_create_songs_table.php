@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('reproductions')->default(0);
             $table->text('image')->nullable();
             $table->foreignId('album_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

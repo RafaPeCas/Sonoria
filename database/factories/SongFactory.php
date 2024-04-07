@@ -1,5 +1,4 @@
 <?php
-// database/factories/SongFactory.php
 
 namespace Database\Factories;
 
@@ -32,11 +31,7 @@ class SongFactory extends Factory
             'image' => $this->faker->imageUrl(),
             'album_id' => function () {
                 return \App\Models\Album::factory()->create()->id;
-            },'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
+            }
         ];
     }
 }
-
-?>

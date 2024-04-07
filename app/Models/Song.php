@@ -32,13 +32,14 @@ class Song extends Model
     {
     return $this->belongsTo(Album::class);
     }
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_song');
-    }
+
     public function reproductions()
     {
         return $this->hasMany(UserReproduction::class);
     }
-   
+
+    public function users()
+    {
+        return $this->hasMany(UserSong::class);
+    }
 }

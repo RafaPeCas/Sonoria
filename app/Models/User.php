@@ -69,10 +69,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Search::class);
     }
-    public function songs()
-    {
-        return $this->hasMany(Song::class);
-    }
+
     public function playlists()
     {
         return $this->belongsToMany(Playlist::class, 'user_playlist');
@@ -84,5 +81,9 @@ class User extends Authenticatable
     public function reproductions()
     {
         return $this->hasMany(UserReproduction::class);
+    }
+    public function songs()
+    {
+        return $this->hasMany(UserSong::class);
     }
 }

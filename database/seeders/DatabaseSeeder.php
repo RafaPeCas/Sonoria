@@ -17,6 +17,7 @@ use App\Models\Search;
 use App\Models\Song;
 use App\Models\Subscription;
 use App\Models\UserReproduction;
+use App\Models\UserSong;
 
 class DatabaseSeeder extends Seeder
 {
@@ -46,9 +47,6 @@ class DatabaseSeeder extends Seeder
             // Seed searches for each user
             $user->searches()->save(Search::factory()->make());
 
-            // Seed songs for each user
-            $user->songs()->save(Song::factory()->make());
-
             // Seed playlists for each user
             $user->playlists()->save(Playlist::factory()->make());
 
@@ -57,6 +55,9 @@ class DatabaseSeeder extends Seeder
 
             // Seed reproductions for each user
             $user->reproductions()->save(UserReproduction::factory()->make());
+
+            $user->songs()->save(UserSong::factory()->make());
+
         });
 
         // Seed genres
