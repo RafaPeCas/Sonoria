@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get("/admin", function(){
     return view("admin.index");
 });
+
+Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
