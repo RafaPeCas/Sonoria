@@ -1,4 +1,4 @@
-@extends("_layouts.admin.template")
+@extends("_layouts.template")
 
 @section("title", "Index de admin")
 
