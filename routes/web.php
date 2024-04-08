@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::get("/admin", function(){
     return view("admin.index");
 });
+Route::get('/search', [SearchController::class, 'search'])->name('search');
