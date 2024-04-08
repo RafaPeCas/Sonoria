@@ -1,8 +1,10 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class AddressFactory extends Factory
 {
@@ -21,7 +23,9 @@ class AddressFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 10), 
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
             'province' => $this->faker->state,
             'city' => $this->faker->city,
             'street' => $this->faker->streetAddress,
@@ -31,4 +35,3 @@ class AddressFactory extends Factory
         ];
     }
 }
-?>

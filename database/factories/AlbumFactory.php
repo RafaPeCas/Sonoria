@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Album;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class AlbumFactory extends Factory
 {
@@ -25,7 +26,7 @@ class AlbumFactory extends Factory
             'name' => $this->faker->word,
             'image' => $this->faker->imageUrl(),
             'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
+                return User::factory()->create()->id;
             },
         ];
     }
