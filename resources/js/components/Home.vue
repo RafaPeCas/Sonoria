@@ -3,6 +3,7 @@ let userImage = "/img/userPictures/default.png"
 </script>
 
 <template>
+
     <aside>
         <div class="display d-flex flex-column align-items-center">
             <button>Buscador</button>
@@ -63,6 +64,7 @@ let userImage = "/img/userPictures/default.png"
             </div>
         </div>
     </section>
+    
 </template>
 
 <style scoped>

@@ -5,7 +5,7 @@
 @section('links')
     @vite('resources/js/reproduction_panel.js')
     @vite('resources/js/home.js')
-    <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
 @endsection
 
 @section('content')
