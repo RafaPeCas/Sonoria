@@ -26,7 +26,11 @@ Route::get("/home", function(){
     return view("home");
 });
 
+
 Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
+Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
+
+
 Route::get('user_data', [UserController::class, 'seeData'])->name('user.data');
 
 Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
