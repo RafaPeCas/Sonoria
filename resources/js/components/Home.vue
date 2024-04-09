@@ -81,7 +81,7 @@ aside {
     padding-bottom: 150px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .contentHeader {
