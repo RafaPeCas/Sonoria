@@ -67,8 +67,20 @@ class SongController extends Controller
     if (isset($request['playlists'])) {
         $song->playlists()->attach($request['playlists']);
     }
-    
+
     return redirect()->back();
 }
 
+
+
+public function getSongById($id)
+{
+    $song = Song::find($id);
+
+    if (!$song) {
+        return view('error')->with('message', 'Canción no encontrada');
+    }
+
+    return view('cancion')->with('song', $song);
+}
 }

@@ -39,6 +39,25 @@
                         </div>
 
                         <div class="form-group row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('birthdate') }}</label>
+                            <div class="col-md-6">
+                                <input id="birthdate" type="date" class="form-input rounded-md shadow-sm mt-1 block w-full" name="birthdate" :value="old('birthdate')" required autofocus />
+
+                               
+                            </div>
+
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="gender" class="block font-medium text-sm text-gray-700">Género</label>
+                            <select id="gender" name="gender" class="block font-medium text-sm text-gray-700" required>
+                                <option value="male">Masculino</option>
+                                <option value="female">Femenino</option>
+                                <option value="other">Otro</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
