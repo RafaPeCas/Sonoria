@@ -78,6 +78,6 @@ public function getSongById($id)
         return view('error')->with('message', 'Canción no encontrada');
     }
 
-    return view('cancion')->with('song', $song);
+    return view('temp/cancion')->with('song', $song);
 }
 }
