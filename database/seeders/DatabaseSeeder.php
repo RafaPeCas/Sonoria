@@ -18,6 +18,7 @@ use App\Models\Song;
 use App\Models\Subscription;
 use App\Models\UserReproduction;
 use App\Models\UserSong;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        $user = new User();
+        $user->name = 'admin';
+        $user->email = 'admin@admin.com';
+        $user->password = Hash::make('admin');
+        $user->gender = 'male'; 
+        $user->birth = '1990-01-01'; 
+        $user->last_song = null; 
+        $user->save();
+
         // Seed users
         User::factory(10)->create()->each(function ($user) {
             // Seed addresses for each user
@@ -58,6 +69,8 @@ class DatabaseSeeder extends Seeder
 
             $user->songs()->save(UserSong::factory()->make());
         });
+
+
 
         collect([
             'pop', 'rock', 'rap', 'hip-hop', 'alternative', 'indie', 'jazz', 'blues', 'country',
