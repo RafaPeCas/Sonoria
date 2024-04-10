@@ -1,13 +1,9 @@
-<script setup>
-let image = "/img/cover/test.jpg";
-</script>
-
-<template>
+<section id="reproductionPanel">
     <section id="reproductionPanel">
         <div id="songInfo">
             <div class="d-flex custom align-items-center h-100 pl-2">
                 <div>
-                    <img :src=image alt="">
+                    <img src="/img/cover/test.jpg" alt="">
                 </div>
                 <div>
                     <h2>Absolution</h2>
@@ -22,30 +18,9 @@ let image = "/img/cover/test.jpg";
                     </h1>
                 </div>
                 <div>
-                    
+
                 </div>
             </div>
         </div>
     </section>
-</template>
-
-<style scoped>
-img {
-    width: 100px;
-    height: 100px;
-}
-
-.custom {
-    justify-content: space-evenly;
-    color: white;
-}
-
-#songInfo{
-    width: 400px;
-}
-
-#mediaPlayer{
-    flex-grow: 1;
-}
-
-</style>
+</section>

@@ -13,3 +13,88 @@
     height: 100%;
     display: flex;
 }
+
+aside {
+    width: 400px;
+    height: 100%;
+    background-color: #d9d9d97b;
+
+    @media (max-width: 1023px) {
+        width: 100px;
+    }
+}
+
+#content {
+    flex-grow: 1;
+    padding-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.contentHeader {
+    width: 100%;
+    height: 100px;
+    flex-direction: row-reverse;
+    padding-right: 30px;
+}
+
+.userIcon {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.contentBody {
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: white;
+}
+
+.mixButton {
+    width: 25%;
+    height: 150px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: rgb(0, 0, 0) 5px 5px 5px;
+}
+
+hr {
+    margin-top: 0;
+}
+
+.display {
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    padding-bottom: 150px;
+}
+
+.display button {
+    width: 70%;
+    height: 60px;
+    border-radius: 15px;
+    box-shadow: rgb(52, 52, 52) 5px 5px 5px 5px;
+    border: none;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
+
+.custom {
+    justify-content: space-evenly;
+    color: white;
+}
+
+#songInfo {
+    width: 400px;
+}
+
+#mediaPlayer {
+    flex-grow: 1;
+}

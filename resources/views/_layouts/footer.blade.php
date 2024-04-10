@@ -1,7 +1,6 @@
 <footer>
-    <section id="reproductionPanel">
-        
-    </section>
+   @yield("footer")
 </footer>
 </body>
+
 </html>
