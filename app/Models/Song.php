@@ -21,7 +21,7 @@ class Song extends Model
     ];
     public function genres()
     {
-    return $this->belongsToMany(Genre::class, 'genre_song');
+        return $this->belongsToMany(Genre::class, 'genre_song');
     }
 
     public function playlists()
@@ -30,7 +30,7 @@ class Song extends Model
     }
     public function album()
     {
-    return $this->belongsTo(Album::class);
+        return $this->belongsTo(Album::class);
     }
 
     public function reproductions()
@@ -41,5 +41,10 @@ class Song extends Model
     public function users()
     {
         return $this->hasMany(UserSong::class);
+    }
+
+    public function lastSong()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -46,7 +46,8 @@ class User extends Authenticatable
     ];
 
 
-    public function addresses(){
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
     }
     public function albums()
@@ -85,5 +86,9 @@ class User extends Authenticatable
     public function songs()
     {
         return $this->hasMany(UserSong::class);
+    }
+    public function lastSong()
+    {
+        return $this->hasOne(Song::class);
     }
 }

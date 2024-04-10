@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('remember_token')->nullable();
             $table->text('gender', 30)->nullable();
             $table->date('birth')->nullable();
+            $table->unsignedBigInteger('last_song')->nullable();
             $table->timestamps();
         });
     }
