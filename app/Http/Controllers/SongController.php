@@ -34,11 +34,8 @@ class SongController extends Controller
     }
 
     $file = $request->file('file');
-    $fileName = $file->getClientOriginalName();
+    $base64File = base64_encode(file_get_contents($file));
 
-    if (!Storage::exists('canciones/' . $fileName)) {
-        $file->storeAs('canciones', $fileName);
-    }
 
     $image = $request->file('image');
     $imageName = $image->getClientOriginalName();
@@ -48,7 +45,7 @@ class SongController extends Controller
     }
 
      $song = Song::create([
-        'file' => 'canciones/' . $fileName,
+        'file' => $base64File,
         'explicit' => $request['explicit'] ?? false,
         'active' => $request['active'] ?? true,
         'hidden' => $request['hidden'] ?? false,

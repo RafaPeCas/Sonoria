@@ -13,10 +13,13 @@
     <p>No hay imagen disponible para esta canción</p>
 @endif
 
-<audio controls>
-    <source src="{{ asset('/' . $song->file) }}" type="audio/mpeg">
-    Your browser does not support the audio element.
+<audio controls="controls" autobuffer="autobuffer" autoplay="autoplay">
+    <source src="data:audio/wav;base64,{{ $song->file }}" />
 </audio>
+
+
+
+
 <p>Reproducciones: {{ $song->reproductions }}</p>
 <p>ID del álbum: {{ $song->album_id }}</p>
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
-            $table->text('file');
             $table->boolean('explicit')->default(false);
             $table->boolean('active')->default(true);
             $table->boolean('hidden')->default(false);
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('album_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE songs ADD file LONGBLOB");
+
     }
 
     /**
