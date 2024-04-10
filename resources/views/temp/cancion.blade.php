@@ -7,11 +7,9 @@
 <p>Activa: {{ $song->active ? 'Sí' : 'No' }}</p>
 <p>Oculta: {{ $song->hidden ? 'Sí' : 'No' }}</p>
 <p>Nombre: {{ $song->name }}</p>
-@if ($song->image)
-    <img src="{{ asset('/' . $song->image) }}" alt="Imagen de la canción">
-@else
-    <p>No hay imagen disponible para esta canción</p>
-@endif
+
+<img style='display:block; width:100px;height:100px;' id='base64image'
+       src='data:image/jpeg;base64,{{ $song->image}}' />
 
 <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay">
     <source src="data:audio/wav;base64,{{ $song->file }}" />

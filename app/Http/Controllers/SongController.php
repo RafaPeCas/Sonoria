@@ -34,23 +34,20 @@ class SongController extends Controller
     }
 
     $file = $request->file('file');
-    $base64File = base64_encode(file_get_contents($file));
+    $songFile = base64_encode(file_get_contents($file));
 
 
     $image = $request->file('image');
-    $imageName = $image->getClientOriginalName();
+    $imageFile = base64_encode(file_get_contents($image));
 
-    if (!Storage::exists('imagenes/' . $imageName)) {
-        $image->storeAs('imagenes', $imageName);
-    }
 
      $song = Song::create([
-        'file' => $base64File,
+        'file' => $songFile,
         'explicit' => $request['explicit'] ?? false,
         'active' => $request['active'] ?? true,
         'hidden' => $request['hidden'] ?? false,
         'name' => $request['name'],
-        'image' => 'imagenes/' . $imageName,
+        'image' => $imageFile,
         'reproductions' => $request['reproductions'] ?? 0,
         'album_id' => $request['album_id'],
     ]);
@@ -65,7 +62,7 @@ class SongController extends Controller
         $song->playlists()->attach($request['playlists']);
     }
 
-    return redirect()->back();
+    return view('temp/cancion')->with('song', $song);
 }
 
 

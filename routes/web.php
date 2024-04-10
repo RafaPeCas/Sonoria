@@ -27,7 +27,7 @@ Route::get("/home", function(){
 });
 
 
-Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
+Route::post('/song', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
 
 
