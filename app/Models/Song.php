@@ -43,8 +43,7 @@ class Song extends Model
         return $this->hasMany(UserSong::class);
     }
 
-    public function lastSong()
-    {
-        return $this->belongsTo(User::class);
+    public function lastSong(){
+        return $this->belongsTo(User::class, "last_song");
     }
 }

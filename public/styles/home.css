@@ -98,3 +98,15 @@ img {
 #mediaPlayer {
     flex-grow: 1;
 }
+
+.songTitle {
+    width: 200px; /* Ancho máximo del contenedor */
+    white-space: nowrap; /* Evita el retorno automático de línea */
+    overflow-x: auto; /* Muestra el scrollbar horizontal cuando sea necesario */
+    overflow-y: hidden; /* Oculta cualquier overflow vertical (no se espera en este caso) */
+}
+
+.songTitle h2 {
+    display: inline-block; /* Permite que el texto se comporte como un bloque en línea */
+    margin: 0; /* Elimina cualquier margen predeterminado */
+}

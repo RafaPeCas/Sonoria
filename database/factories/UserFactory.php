@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'birth' => fake()->date(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'last_song' => $this->faker->randomNumber(1, 40)
+            'last_song' => null
         ];
     }
 

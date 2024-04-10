@@ -89,6 +89,6 @@ class User extends Authenticatable
     }
     public function lastSong()
     {
-        return $this->hasOne(Song::class);
+        return $this->hasOne(Song::class, "id", "last_song");
     }
 }
