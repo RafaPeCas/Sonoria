@@ -3,8 +3,8 @@
 @section('title', 'home')
 
 @section('links')
-    @vite('resources/js/welcome.js')
     <link rel="stylesheet" href="{{asset("styles/welcome.css")}}">
+    <script defer src="{{asset("js/userLogInRequest.js")}}"></script>
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
                     <img src="img/logos/logo_texto.png" alt="">
                 </div>
                 <div class="links d-flex">
-                    <a href="/login">Log in</a>
+                    <a class="color-white pointer" onclick="userLoginRequest()">Log in</a>
                     <a href="/register">Register</a>
                 </div>
             </div>

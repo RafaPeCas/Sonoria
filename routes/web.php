@@ -1,8 +1,10 @@
 <?php
-use App\Http\Controllers\SongController;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,12 +24,16 @@ Route::get("/admin", function(){
     return view("admin.index");
 });
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 Route::get("/home", function(){
     return view("home");
 });
 
+Route::get("/spotify", function(){
+    return view("temp.spotify");
+});
 
-Route::post('/songs', [SongController::class, 'store'])->name('songs.store');
+Route::post('/musica', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
 
 

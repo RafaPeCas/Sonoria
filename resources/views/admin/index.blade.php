@@ -3,7 +3,7 @@
 @section("title", "Index de admin")
 
 @section("links")
-    @vite("resources/js/show_song.js")
+
 @endsection
 
 @section("content")
