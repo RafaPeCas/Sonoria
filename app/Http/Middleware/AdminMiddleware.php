@@ -17,8 +17,8 @@ class AdminMiddleware
     {
         //Guardo en esta variable si el usuario esta autenticado
         $user = auth()->user();
-        //Si el usuario esta autenticado, tiene un rol asignado y ese rol es exactamente igual a admin, puede acceder a la vista asignada
-        if ($user && $user->role && $user->role->rol === 'admin') {
+        //Si el usuario esta autenticado, tiene un id asignado, ese id es 1 y si tiene email y ese email es admin...., puede acceder a la vista asignada
+        if ($user && $user->id->id===1 && $user->email->email === 'admin@admin.com') {
             return $next($request);
         }else{
             //En caso contrario se le redirigira a la ruta principal
