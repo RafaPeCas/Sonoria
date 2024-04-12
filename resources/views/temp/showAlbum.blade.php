@@ -33,9 +33,6 @@
                         <label for="hidden">Oculta:</label>
                         <input type="checkbox" id="hidden" name="hidden" value="1"><br>
 
-                        <label for="album_id">ID del álbum:</label><br>
-                        <input type="number" id="album_id" name="album_id" required><br>
-
                         <label for="genres">Géneros:</label><br>
 
                         <select id="genres" name="genres[]" multiple>
@@ -44,13 +41,11 @@
                             <option value="3">Rap</option>
                         </select><br>
 
-
+                        <input type="hidden" id="album_id" name="album_id" value="{{$album->id}}"><br>
 
                         <input type="submit" value="Guardar canción">
                     </form>
-
-
-     </div>
+    </div>
     </main>
 
 @include('_layouts.footer')

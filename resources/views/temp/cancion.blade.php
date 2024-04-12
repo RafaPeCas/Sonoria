@@ -8,8 +8,6 @@
 <p>Oculta: {{ $song->hidden ? 'Sí' : 'No' }}</p>
 <p>Nombre: {{ $song->name }}</p>
 
-<img style='display:block; width:100px;height:100px;' id='base64image'
-       src='data:image/jpeg;base64,{{ $song->image}}' />
 
 <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay">
     <source src="data:audio/wav;base64,{{ $song->file }}" />

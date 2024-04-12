@@ -20,7 +20,6 @@ class SongController extends Controller
         'hidden' => 'boolean',
         'name' => 'required|string|max:255',
         'reproductions' => 'integer|min:0',
-        'image' => 'nullable|image',
         'album_id' => 'required|exists:albums,id',
         'genres' => 'array',
         'genres.*' => 'exists:genres,id',
@@ -37,8 +36,6 @@ class SongController extends Controller
     $songFile = base64_encode(file_get_contents($file));
 
 
-    $image = $request->file('image');
-    $imageFile = base64_encode(file_get_contents($image));
 
 
      $song = Song::create([
@@ -47,7 +44,6 @@ class SongController extends Controller
         'active' => $request['active'] ?? true,
         'hidden' => $request['hidden'] ?? false,
         'name' => $request['name'],
-        'image' => $imageFile,
         'reproductions' => $request['reproductions'] ?? 0,
         'album_id' => $request['album_id'],
     ]);
