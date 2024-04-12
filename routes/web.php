@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SpotifyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +31,7 @@ Route::get("/home", function(){
     return view("home");
 });
 
-Route::get("/spotify", function(){
-    return view("temp.spotify");
-});
+Route::get("/spotify", [SpotifyController::class, "spotifyCallback"])->name("spotify");
 
 Route::post('/musica', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
