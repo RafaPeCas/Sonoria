@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Song;
 use App\Models\Genre;
 use App\Models\Playlist;
+use Illuminate\Support\Facades\Redirect;
 
 class SongController extends Controller
 {
@@ -58,7 +59,7 @@ class SongController extends Controller
         $song->playlists()->attach($request['playlists']);
     }
 
-    return view('temp/cancion')->with('song', $song);
+    return Redirect::route('songs.getSongById', ['id' => $song->id]);
 }
 
 
