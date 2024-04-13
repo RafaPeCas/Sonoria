@@ -46,8 +46,15 @@
                     </div>
                 </div>
                 <div class="form-group row mb-3 justify-content-center">
-                  
-                    <div class="col-md-10 ">
+                    <div class="col-md-5 mt-1">
+                        <input id="birthdate" type="date" placeholder="Fecha de Nacimiento" class="custom-input form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}" required autofocus style="text-align: center;">
+                        @error('birthdate')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-5 ">
                         <select id="gender" name="gender" class="custom-input form-control @error('gender') is-invalid @enderror" required>
                             <option value="" disabled selected hidden>Género</option>
                             <option value="male">Masculino</option>
