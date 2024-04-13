@@ -72,9 +72,17 @@ class UserController extends Controller
         return view("user/userEditData", compact("user"));
     }
 
-    public function seeData(){
-        $user=Auth::user();
+    public function seeData()
+    {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
 
-        return view("user/userData", compact('user'));
+        // Cargar todas las playlists asociadas al usuario
+        $playlists = $user->playlists;
+
+        // Devolver la vista con el usuario y sus playlists
+        return view("user/userData", compact('user', 'playlists'));
     }
+
+
 }
