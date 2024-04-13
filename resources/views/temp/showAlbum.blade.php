@@ -4,7 +4,7 @@
 
 <main>
 
-    <div id="home">
+    <div class="text-white" id="home">
 
         <h1 class="text-white">Album</h1>
 
@@ -13,8 +13,18 @@
         <img style='display:block; width:100px;height:100px;' id='base64image'
                src='data:image/jpeg;base64,{{ $album->image}}' />
 
+               @if ($album->songs->count() > 0)
+               <h2>Canciones del álbum:</h2>
+               <ul>
+                   @foreach ($album->songs as $song)
+                   <li><a href="{{ route('songs.getSongById', ['id' => $song->id]) }}" style=" color: inherit; ">{{ $song->name }}</a></li>
+                   @endforeach
+               </ul>
+             @else
+               <p>No hay canciones en este álbum.</p>
+            @endif
 
-
+            <h2>Añadir canción:</h2>
                     <form class="text-white" action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf <!-- Token CSRF para protección contra falsificación de solicitudes entre sitios -->
 

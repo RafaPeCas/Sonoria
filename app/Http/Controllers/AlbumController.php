@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Album;
+use App\Models\Song;
+
 
 class AlbumController extends Controller{
 
@@ -38,7 +40,7 @@ class AlbumController extends Controller{
 
 public function getAlbumById($id)
 {
-    $album = Album::find($id);
+    $album = Album::with('songs')->find($id);
 
     if (!$album) {
         return view('error')->with('message', 'Canción no encontrada');

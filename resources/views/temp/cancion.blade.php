@@ -1,6 +1,8 @@
-<div id="home">
+@include('_layouts.header')
+<main>
+<div class="text-white" id="home">
 
-<h1 class="text-white">Prueba</h1>
+<h1>Prueba</h1>
 
 <h2>{{ $song->title }}</h2>
 <p>Explícita: {{ $song->explicit ? 'Sí' : 'No' }}</p>
@@ -21,3 +23,6 @@
 
 
     </div>
+
+</main>
+@include('_layouts.footer')

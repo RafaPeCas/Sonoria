@@ -1,3 +1,9 @@
+
+
+@include('_layouts.header')
+
+<main>
+<div class="text-white">
 <h2>Crear nuevo álbum</h2>
 <form action="{{ route('albums.store') }}" method="POST" enctype="multipart/form-data">
     @csrf <!-- Token CSRF para protección contra falsificación de solicitudes entre sitios -->
@@ -10,3 +16,7 @@
 
     <input type="submit" value="Guardar álbum">
 </form>
+</div>
+</main>
+
+@include('_layouts.footer')
