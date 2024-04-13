@@ -80,21 +80,3 @@ hr {
     box-shadow: rgb(52, 52, 52) 5px 5px 5px 5px;
     border: none;
 }
-
-img {
-    width: 100px;
-    height: 100px;
-}
-
-.custom {
-    justify-content: space-evenly;
-    color: white;
-}
-
-#songInfo {
-    width: 400px;
-}
-
-#mediaPlayer {
-    flex-grow: 1;
-}

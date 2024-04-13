@@ -19,11 +19,11 @@ return new class extends Migration
             $table->boolean('hidden')->default(false);
             $table->string('name', 255);
             $table->integer('reproductions')->default(0);
-            $table->text('image')->nullable();
             $table->foreignId('album_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
         DB::statement("ALTER TABLE songs ADD file LONGBLOB");
+        DB::statement("ALTER TABLE songs ADD image LONGBLOB");
 
     }
 

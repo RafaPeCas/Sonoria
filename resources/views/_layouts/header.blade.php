@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('styles/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
     <script defer src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+    
     @yield('links')
 </head>
 
@@ -19,3 +20,4 @@
 
         </nav>
     </header>
+
