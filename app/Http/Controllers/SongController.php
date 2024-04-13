@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Song;
 use App\Models\Genre;
 use App\Models\Playlist;
+use Illuminate\Support\Facades\Redirect;
 
 class SongController extends Controller
 {
@@ -20,7 +21,6 @@ class SongController extends Controller
         'hidden' => 'boolean',
         'name' => 'required|string|max:255',
         'reproductions' => 'integer|min:0',
-        'image' => 'nullable|image',
         'album_id' => 'required|exists:albums,id',
         'genres' => 'array',
         'genres.*' => 'exists:genres,id',
@@ -34,23 +34,17 @@ class SongController extends Controller
     }
 
     $file = $request->file('file');
-    $base64File = base64_encode(file_get_contents($file));
+    $songFile = base64_encode(file_get_contents($file));
 
 
-    $image = $request->file('image');
-    $imageName = $image->getClientOriginalName();
 
-    if (!Storage::exists('imagenes/' . $imageName)) {
-        $image->storeAs('imagenes', $imageName);
-    }
 
      $song = Song::create([
-        'file' => $base64File,
+        'file' => $songFile,
         'explicit' => $request['explicit'] ?? false,
         'active' => $request['active'] ?? true,
         'hidden' => $request['hidden'] ?? false,
         'name' => $request['name'],
-        'image' => 'imagenes/' . $imageName,
         'reproductions' => $request['reproductions'] ?? 0,
         'album_id' => $request['album_id'],
     ]);
@@ -65,7 +59,7 @@ class SongController extends Controller
         $song->playlists()->attach($request['playlists']);
     }
 
-    return redirect()->back();
+    return Redirect::route('songs.getSongById', ['id' => $song->id]);
 }
 
 
