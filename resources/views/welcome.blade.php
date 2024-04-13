@@ -3,7 +3,6 @@
 @section('title', 'home')
 
 @section('links')
-    @vite('resources/js/welcome.js')
     <link rel="stylesheet" href="{{asset("styles/welcome.css")}}">
 @endsection
 

@@ -35,7 +35,7 @@ class AlbumController extends Controller{
 
     ]);
 
-    return view('temp/showAlbum')->with('album', $album);
+    return view('album/show')->with('album', $album);
 }
 
 public function getAlbumById($id)
@@ -46,7 +46,7 @@ public function getAlbumById($id)
         return view('error')->with('message', 'Canción no encontrada');
     }
 
-    return view('temp/showAlbum')->with('album', $album);
+    return view('album/show')->with('album', $album);
 }
 
 }
