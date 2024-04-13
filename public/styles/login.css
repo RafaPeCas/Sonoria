@@ -1,6 +1,12 @@
-#background{
+html, body {
     height: 100%;
- width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#background{
+    height: 100%!important;
+ width: 100%!important;
     background: rgb(124, 16, 16);
     background: -moz-linear-gradient(
         145deg,
@@ -17,70 +23,109 @@
         rgba(124, 16, 16, 1) 0%,
         rgba(8, 0, 91, 1) 100%
     );
-    background-repeat: no-repeat;
-    background-size:cover;
-    
+    background-repeat: no-repeat !important;
+    background-size:cover !important;
+   
 }
+
 
 .sonoria{
     margin-right: 51%;
 }
+
 .borde{
 margin-top: 6%;
 margin-bottom: 4%;
-color: blueviolet; }
+color: rgb(245, 242, 247); 
+}
+
 .log{
     padding: 8%;
 }
+.log2{
+
+    margin-top: 9.49%;
+}
+
+.backColor{
+    padding-top:5.55%;
+}
 
 .space{
-    margin-top: -2%;
+    margin-top: -8%;
     margin-bottom: 5%;
-    margin-left: 28%;
+    margin-left: 25%;
 }
+.space2{
+    margin-top: -16%;
+    margin-bottom: 7%;
+    margin-left: 25%;
+}
+
 .custom-input {
-     width: 100% !important;
-    height:60% !important;
-    background-color: transparent !important;
+    margin-right: 20%;
+    width: 100% !important;
+    height: 80% !important;
+    background-color: rgba(255, 255, 255, 0.266) !important; 
     border: none !important;
-    outline:none !important;
-    border-radius: 40px !important;
+    outline: none !important;
+    border-radius: 20px !important; 
     font-size: 17px !important;
-    border: 1px solid  rgb(162, 0, 255) !important;
-    color: rgb(0, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
     padding: 20px 45px 20px 20px !important;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5); 
 }
 
-.presentation{
-    width: 420px;
+
+
+
+.presentation {
+    max-width: 22px;
     color: rgb(0, 0, 0);
-    border-radius: 10px;
     padding: 30px 40px;
-
-background: rgba(248, 245, 248, 0.813);
-border-radius: 16px;
-
-backdrop-filter: blur(8.2px);
--webkit-backdrop-filter: blur(8.2px);
-
+    background: rgba(112, 109, 112, 0.5);
+    border-radius: 25px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(8.2px);
+    border: none; 
 }
+
+
 
 
 .login-button {
-    width: 50%;
-    height: 40px;
-
+    width: 80px;
+    height: 80px; 
     border-width: 2.5px;
     outline: none;
-    border-radius: 40px;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
     box-shadow: 0px 0px 18px 2px rgba(215, 124, 215, 0.468);
-    font-size: 16px;
-    color: rgb(35, 30, 30);
-    font-weight: 640;
+
+    color: transparent !important; 
+    background-color: transparent !important; 
+    background-position: center !important;
+   
 }
 
-.login-button:hover {
-    background-color: rgba(223, 183, 230, 0.537);
-    color: rgb(135, 66, 66);
-    border: 2px solid rgb(135, 66, 66);
+.login-button img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+
+
+.custom-input option {
+    background-color: rgb(54, 54, 54); 
+    color: rgb(224, 216, 216); 
+}
+
+.color{
+    color:aliceblue !important;
+
+
+}
+.custom-input::placeholder {
+    color: #ffffff !important; 
 }

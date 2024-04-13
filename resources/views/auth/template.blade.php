@@ -22,7 +22,7 @@
     <div id="app" >
     
 
-    <main class="pt-4">
+    <main class="backColor">
         @yield('content')
     </main>
     </div>
