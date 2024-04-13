@@ -1,0 +1,30 @@
+#songInfo {
+    width: 400px;
+}
+
+#mediaPlayer {
+    flex-grow: 1;
+}
+
+.songTitle {
+    width: 200px;
+    white-space: nowrap; 
+    overflow-x: auto;  
+    overflow-y: hidden; 
+}
+
+.songTitle h2 {
+    display: inline-block; 
+    margin: 0; 
+}
+
+.coverImg {
+    width: 100px;
+    height: 100px;
+}
+
+.custom {
+    justify-content: space-evenly;
+    color: white;
+}
+
