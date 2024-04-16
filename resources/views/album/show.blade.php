@@ -27,6 +27,8 @@
                 </div>
             </div>
         </div>
+
+
     </section>
 
     <section class="albumControls">
@@ -38,7 +40,30 @@
             <button class="optionsButton"></button>
         </div>
     </section>
+ <!-- Aquí comienza el formulario para agregar una nueva canción -->
+ <form class="text-white" action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="album_id" value="{{ $album->id }}">
 
+    <label for="file">Archivo de canción:</label>
+    <input type="file" id="file" name="file" required>
+    <br>
+
+    <label for="explicit">Explícita:</label>
+    <input type="checkbox" id="explicit" name="explicit" value="1"><br>
+
+    <label for="active">Activa:</label>
+    <input type="checkbox" id="active" name="active" value="1">
+
+    <label for="hidden">Oculta:</label>
+    <input type="checkbox" id="hidden" name="hidden" value="1"><br>
+
+    <label for="name">Nombre de la canción:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <button type="submit">Agregar Canción</button>
+</form>
     @if ($album->songs->count() > 0)
         <table class="text-white w-100 songsList">
             <thead>
