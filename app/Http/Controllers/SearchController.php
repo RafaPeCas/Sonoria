@@ -7,18 +7,22 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
+    public function searchSong(Request $request)
     {
         // Obtener el término de búsqueda del formulario
         $term = $request->input('term');
 
-        // Limpiar la variable $songs antes de asignarle nuevos resultados
-        unset($songs);
-
         // Buscar canciones que coincidan con el término de búsqueda
         $songs = Song::where('name', 'like', '%' . $term . '%')->get();
 
-        // Pasar los resultados a la vista
-        return view('search_results', ['songs' => $songs, 'term' => $term]);
+        // Devolver los resultados en formato HTML
+        $html = '<ul>';
+        foreach ($songs as $song) {
+            $html .= '<li>' . $song->name . '</li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
     }
+
 }
