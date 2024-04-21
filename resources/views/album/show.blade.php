@@ -81,7 +81,7 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>
-                            <a href="#" class="song-link" data-src="data:audio/wav;base64,{{ $song->file }}"
+                            <a href="#" class="song-link" data-id="{{$song->id}}" data-src="data:audio/wav;base64,{{ $song->file }}"
                                 style="color: inherit;">
                                 {{ $song->name }}
                             </a>
@@ -95,6 +95,7 @@
                     </tr>
                 @endforeach
             </tbody>
+
         </table>
     @else
         <p>No hay canciones en este álbum.</p>
