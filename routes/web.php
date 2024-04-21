@@ -24,7 +24,11 @@ Route::get('/', function () {
 Route::get("/admin", function(){
     return view("admin.index");
 });
-Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/searchSong', [SearchController::class, 'searchSong'])->name('searchSong');
+
+Route::get("/search", function(){
+    return view("temp.search_results");
+});
 Route::get("/home", function(){
     return view("home");
 });
