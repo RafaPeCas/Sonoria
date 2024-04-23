@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -48,7 +49,7 @@ class UserController extends Controller
                     //Si introduce email  existente le salta el mensaje de error
                     if ($exception->errorInfo[1] === 1062) {
 
-                    throw ValidationException::withMessages(['email' => 'El correo electrónico  ya está en uso']);
+                        throw ValidationException::withMessages(['email' => 'El correo electrónico  ya está en uso']);
                     } else {
                         // Manejar otros errores de la base de datos
                         // Por ejemplo, podrías registrar el error o redirigir a una página de error general
@@ -84,5 +85,14 @@ class UserController extends Controller
         return view("user/userData", compact('user', 'playlists'));
     }
 
+    public function show($id)
+    {
+        $user = User::find($id);
 
+        if (!$user) {
+            abort(404, 'Usuario no encontrado');
+        }
+
+        return view('user.show', compact('user'));
+    }
 }
