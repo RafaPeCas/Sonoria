@@ -36,7 +36,7 @@ class UserController extends Controller
         if ($user) {
             // Verificar si el usuario ha actualizado algún campo
             if ($request->filled('name') || $request->filled('email') || $request->filled('gender')) {
-                //Usamos try cath para manejar la excepción de que de la casualidad que el usuario introduzca un correo o tlf q ya exista
+                
                 try {
                     $user = User::find($request->id);
                     $user->name = $request->name;
