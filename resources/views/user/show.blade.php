@@ -18,7 +18,7 @@
                 <p class="m-0">Álbum</p>
                 <h1 class="albumName"></h1>
                 <div class="d-flex justify-center align-items-center">
-                    <img src="{{ asset('img/cover/test.jpg') }}" alt="imagen" class="groupImage">
+                    <img src="{{ $user->image }}" alt="imagen" class="groupImage">
                     <p class="m-0 mx-2">
                         {{ $user->name }}
                     </p>
@@ -27,15 +27,7 @@
         </div>
     </section>
 
-    <section class="albumControls">
-        <div>
-            <button class="playButton">></button>
-            <button class="suffleButton"></button>
-            <button class="addButton"></button>
-            <button class="downloadButton"></button>
-            <button class="optionsButton"></button>
-        </div>
-    </section>
+    
 
     <div style="color: white" class="d-flex">
         {{ $user->name }}

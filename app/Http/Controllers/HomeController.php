@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function show()
     {
-        $users = User::inRandomOrder()->limit(10)->get();
+        $users = User::whereHas('albums')->inRandomOrder()->limit(10)->distinct()->get();
 
         return view("home")->with("users", $users);
     }
