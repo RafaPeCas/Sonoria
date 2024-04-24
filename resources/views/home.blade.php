@@ -36,21 +36,12 @@
                     </div>
 
                     <div class="d-flex gap-5">
-                        <button class="mixButton">
+                        @foreach ($users as $user)
+                            <a href="{{ route('user.profile', ['id' => $user->id]) }}" class="mixButton">
+                                {{ $user->name }}
+                            </a>
+                        @endforeach
 
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
                     </div>
                     <div class="d-flex gap-5">
                         <button class="mixButton">
@@ -77,6 +68,6 @@
     </div>
 @endsection
 
-@section("footer")
-    @extends("user._reproductionPanel")
+@section('footer')
+    @extends('user._reproductionPanel')
 @endsection

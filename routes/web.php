@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
@@ -23,14 +24,9 @@ Route::get('/', function () {
 Route::get("/admin", function(){
     return view("admin.index");
 });
-Route::post('/searchSong', [SearchController::class, 'searchSong'])->name('searchSong');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/home', [HomeController::class, 'show'])->name('home');
 
-Route::get("/search", function(){
-    return view("temp.search_results");
-});
-Route::get("/home", function(){
-    return view("home");
-});
 /*Rutas para songs */
 Route::post('/song', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
@@ -45,6 +41,7 @@ Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('album
 
 /* Rutas para usuarios*/
 Route::get('user_data', [UserController::class, 'seeData'])->name('user.data');
+Route::get('user/{id}', [UserController::class, 'show'])->name('user.profile');
 
 Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
 Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');
