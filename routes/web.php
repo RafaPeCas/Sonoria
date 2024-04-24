@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongController;
-use App\Http\Controllers\PlaylistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
@@ -42,10 +41,6 @@ Route::get("/albumForm", function(){
 });
 Route::post('/album', [AlbumController::class, 'store'])->name('albums.store');
 Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('albums.getAlbumById');
-
-/* Rutas para playlist */
-Route::post('/playlists', [PlaylistController::class, 'store'])->name('playlist.store');
-Route::get('/playlists/{id}', [PlaylistController::class, 'getPlaylistById'])->name('playlist.getPlaylistById');
 
 
 /* Rutas para usuarios*/
