@@ -30,6 +30,7 @@ Route::get('/home', [HomeController::class, 'show'])->name('home');
 /*Rutas para songs */
 Route::post('/song', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
+Route::get('/song/{id}/delete', [SongController::class, 'deleteSongById'])->name('songs.deleteSongById');
 
 /* Rutas para albums */
 Route::get("/albumForm", function(){

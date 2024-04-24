@@ -89,4 +89,38 @@ songLinks.forEach(function(link) {
         document.cookie = `currentTime=${currentTime}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
         console.log("Cookie de tiempo guardada:", currentTime);
     });
+
+
+    document.querySelectorAll('.delete-song-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var songId = this.getAttribute('data-id');
+            deleteSongById(songId);
+        });
+    });
+
+    function deleteSongById(id) {
+        fetch('/song/' + id+'/delete', {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.err) {
+
+                var row = document.getElementById('song_' + id);
+                if (row) {
+                    row.remove();
+                }
+            } else {
+                alert('Error al eliminar la canción: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al eliminar la canción:', error);
+        });
+    }
+
 });

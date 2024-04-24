@@ -74,4 +74,20 @@ public function getSongById($id)
 
     return view('temp/cancion')->with('song', $song);
 }
+
+public function deleteSongById($id){
+    $song = Song::find($id);
+
+    if (!$song) {
+        return response()->json(['err' => true, 'message' => 'Canción no encontrada']);
+    }
+
+    try {
+        $song->delete();
+        return response()->json(['err' => false]);
+    } catch (\Exception $e) {
+        return response()->json(['err' => true, 'message' => 'Error al eliminar la canción: ' . $e->getMessage()]);
+    }
+}
+
 }

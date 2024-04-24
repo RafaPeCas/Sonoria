@@ -78,7 +78,7 @@
             </thead>
             <tbody>
                 @foreach ($album->songs as $index => $song)
-                    <tr>
+                    <tr id="song_{{ $song->id }}">
                         <td>{{ $index + 1 }}</td>
                         <td>
                             <a href="#" class="song-link" data-id="{{$song->id}}" data-src="data:audio/wav;base64,{{ $song->file }}"
@@ -90,7 +90,7 @@
                             {{ $song->reproductions }}
                         </td>
                         <td>
-                            X
+                            <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach
@@ -98,7 +98,7 @@
 
         </table>
     @else
-        <p>No hay canciones en este álbum.</p>
+        <p class="text-white">No hay canciones en este álbum.</p>
     @endif
 
 @endsection
