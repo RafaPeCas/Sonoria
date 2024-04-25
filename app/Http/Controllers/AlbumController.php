@@ -39,6 +39,24 @@ class AlbumController extends Controller
         return view('album/show')->with('album', $album);
     }
 
+    public function update(Request $request, $id){
+    $album = Album::findOrFail($id);
+
+    if ($request->has('name') && !is_null($request->input('name'))) {
+        $album->name = $request->input('name');
+    }
+
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageFile = base64_encode(file_get_contents($image));
+        $album->image = $imageFile;
+    }
+
+    $album->save();
+
+    return response()->json(['err' => false]);
+}
+
     public function getAlbumById($id)
     {
         $album = Album::with('songs')->find($id);
