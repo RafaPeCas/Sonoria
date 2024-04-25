@@ -34,7 +34,7 @@ html, body {
 }
 
 .borde{
-margin-top: 6%;
+margin-top: 3%;
 margin-bottom: 4%;
 color: rgb(245, 242, 247); 
 }
@@ -44,13 +44,16 @@ color: rgb(245, 242, 247);
 }
 .log2{
 
-    margin-top: 9.49%;
+    margin-top: 7.8%;
 }
 
 .backColor{
     padding-top:5.55%;
 }
 
+.special{
+margin-bottom: 2% !important;
+}
 .space{
     margin-top: -8%;
     margin-bottom: 5%;

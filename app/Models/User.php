@@ -75,10 +75,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Playlist::class, 'user_playlist');
     }
-    public function roles()
+    public function role()
     {
-        return $this->hasMany(Role::class);
+        return $this->hasOne(Role::class);
     }
+
     public function reproductions()
     {
         return $this->hasMany(UserReproduction::class);
