@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Song;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function searchSong(Request $request)
+    public function search()
+    {
+        return view('temp/search_results');
+    }
+
+    public function searchArtist(Request $request)
     {
         // Obtener el término de búsqueda del formulario
         $term = $request->input('term');
 
         // Buscar canciones que coincidan con el término de búsqueda
-        $songs = Song::where('name', 'like', '%' . $term . '%')->get();
+        $artist = User::where('name', 'like', '%' . $term . '%')->get();
 
-        // Devolver los resultados en formato HTML
         $html = '<ul>';
-        foreach ($songs as $song) {
-            $html .= '<li>' . $song->name . '</li>';
+        foreach ($artist as $artist) {
+            $html .= '<li><a href="' . route('user.profile', ['id' => $artist->id]) . '" class="mixButton">' . $artist->name . '</a></li>';
         }
         $html .= '</ul>';
+
 
         return $html;
     }

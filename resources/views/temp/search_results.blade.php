@@ -7,9 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Buscar canción</h1>
+    <h1>Buscar artista</h1>
     <form id="searchForm">
-        <input type="text" id="searchInput" name="term" placeholder="Ingrese el nombre de la canción">
+        <input type="text" id="searchInput" name="term" placeholder="Ingrese el nombre del artista">
         <!-- Quitamos el botón de enviar -->
     </form>
 
@@ -19,14 +19,14 @@
 
     <script>
         var typingTimer;
-        var doneTypingInterval = 500; // Intervalo de tiempo en milisegundos
+        var doneTypingInterval = 300; // Intervalo de tiempo en milisegundos
 
         $(document).ready(function() {
             $('#searchInput').on('input', function() {
                 clearTimeout(typingTimer); // Limpiar el temporizador en cada entrada
 
                 var term = $(this).val();
-                if (term.length >= 3) {
+                if (term.length >= 1) {
                     typingTimer = setTimeout(function() {
                         realizarBusqueda(term); // Llamar a la función de búsqueda después del intervalo de tiempo
                     }, doneTypingInterval);
@@ -38,7 +38,7 @@
 
         function realizarBusqueda(term) {
             $.ajax({
-                url: "{{ route('searchSong') }}",
+                url: "{{ route('searchArtist') }}",
                 method: "POST",
                 data: { term: term, _token: '{{ csrf_token() }}' },
                 beforeSend: function() {
@@ -46,6 +46,7 @@
                 },
                 success: function(response) {
                     $('#searchResults').html(response);
+                    console.log(response);
                 },
                 complete: function() {
                     // Aquí puedes ocultar el mensaje de carga si lo muestras

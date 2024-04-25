@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get("/admin", function(){
     return view("admin.index");
 });
-Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 Route::get('/home', [HomeController::class, 'show'])->name('home');
 
 /*Rutas para songs */
@@ -47,3 +47,7 @@ Route::get('user/{id}', [UserController::class, 'show'])->name('user.profile');
 
 Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
 Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');
+
+/*Rutas para search */
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search-artist', [SearchController::class, 'searchArtist'])->name('searchArtist');
