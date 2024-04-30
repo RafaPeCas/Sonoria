@@ -31,44 +31,34 @@
             <div class="contentBody">
                 <div class="d-flex flex-column gap-5">
                     <div>
-                        <h1>Tus mixes</h1>
-                        <hr>
+                        <h1>Artistas destacados</h1>
+                        <hr class="mb-0">
                     </div>
 
-                    <div class="d-flex gap-5">
-                        <button class="mixButton">
+                    <div class="d-flex gap-5 lo-odio">
+                        @foreach ($users as $user)
+                            <div class="d-flex gap-5 align-items-end @if ($loop->last) last-artist @endif">
+                                <a href="{{ route('user.profile', ['id' => $user->id]) }}" class="text-decoration-none text-white">
+                                    <div class="d-flex lo-odio">
+                                        <marquee behavior="" direction="left" class="artist-name">{{ $user->name }}</marquee>
+                                        <button class="mixButton">
+                                        </button>
+                                    </div>
+                                </a>
+                                @foreach ($user->albums as $album)
+                                    <div class="d-flex lo-odio">
+                                        <marquee behavior="" direction="left" class="album-name">{{ $album->name }}</marquee>
+                                        <a href="{{ route('album.show', ['id' => $album->id]) }}" class="imagencita"
+                                            style="background-color: red">
+                                            <img src="{{ $album->image }}" alt="" class="imagencita img-fluid">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
 
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
                     </div>
-                    <div class="d-flex gap-5">
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                        <button class="mixButton">
-
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -77,6 +67,6 @@
     </div>
 @endsection
 
-@section("footer")
-    @extends("user._reproductionPanel")
+@section('footer')
+
 @endsection

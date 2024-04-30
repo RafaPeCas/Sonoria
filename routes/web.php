@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\PlaylistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
@@ -24,9 +26,8 @@ Route::get("/admin", function(){
     return view("admin.index");
 });
 Route::get('/search', [SearchController::class, 'search'])->name('search');
-Route::get("/home", function(){
-    return view("home");
-});
+Route::get('/home', [HomeController::class, 'show'])->name('home');
+
 /*Rutas para songs */
 Route::post('/song', [SongController::class, 'store'])->name('songs.store');
 Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
@@ -36,10 +37,16 @@ Route::get("/albumForm", function(){
     return view("temp/albumForm");
 });
 Route::post('/album', [AlbumController::class, 'store'])->name('albums.store');
-Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('albums.getAlbumById');
+Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('album.show');
+
+/* Rutas para playlist */
+Route::post('/playlists', [PlaylistController::class, 'store'])->name('playlist.store');
+Route::get('/playlists/{id}', [PlaylistController::class, 'getPlaylistById'])->name('playlist.getPlaylistById');
 
 
+/* Rutas para usuarios*/
 Route::get('user_data', [UserController::class, 'seeData'])->name('user.data');
+Route::get('user/{id}', [UserController::class, 'show'])->name('user.profile');
 
 Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
 Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');
