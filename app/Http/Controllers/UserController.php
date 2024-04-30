@@ -10,6 +10,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -36,7 +37,7 @@ class UserController extends Controller
         if ($user) {
             // Verificar si el usuario ha actualizado algún campo
             if ($request->filled('name') || $request->filled('email') || $request->filled('gender')) {
-                
+
                 try {
                     $user = User::find($request->id);
                     $user->name = $request->name;
@@ -93,6 +94,90 @@ class UserController extends Controller
             abort(404, 'Usuario no encontrado');
         }
 
-        return view('user.show', compact('user'));
+        // Obtener el número de seguidores
+        $followersCount = DB::table('follows')
+            ->where('followed_id', $id)
+            ->count();
+
+        // Obtener la lista de seguidores
+        $followers = DB::table('follows')
+            ->join('users', 'follows.follower_id', '=', 'users.id')
+            ->select('users.*')
+            ->where('follows.followed_id', $id)
+            ->get();
+
+        // Verificar si el usuario autenticado está siguiendo al usuario actual
+        $isFollowing = DB::table('follows')
+            ->where('follower_id', auth()->id())
+            ->where('followed_id', $id)
+            ->exists();
+
+        // Obtener el número de usuarios a los que sigue
+        $followingCount = DB::table('follows')
+            ->where('follower_id', $id)
+            ->count();
+
+        // Obtener la lista de usuarios a los que sigue
+        $following = DB::table('follows')
+            ->join('users', 'follows.followed_id', '=', 'users.id')
+            ->select('users.*')
+            ->where('follows.follower_id', $id)
+            ->get();
+
+        return view('user.show', compact('user', 'followersCount', 'isFollowing', 'followers', 'followingCount', 'following'));
     }
+
+    public function follow($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            abort(404, 'Usuario no encontrado');
+        }
+
+        $existingFollow = DB::table('follows')
+            ->where('follower_id', auth()->id())
+            ->where('followed_id', $id)
+            ->exists();
+
+        if (!$existingFollow) {
+            DB::table('follows')->insert([
+                'follower_id' => auth()->id(),
+                'followed_id' => $id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            return back()->with('success', 'Ahora estás siguiendo a ' . $user->name);
+        } else {
+            return back()->with('error', 'Ya estás siguiendo a ' . $user->name);
+        }
+    }
+
+    public function unfollow($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            abort(404, 'Usuario no encontrado');
+        }
+
+        $existingFollow = DB::table('follows')
+            ->where('follower_id', auth()->id())
+            ->where('followed_id', $id)
+            ->exists();
+
+        if ($existingFollow) {
+            DB::table('follows')
+                ->where('follower_id', auth()->id())
+                ->where('followed_id', $id)
+                ->delete();
+
+            return back()->with('success', 'Has dejado de seguir a ' . $user->name);
+        } else {
+            return back()->with('error', 'No estás siguiendo a ' . $user->name);
+        }
+    }
+
+
 }

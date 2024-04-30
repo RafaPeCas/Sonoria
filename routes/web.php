@@ -44,6 +44,8 @@ Route::get('/album/{id}/update', [AlbumController::class, 'update'])->name('albu
 /* Rutas para usuarios*/
 Route::get('user_data', [UserController::class, 'seeData'])->name('user.data');
 Route::get('user/{id}', [UserController::class, 'show'])->name('user.profile');
+Route::post('users/{id}/follow', [UserController::class, 'follow'])->name('user.follow');
+Route::post('users/{id}/unfollow', [UserController::class, 'unfollow'])->name('user.unfollow');
 
 Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
 Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');

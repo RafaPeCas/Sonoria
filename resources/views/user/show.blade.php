@@ -37,13 +37,42 @@
         </div>
     </section>
 
-    <div style="color: white" class="d-flex">
-        {{ $user->name }}
-        {{ $user->email }}
-        {{ $user->gender }}
-        {{ $user->birth }}
-        {{ $user->gender }}
+    <div style="color: white">
+        <h1>Perfil de {{ $user->name }}</h1>
+
+        @if ($isFollowing)
+            <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit">Dejar de Seguir</button>
+            </form>
+        @else
+            <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit">Seguir</button>
+            </form>
+        @endif
+
+        <h2>Número de Seguidores: {{ $followersCount }}</h2>
+        @if ($followersCount > 0)
+            <h3>Seguidores:</h3>
+            <ul>
+                @foreach ($followers as $follower)
+                    <li>{{ $follower->name }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        <h2>Número de Siguiendo: {{ $followingCount }}</h2>
+        @if ($followingCount > 0)
+            <h3>Siguiendo:</h3>
+            <ul>
+                @foreach ($following as $followed)
+                    <li>{{ $followed->name }}</li>
+                @endforeach
+            </ul>
+        @endif
     </div>
+
 
 @endsection
 
