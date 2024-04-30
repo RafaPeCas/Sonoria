@@ -26,7 +26,6 @@ aside {
 
 #content {
     flex-grow: 1;
-    padding-bottom: 150px;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -37,6 +36,7 @@ aside {
     height: 100px;
     flex-direction: row-reverse;
     padding-right: 30px;
+    margin-top: 15px;
 }
 
 .userIcon {
@@ -55,11 +55,13 @@ aside {
 }
 
 .mixButton {
-    width: 25%;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 15px;
     border: none;
     box-shadow: rgb(0, 0, 0) 5px 5px 5px;
+    background-color: #eee;
+    padding: 25px;
 }
 
 hr {
@@ -79,4 +81,65 @@ hr {
     border-radius: 15px;
     box-shadow: rgb(52, 52, 52) 5px 5px 5px 5px;
     border: none;
+}
+
+.lo-odio {
+    flex-direction: column;
+}
+
+.imagencita {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: rgb(0, 0, 0) 5px 5px 5px;
+}
+
+.imagencita img {
+    width: 100%;
+}
+
+.last-artist {
+    margin-bottom: 50px;
+}
+
+.artist-name {
+    width: 200px;
+    height: 30px;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.album-name {
+    width: 150px;
+    height: 30px;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.marquee-container {
+    width: 200px;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+.marquee-text {
+    white-space: nowrap;
+    position: absolute;
+    animation: marquee-scroll 8s linear infinite;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.marquee-container:hover .marquee-text {
+    animation-play-state: running;
+}
+
+.marquee-text:hover {
+    animation-play-state: paused;
 }

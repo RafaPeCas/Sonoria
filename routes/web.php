@@ -37,7 +37,7 @@ Route::get("/albumForm", function(){
     return view("temp/albumForm");
 });
 Route::post('/album', [AlbumController::class, 'store'])->name('albums.store');
-Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('albums.getAlbumById');
+Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('album.show');
 Route::get('/album/{id}/update', [AlbumController::class, 'update'])->name('album.update');
 
 
