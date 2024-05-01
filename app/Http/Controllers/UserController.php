@@ -124,8 +124,13 @@ class UserController extends Controller
             ->where('follows.follower_id', $id)
             ->get();
 
-        return view('user.show', compact('user', 'followersCount', 'isFollowing', 'followers', 'followingCount', 'following'));
+        // Obtener los álbumes del usuario si tiene alguno
+        $albums = $user->albums()->get();
+
+        return view('user.show', compact('user', 'followersCount', 'isFollowing', 'followers', 'followingCount', 'following', 'albums'));
     }
+
+
 
     public function follow($id)
     {

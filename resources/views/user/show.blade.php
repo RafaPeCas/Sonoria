@@ -27,7 +27,7 @@
         </div>
     </section>
 
-    
+
 
     <div style="color: white">
         <h1>Perfil de {{ $user->name }}</h1>
@@ -62,6 +62,21 @@
                     <li>{{ $followed->name }}</li>
                 @endforeach
             </ul>
+        @endif
+
+        @if ($albums->count() > 0)
+            <h2>Álbumes:</h2>
+            <div class="album-container">
+                @foreach ($albums as $album)
+                    <div class="ms-3 d-flex lo-odio">
+                        <marquee behavior="" direction="left" class="album-name">{{ $album->name }}</marquee>
+                        <a href="{{ route('album.show', ['id' => $album->id]) }}" class="imagencita"
+                            style="background-color: red">
+                            <img src="{{ $album->image }}" alt="" class="imagencita img-fluid">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         @endif
     </div>
 
