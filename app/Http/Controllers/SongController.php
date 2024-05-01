@@ -59,7 +59,7 @@ class SongController extends Controller
         $song->playlists()->attach($request['playlists']);
     }
 
-    return Redirect::route('songs.getSongById', ['id' => $song->id]);
+    return Redirect::route('album.show', ['id' => $request['album_id']]);
 }
 
 

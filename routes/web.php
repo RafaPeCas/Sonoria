@@ -6,6 +6,7 @@ use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserReproductionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,3 +54,6 @@ Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');
 /*Rutas para search */
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::post('/search-artist', [SearchController::class, 'searchArtist'])->name('searchArtist');
+
+/*Ruta para las reproducciones */
+Route::post('/song/{songId}/reproduction', [UserReproductionController::class, 'addReproduction'])->name('song.addReproduction');

@@ -65,6 +65,7 @@ songLinks.forEach(function(link) {
         // Obtener la ID de la canción del atributo data-id
         const songId = this.getAttribute('data-id');
 
+
         // Guardar la cookie songId
         document.cookie = `songId=${songId}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
 
@@ -75,6 +76,8 @@ songLinks.forEach(function(link) {
         audioPlayer.currentTime = 0;
 
         // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
+        registerReproduction(songId);
+
         audioPlayer.play();
     });
 });
@@ -122,5 +125,28 @@ songLinks.forEach(function(link) {
             console.error('Error al eliminar la canción:', error);
         });
     }
+
+
+    function registerReproduction(songId) {
+        fetch('/song/' + songId + '/reproduction', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al registrar la reproducción');
+            }
+            console.log('Reproducción registrada correctamente');
+        })
+        .catch(error => {
+            console.error('Error al registrar la reproducción:', error);
+        });
+    }
+
+
+
 
 });

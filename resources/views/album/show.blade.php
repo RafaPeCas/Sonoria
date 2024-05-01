@@ -101,6 +101,10 @@
         <p class="text-white">No hay canciones en este álbum.</p>
     @endif
 
+    <script>
+        var csrfToken = '{{ csrf_token() }}';
+    </script>
+
 @endsection
 
 @section('footer')
