@@ -8,14 +8,14 @@
 
 .songTitle {
     width: 200px;
-    white-space: nowrap; 
-    overflow-x: auto;  
-    overflow-y: hidden; 
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .songTitle h2 {
-    display: inline-block; 
-    margin: 0; 
+    display: inline-block;
+    margin: 0;
 }
 
 .coverImg {
@@ -28,3 +28,45 @@
     color: white;
 }
 
+/* Oculta los controles de medios predeterminados */
+.custom-audio-player audio::-webkit-media-controls {
+    display: none !important;
+}
+
+/* Estilos para los controles personalizados */
+.custom-audio-player .audio-controls {
+    display: flex;
+    align-items: center;
+}
+
+.custom-audio-player .audio-controls button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px;
+    margin: 0 2px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.custom-audio-player .audio-controls input[type="range"] {
+    width: 100px;
+    margin: 0 5px;
+}
+
+/* Estilos para la barra de progreso */
+.custom-audio-player .progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.custom-audio-player .progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}

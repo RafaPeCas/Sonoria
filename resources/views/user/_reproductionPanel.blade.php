@@ -46,12 +46,23 @@
         </div>
         <div id="mediaPlayer">
             <div class="d-flex custom align-items-center h-100 pl-2">
-                <div>
-
-                    <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay">
+                <div class="custom-audio-player">
+                    <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay" id="audio-player">
+                        <!-- Aquí puedes colocar la fuente de audio -->
+                        Tu navegador no soporta audio.
                     </audio>
+                    <div class="audio-controls">
+                        <button class="play-pause">Play/Pause</button>
+                        <button class="seek-backward">«</button>
+                        <button class="seek-forward">»</button>
+                        <input type="range" class="volume-slider" min="0" max="100" value="100">
+                    </div>
 
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
                 </div>
+
                 <div>
 
                 </div>
