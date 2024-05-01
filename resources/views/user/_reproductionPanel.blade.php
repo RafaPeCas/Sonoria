@@ -55,6 +55,10 @@
                         <button class="play-pause">Play/Pause</button>
                         <button class="seek-backward">«</button>
                         <button class="seek-forward">»</button>
+                        <button class="prev-song-btn"><</button>
+                        <button class="next-song-btn">></button>
+                        <button class="random-mode-btn">Aleatorio</button>
+
                         <input type="range" class="volume-slider" min="0" max="100" value="100">
                     </div>
 

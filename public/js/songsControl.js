@@ -8,6 +8,10 @@ var volumeSlider = document.querySelector('.volume-slider');
 var progressBar = document.querySelector('.progress-bar');
 var progressContainer = document.querySelector('.progress-container');
 var isDragging = false;
+var prevSongButton = document.querySelector('.prev-song-btn');
+var nextSongButton = document.querySelector('.next-song-btn');
+var randomModeButton = document.querySelector('.random-mode-btn');
+var isRandomMode = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento <audio>
@@ -232,5 +236,106 @@ document.addEventListener('DOMContentLoaded', function () {
         progressBar.style.width = progress + '%';
     });
 
+    // Manejar el clic en el botón de retroceso
+prevSongButton.addEventListener('click', function() {
+    // Obtener el índice actual de la canción reproducida
+    var currentSongIndex = getCurrentSongIndex();
+
+    // Obtener el índice de la canción anterior
+    var prevSongIndex = currentSongIndex - 1;
+
+    // Reproducir la canción anterior si existe
+    if (prevSongIndex >= 0) {
+        playSongByIndex(prevSongIndex);
+    }
+});
+
+// Manejar el clic en el botón de avance
+nextSongButton.addEventListener('click', function() {
+    if (isRandomMode) { // Verificar si el modo aleatorio está activado
+        var currentSongIndex = getCurrentSongIndex();
+        var randomIndex;
+
+        // Generar un índice aleatorio diferente al índice de la canción actual
+        do {
+            randomIndex = Math.floor(Math.random() * songLinks.length);
+        } while (randomIndex === currentSongIndex);
+
+        // Reproducir la canción aleatoria
+        playSongByIndex(randomIndex);
+    } else {
+        // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
+        var nextSongIndex = getCurrentSongIndex() + 1;
+        if (nextSongIndex < songLinks.length) {
+            playSongByIndex(nextSongIndex);
+        }
+    }
+});
+
+// Función para obtener el índice de la canción actualmente reproducida
+function getCurrentSongIndex() {
+    var currentSongSrc = audioPlayer.src;
+    for (var i = 0; i < songLinks.length; i++) {
+        if (songLinks[i].getAttribute('data-src') === currentSongSrc) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+audioPlayer.addEventListener('ended', function() {
+    if (isRandomMode) {
+        var currentSongIndex = getCurrentSongIndex();
+        var randomIndex;
+
+        // Generar un índice aleatorio diferente al índice de la canción actual
+        do {
+            randomIndex = Math.floor(Math.random() * songLinks.length);
+        } while (randomIndex === currentSongIndex);
+
+        // Reproducir la canción aleatoria
+        playSongByIndex(randomIndex);
+    } else {
+        // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
+        var nextSongIndex = getCurrentSongIndex() + 1;
+        if (nextSongIndex < songLinks.length) {
+            playSongByIndex(nextSongIndex);
+        }
+    }
+});
+
+
+// Función para reproducir una canción por su índice en la lista de enlaces de canciones
+function playSongByIndex(index) {
+    var songLink = songLinks[index];
+    var songSrc = songLink.getAttribute('data-src');
+    var songId = songLink.getAttribute('data-id');
+
+    // Guardar la cookie songId
+    document.cookie = `songId=${songId}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+
+    // Actualizar el atributo src del elemento <audio> con la URL de la nueva canción seleccionada
+    audioPlayer.src = songSrc;
+
+    // Establecer el currentTime del audioPlayer
+    audioPlayer.currentTime = 0;
+
+    // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
+    registerReproduction(songId);
+
+    audioPlayer.play();
+}
+
+randomModeButton.addEventListener('click', function() {
+    // Cambiar el estado del modo aleatorio
+    isRandomMode = !isRandomMode;
+
+    // Actualizar el texto del botón según el estado del modo aleatorio
+    if (isRandomMode) {
+        randomModeButton.textContent = 'Aleatorio (activado)';
+    } else {
+        randomModeButton.textContent = 'Aleatorio';
+    }
+});
 
 });
