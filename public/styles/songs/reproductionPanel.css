@@ -70,3 +70,11 @@
     background-color: #4CAF50;
     border-radius: 5px;
 }
+
+.active{
+    color: #4CAF50 !important;
+}
+
+.noDecoration{
+    text-decoration: none !important;
+}
