@@ -8,12 +8,12 @@
                 <div>
                     <div class="songTitle">
                         <div>
-                            <h2>{{ $lastSong->name }}</h2>
+                            <h2></h2>
                         </div>
 
                     </div>
-                    <p>{{ $lastSong->album->name }}</p>
-                    {{ dd($lastSong) }}
+                    <p id="albumNameRepro"></p>
+
                 </div>
             </div>
         </div>
@@ -37,10 +37,10 @@
                 <div>
                     <div class="songTitle">
                         <div>
-                            <h2>Time is runnig out</h2>
+                            <h2></h2>
                         </div>
                     </div>
-                    <a href="#">Absolution</a>
+                    <p id="albumNameRepro"></p>
                 </div>
             </div>
         </div>

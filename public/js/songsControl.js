@@ -20,6 +20,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Verificar si existe una cookie para songId
     const songIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songId='));
 
+    const songTitleCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songTitle='));
+    updateAlbumName();
+
+    if (songTitleCookie) {
+        // Si existe la cookie, obtener el título almacenado
+        const songTitle = songTitleCookie.split('=')[1];
+
+        // Actualizar el título de la canción en la interfaz
+        updateSongInfo(songTitle);
+    }
+
     if (songIdCookie) {
         // Si existe la cookie, obtener la ID de la canción almacenada
         const songId = songIdCookie.split('=')[1];
@@ -89,9 +100,9 @@ document.addEventListener('DOMContentLoaded', function () {
             audioPlayer.currentTime = 0;
 
             const songTitle = this.textContent.trim();
-            const albumName = this.closest('tr').querySelector('td:nth-child(2)').textContent.trim();
+            document.cookie = `songTitle=${songTitle}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
 
-            updateSongInfo(songTitle, albumName);
+            updateSongInfo(songTitle);
 
             // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
             registerReproduction(songId);
@@ -344,13 +355,23 @@ randomModeButton.addEventListener('click', function() {
 });
 
 
-function updateSongInfo(songTitle, albumName) {
-    var songTitleElement = document.querySelector('.songTitle h2'); // Elemento del título de la canción
-    var albumLinkElement = document.querySelector('.songTitle a'); // Elemento del nombre del álbum
+function updateSongInfo(songTitle) {
+    let songTitleElement = document.querySelector('.songTitle h2'); // Elemento del título de la canción
 
-    // Actualizar el título de la canción y el nombre del álbum
     songTitleElement.textContent = songTitle;
-    albumLinkElement.textContent = albumName;
-    console.log("AQUI EL NOMBRE"+ songTitle+ albumName);
+}
+
+function updateAlbumName() {
+    // Obtener el elemento h1 con la clase albumName
+    let albumNameElement = document.querySelector('.albumName');
+
+    // Obtener el texto del nombre del álbum
+    let albumName = albumNameElement.textContent.trim();
+
+    // Obtener el elemento p con el id albumNameRepro
+    let albumNameReproElement = document.getElementById('albumNameRepro');
+
+    // Establecer el texto del nombre del álbum en el elemento p
+    albumNameReproElement.textContent = albumName;
 }
 });
