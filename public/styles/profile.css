@@ -1,0 +1,95 @@
+.userHeader {
+    width: 100%;
+    background-color: #535353ab;
+    height: 300px;
+    color: white;
+    display: flex;
+}
+
+.userImage img {
+    width: 200px;
+    height: 200px;
+}
+
+.userImage {
+    background-color: white;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+
+.userData {
+    display: flex;
+    padding-top: 50px;
+    padding-left: 50px;
+    max-width: 550px;
+}
+
+.userName {
+    padding-left: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userName hr {
+    color: white;
+}
+
+.recentlyPlayed {
+    flex-grow: 1;
+    background-color: white;
+    margin: 10px 50px 10px 50px;
+    border-radius: 30px;
+
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tabs button {
+    background-color: #535353ab;
+    border: none;
+    width: 100%;
+    height: 100px;
+    color: white;
+}
+
+.shadow {
+    border: 1px black solid;
+    border-top: none;
+}
+
+.tabContent{
+    width: 100%;
+    flex-grow: 1;
+}
+
+.tabContent div{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.tabContainer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+.shown{
+    background-color: white !important;
+    color: black !important;
+}
+
+.hidden{
+    display: none !important;
+}

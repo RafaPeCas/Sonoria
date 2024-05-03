@@ -71,10 +71,10 @@
         <section id="content">
             <div class="contentHeader d-flex align-items-center">
                 <div class="navMenu">
-                    <button>Tu biblioteca</button>
-                    <button>Inicio</button>
-                    <button>Recomendaciones</button>
-                    <button>Tu perfil</button>
+                    <a href="">Tu biblioteca</a>
+                    <a href="">Inicio</a>
+                    <a href="">Recomendaciones</a>
+                    <a href="{{route("user.profile", Auth::user()->id)}}">Tu perfil</a>
                 </div>
             </div>
             <div class="contentBody">
