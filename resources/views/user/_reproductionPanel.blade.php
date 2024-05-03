@@ -10,9 +10,9 @@
                         <div>
                             <h2></h2>
                         </div>
+                        <p id="albumNameRepro"></p>
 
                     </div>
-                    <p id="albumNameRepro"></p>
 
                 </div>
             </div>
