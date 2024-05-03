@@ -50,14 +50,48 @@ table {
     background-color: green;
 }
 
-.suffleButton {
+
+
+/* Estilos personalizados para el modal con efecto glass morphism */
+.glass-morphism {
+    background-color: rgba(184, 19, 206, 0.413); /* Color de fondo con transparencia */
+    backdrop-filter: blur(10px); /* Aplicar desenfoque al fondo */
+    border-radius: 15px; /* Bordes redondeados */
+    border: 1px solid rgba(55, 0, 255, 0.2); /* Borde con transparencia */
 }
 
-.addButton {
+.glass-morphism .modal-header,
+.glass-morphism .modal-footer {
+    background-color: transparent; /* Fondo transparente para encabezado y pie de página */
+    border: none; /* Sin bordes */
 }
 
-.downloadButton {
+.glass-morphism .modal-title {
+    color: #fff; /* Color del título */
 }
 
-.optionsButton {
+.glass-morphism .modal-body {
+    color: #fff; /* Color del texto del cuerpo */
+}
+
+.glass-morphism .modal-body input[type="text"],
+.glass-morphism .modal-body input[type="checkbox"] {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para input de texto y checkbox */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.glass-morphism .modal-body input[type="text"]:focus,
+.glass-morphism .modal-body input[type="checkbox"]:focus {
+    outline: none; /* Sin contorno al enfocar */
+}
+
+.glass-morphism .modal-body label {
+    color: #fff; /* Color del texto de las etiquetas */
+}
+
+.glass-morphism .modal-body .form-check-label {
+    color: #fff; /* Color del texto de las etiquetas de checkbox */
 }

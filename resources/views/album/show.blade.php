@@ -30,51 +30,77 @@
         </div>
     </section>
 
-    <section class="albumControls">
-        <div>
-            <button class="playButton">></button>
-            <button class="suffleButton"></button>
-            <button class="addButton"></button>
-            <button class="downloadButton"></button>
-            <button class="optionsButton"></button>
-        </div>
-    </section>
-    <!-- Aquí comienza el formulario para agregar una nueva canción -->
-    <form class="text-white" action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="hidden" name="album_id" value="{{ $album->id }}">
+    @if ((Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $album->user_id)))
 
-        <label for="file">Archivo de canción:</label>
-        <input type="file" id="file" name="file" required>
-        <br>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSongModal">
+  Agregar Canción
+</button>
 
-        <label for="explicit">Explícita:</label>
-        <input type="checkbox" id="explicit" name="explicit" value="1"><br>
+<!-- Modal -->
+<div class="modal fade" id="addSongModal" tabindex="-1" aria-labelledby="addSongModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content glass-morphism">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSongModalLabel">Agregar Nueva Canción</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="text-white" action="{{ route('songs.store') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <input type="hidden" name="album_id" value="{{ $album->id }}">
+          
+          <div class="mb-3">
+            <label for="file" class="form-label">Archivo de canción:</label>
+            <input type="file" id="file" name="file" class="form-control" required>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" id="explicit" name="explicit" value="1" class="form-check-input">
+            <label for="explicit" class="form-check-label">Explícita</label>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" id="active" name="active" value="1" class="form-check-input">
+            <label for="active" class="form-check-label">Activa</label>
+          </div>
+          
+          <div class="mb-3 form-check">
+            <input type="checkbox" id="hidden" name="hidden" value="1" class="form-check-input">
+            <label for="hidden" class="form-check-label">Oculta</label>
+          </div>
+          
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre de la canción:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Agregar Canción</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 
-        <label for="active">Activa:</label>
-        <input type="checkbox" id="active" name="active" value="1">
-
-        <label for="hidden">Oculta:</label>
-        <input type="checkbox" id="hidden" name="hidden" value="1"><br>
-
-        <label for="name">Nombre de la canción:</label>
-        <input type="text" id="name" name="name" required>
-        <br>
-
-        <button type="submit">Agregar Canción</button>
-    </form>
     @if ($album->songs->count() > 0)
         <table class="text-white w-100 songsList">
             <thead>
                 <th>#</th>
                 <th>Título</th>
                 <th>Reproducciones</th>
-                <th><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
+                <th>
+                @if ((Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $album->user_id)))
+    
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
                         viewBox="0 0 30 30" fill="white">
                         <path
                             d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z">
                         </path>
-                    </svg></th>
+                    </svg>
+                    @endif
+                    </th>
+
             </thead>
             <tbody>
                 @foreach ($album->songs as $index => $song)
@@ -90,7 +116,9 @@
                             {{ $song->reproductions }}
                         </td>
                         <td>
-                            <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
+                        @if ((Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id)))
+                        <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
+                        @endif
                         </td>
                     </tr>
                 @endforeach
