@@ -31,6 +31,7 @@
 
     <div style="color: white">
         <h1>Perfil de {{ $user->name }}</h1>
+        @if (Auth::check() && Auth::user()->id !== $user->id)
 
         @if ($isFollowing)
             <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
@@ -42,6 +43,7 @@
                 @csrf
                 <button type="submit">Seguir</button>
             </form>
+        @endif
         @endif
 
         <h2>Número de Seguidores: {{ $followersCount }}</h2>
