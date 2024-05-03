@@ -22,7 +22,7 @@ class SearchController extends Controller
 
         $html = '<ul>';
         foreach ($artist as $artist) {
-            $html .= '<li><a href="' . route('user.profile', ['id' => $artist->id]) . '" class="mixButton">' . $artist->name . '</a></li>';
+            $html .= '<a href="' . route('user.profile', ['id' => $artist->id]) . '" class=""><li>' . $artist->name . '</li></a>';
         }
         $html .= '</ul>';
 
