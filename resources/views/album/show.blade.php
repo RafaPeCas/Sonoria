@@ -11,7 +11,7 @@
 
 @section('content')
 
-    <section class="albumHeader p-5 w-100 text-white">
+    <section class="albumHeader p-5 w-100 text-white d-flex">
         <div class="d-flex gap-3 w-100">
             {{-- <img src="data:image/jpeg;base64,{{ $album->image }}" alt="{{ $album->name }} cover" id='base64image'
                 class="bigAlbumImage"> --}}
@@ -27,6 +27,13 @@
                     </p>
                 </div>
             </div>
+        </div>
+        <div class="">
+            <a href="{{ route('home') }}"
+                onmouseover="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/homeHover.png') }}'"
+                onmouseleave="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/home.png') }}'">
+                <img src="{{ asset('img/assets/home.png') }}" alt="">
+            </a>
         </div>
     </section>
 

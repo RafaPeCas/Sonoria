@@ -27,9 +27,9 @@ class PlaylistController extends Controller
             'image' => 'nullable|string|max:300',
             'fav' => 'boolean',
         ]);
-    
+
         $user = auth()->user();
-    
+
         // Crear la nueva playlist
         $playlist = new Playlist();
         $playlist->name = $request->name;
@@ -38,10 +38,21 @@ class PlaylistController extends Controller
         $playlist->image = $request->image;
         $playlist->fav = $request->has('fav');
         $playlist->save();
-    
-        // Asociar la playlist al usuario actual mediante la tabla pivot
-        $user->playlists()->attach($playlist->id, ['role' => 'owner']); // Cambia 'owner' por el rol que desees asignar al usuario
-    
+
+        $user->playlists()->attach($playlist->id, ['role' => 'owner']); 
+
         return redirect()->back()->with('success', 'Playlist creada exitosamente');
+    }
+
+
+    public function show($id, $name = null)
+    {
+        $playlist = Playlist::findOrFail($id);
+
+        if ($name && $playlist->name != $name) {
+            return redirect()->route('playlist.show', ['id' => $playlist->id, 'name' => $playlist->name], 301);
+        }
+
+        return view("playlists.show", compact('playlist'));
     }
 }
