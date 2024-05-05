@@ -29,36 +29,55 @@
         </div>
         <div class="tabContainer">
             <div class="tabs">
-                <button class="shadow">follows</button>
-                <button class="shadow">following</button>
-                <button class="shadow">Albums</button>
-                <button class="shadow">Playlists</button>
-                <button class="shadow">Estadísticas</button>
+                <button class="tab-button" data-tab="followers">Seguidores</button>
+                <button class="tab-button" data-tab="following">Siguiendo</button>
+                <button class="tab-button" data-tab="albums">Álbums</button>
+                <button class="tab-button" data-tab="statistics">Estadísticas</button>
             </div>
             <div class="tabContent">
-                <div id="following" class="hidden">
+                <div id="followers" class="hidden text-white tab">
                     <div>
-                        {{$following}}
+                        <h1>Seguidores: {{ $followersCount }}</h1>
+                        <ul>
+                            @foreach($followers as $followerUser)
+                                <a href="{{ route('user.profile', ['id' => $followerUser->id]) }}" class="">
+                                    <li>{{ $followerUser->name }}</li>
+                                </a>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-                <div id="followers" class="hidden">
+                <div id="following" class="hidden text-white tab">
                     <div>
-                        {{$followers}}
+                        <h1>Siguiendo: {{ $followingCount }}</h1>
+                        <ul>
+                            @foreach($following as $followedUser)
+                                <a href="{{ route('user.profile', ['id' => $followedUser->id]) }}" class="">
+                                    <li>{{ $followedUser->name }}</li>
+                                </a>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-                <div id="Albums" class="hidden">
+                <div id="albums" class="hidden text-white tab">
+    <div>
+        @if ($albums->isEmpty())
+            <h1>No hay álbumes en este momento.</h1>
+        @else
+            @foreach($albums as $album)
+                <a href="{{ route('album.show', ['id' => $album->id]) }}" class="imagencita"
+                    style="background-color: red">
+                    <h5 behavior="" direction="left" class="album-name">{{ $album->name }}</h5>
+                    <img src="{{ $album->image }}" alt="" class="imagencita img-fluid">
+                </a>
+            @endforeach
+        @endif
+    </div>
+</div>
+
+                <div id="statistics" class="hidden tab">
                     <div>
-                        
-                    </div>
-                </div>
-                <div id="Playlists" class="hidden">
-                    <div>
-                        
-                    </div>
-                </div>
-                <div id="Estadísticas" class="hidden">
-                    <div>
-                        
+
                     </div>
                 </div>
             </div>

@@ -1,26 +1,29 @@
-"use strict"
+"use strict";
 
-console.log("Una hamburguesita?????")
+var tabButtons = document.querySelectorAll(".tab-button");
 
-var tabButtons = document.querySelector(".tabs").children
-
-Array.from(tabButtons).forEach(button => {
-    button.addEventListener("click", removeShadow);
+tabButtons.forEach(button => {
+    button.addEventListener("click", switchTab);
 });
 
-function removeShadow(e) {
-    var tabContent = document.querySelector(".tabContent")
-    Array.from(tabButtons).forEach(button => {
-        if (button.classList.contains("shown")){
-            button.classList.remove("shown")
-        }
+function switchTab(e) {
+    var targetTabId = e.target.dataset.tab;
+    var tabContent = document.querySelector(".tabContent");
+
+    // Ocultar todos los contenidos de los tabs
+    tabContent.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.add("hidden");
     });
-    Array.from(tabContent.children).forEach(button => {
-        if (!button.classList.contains("hidden")){
-            button.classList.add("hidden")
-        }
+
+    // Mostrar el contenido del tab correspondiente
+    var targetTab = tabContent.querySelector("#" + targetTabId);
+    targetTab.classList.remove("hidden");
+
+    // Eliminar la clase "shadow" de todos los botones
+    tabButtons.forEach(button => {
+        button.classList.remove("shadow");
     });
-    e.srcElement.classList.toggle("shadow")
-    tabContent.querySelector("#"+e.srcElement.innerHTML).classList.toggle("hidden")
-    e.srcElement.classList.toggle("shown")
+
+    // Agregar la clase "shadow" al botón clickeado
+    e.target.classList.add("shadow");
 }
