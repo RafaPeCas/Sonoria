@@ -13,21 +13,23 @@
 
     <section class="albumHeader p-5 w-100 text-white d-flex">
         <div class="d-flex gap-3 w-100">
-        @if ($album->image)
-    <img src="data:image/jpeg;base64,{{ $album->image }}" alt="{{ $album->name }} cover" id="base64image" class="bigAlbumImage">
-@else
-    <img src="{{ asset('img/cover/test.jpg') }}" alt="{{ $album->name }} cover" id="base64image" class="bigAlbumImage">
-@endif
+            @if ($album->image)
+                <img src="data:image/jpeg;base64,{{ $album->image }}" alt="{{ $album->name }} cover" id="base64image"
+                    class="bigAlbumImage">
+            @else
+                <img src="{{ asset('img/cover/test.jpg') }}" alt="{{ $album->name }} cover" id="base64image"
+                    class="bigAlbumImage">
+            @endif
 
             <div class="albumInfo">
                 <p class="m-0">Álbum</p>
                 <h1 class="albumName">{{ $album->name }}</h1>
                 <div class="d-flex justify-center align-items-center">
-                @if ($album->image)
-    <img src="data:image/jpeg;base64,{{ $album->image }}" alt="imagen" class="groupImage">
-@else
-    <img src="{{ asset('img/cover/test.jpg') }}" alt="imagen" class="groupImage">
-@endif
+                    @if ($album->image)
+                        <img src="data:image/jpeg;base64,{{ $album->image }}" alt="imagen" class="groupImage">
+                    @else
+                        <img src="{{ asset('img/cover/test.jpg') }}" alt="imagen" class="groupImage">
+                    @endif
 
                     <p class="m-0 mx-2">
                         Nombre del grupo - Fecha del album - Canciones: {{ $totalSongs }}, duración total
