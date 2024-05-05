@@ -32,7 +32,7 @@
         <div id="songInfo">
             <div class="d-flex custom align-items-center h-100 pl-2">
                 <div>
-                    <img class="coverImg" src="{{ asset('img/cover/test.jpg') }}" alt="">
+                <img class="coverImg" src="{{ $album->image ? 'data:image/jpeg;base64,'.$album->image : asset('img/cover/test.jpg') }}" alt="{{ $album->name }}">
                 </div>
                 <div>
                     <div class="songTitle">

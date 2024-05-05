@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const songTitle = songTitleCookie.split('=')[1];
 
         // Actualizar el título de la canción en la interfaz
-        updateSongInfo(songTitle);
     }
 
     if (songIdCookie) {
@@ -46,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Establecer el atributo src del elemento <audio> con la URL de la canción seleccionada
             audioPlayer.src = songSrc;
+            updateSongInfo(songTitle);
 
             // Verificar si hay una cookie para currentTime
             const currentTimeCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('currentTime='));
