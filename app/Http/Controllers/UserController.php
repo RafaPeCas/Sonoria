@@ -183,6 +183,4 @@ class UserController extends Controller
             return back()->with('error', 'No estás siguiendo a ' . $user->name);
         }
     }
-
-
 }

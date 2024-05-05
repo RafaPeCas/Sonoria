@@ -74,8 +74,9 @@ class User extends Authenticatable
 
     public function playlists()
     {
-        return $this->belongsToMany(Playlist::class, 'user_playlist');
+        return $this->belongsToMany(Playlist::class, 'user_playlist', 'user_id', 'playlist_id')->withPivot('role');
     }
+
     public function role()
     {
         return $this->hasOne(Role::class);

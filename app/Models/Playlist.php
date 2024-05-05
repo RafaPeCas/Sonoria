@@ -19,10 +19,10 @@ class Playlist extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class, 'user_playlist');
+        return $this->belongsToMany(User::class);
     }
     public function songs()
     {
-        return $this->belongsToMany(Song::class, 'playlist_song');
+        return $this->hasMany(Song::class);
     }
 }

@@ -36,7 +36,7 @@
                                 typingTimer = setTimeout(function() {
                                     realizarBusqueda(
                                         term
-                                        ); // Llamar a la función de búsqueda después del intervalo de tiempo
+                                    ); // Llamar a la función de búsqueda después del intervalo de tiempo
                                 }, doneTypingInterval);
                             } else {
                                 $('#searchResults').html(''); // Limpiar los resultados si el término es corto
@@ -71,10 +71,18 @@
         <section id="content">
             <div class="contentHeader d-flex align-items-center">
                 <div class="navMenu">
-                    <a href="">Tu biblioteca</a>
-                    <a href="">Inicio</a>
-                    <a href="">Recomendaciones</a>
-                    <a href="{{route("user.profile", Auth::user()->id)}}">Tu perfil</a>
+                    <a href="{{route("playlist.index")}}">Tus playlists</a>
+                    <a href="#">Recomendaciones</a>
+                    <a href="{{ route('user.profile', Auth::user()->id) }}">Tu perfil</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                        Cerrar sesión
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
                 </div>
             </div>
             <div class="contentBody">

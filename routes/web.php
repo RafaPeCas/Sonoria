@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserReproductionController;
+use App\Http\Controllers\PlaylistController;
+use App\Models\Playlist;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,4 +62,8 @@ Route::middleware(['auth'])->group(function () {
 
     /*Ruta para las reproducciones */
     Route::post('/song/{songId}/reproduction', [UserReproductionController::class, 'addReproduction'])->name('song.addReproduction');
+
+    /*Ruta para las playlists */
+    Route::get("/playlists", [PlaylistController::class, "index"])->name("playlist.index");
+    Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
 });
