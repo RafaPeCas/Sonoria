@@ -1,6 +1,7 @@
 @extends('_layouts.template')
 
 @section('title', $user->name)
+
 <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
 <script defer src="{{ asset('js/profile.js') }}"></script>
 @section('links')
@@ -77,7 +78,41 @@
                 </div>
                 <div id="albums" class="hidden text-white tab">
     <div>
-        @if ($albums->isEmpty())
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAlbumModal">
+  Agregar Álbum
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="addAlbumModal" tabindex="-1" aria-labelledby="addAlbumModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content glass-morphism">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAlbumModalLabel">Agregar Nuevo Álbum</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="text-white" action="{{ route('albums.store') }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <div class="">
+            <label for="name" class="form-label">Nombre del Álbum:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <div class="">
+            <label for="image" class="form-label">Imagen del Álbum:</label>
+            <input type="file" id="image" name="image" class="form-control" required>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Agregar Álbum</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+   
+    
+    @if ($albums->isEmpty())
             <h1>No hay álbumes en este momento.</h1>
         @else
             @foreach($albums as $album)
