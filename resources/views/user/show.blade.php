@@ -22,6 +22,22 @@
                     <hr>
                     <p>{{ $user->email }} (icono de correo)</p>
                     <p>{{ $user->birth }} (icono de tarta)</p>
+                    
+        @if (Auth::check() && Auth::user()->id !== $user->id)
+
+        @if ($isFollowing)
+            <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit">Dejar de Seguir</button>
+            </form>
+        @else
+            <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                @csrf
+                <button type="submit">Seguir</button>
+            </form>
+        @endif
+        @endif
+
                 </div>
             </div>
             <div class="recentlyPlayed">
