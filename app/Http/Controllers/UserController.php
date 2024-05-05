@@ -89,31 +89,38 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-    
+
         if (!$user) {
             abort(404, 'Usuario no encontrado');
         }
-    
+
         // Obtener los IDs y nombres de los seguidores
         $followers = DB::table('follows')
             ->join('users', 'follows.follower_id', '=', 'users.id')
             ->select('users.id', 'users.name')
             ->where('follows.followed_id', $id)
             ->get();
-    
+
         // Obtener los IDs y nombres de los usuarios seguidos
         $following = DB::table('follows')
             ->join('users', 'follows.followed_id', '=', 'users.id')
             ->select('users.id', 'users.name')
             ->where('follows.follower_id', $id)
             ->get();
-    
+
         // Obtener los IDs y nombres de los álbumes
         $albums = $user->albums()->pluck('name', 'id');
-    
-        return view('user.show', compact('user', 'followers', 'following', 'albums'));
+
+        // Verificar si el usuario autentic ado está siguiendo al usuario actual
+
+        $isFollowing = DB::table('follows')
+            ->where('follower_id', auth()->id())
+            ->where('followed_id', $id)
+            ->exists();
+
+        return view('user.show', compact('user', 'followers', 'following', 'albums', 'isFollowing'));
     }
-    
+
 
 
 

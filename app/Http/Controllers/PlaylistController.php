@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Playlist;
+use App\Models\Song;
 
 class PlaylistController extends Controller
 {
@@ -39,7 +40,7 @@ class PlaylistController extends Controller
         $playlist->fav = $request->has('fav');
         $playlist->save();
 
-        $user->playlists()->attach($playlist->id, ['role' => 'owner']); 
+        $user->playlists()->attach($playlist->id, ['role' => 'owner']);
 
         return redirect()->back()->with('success', 'Playlist creada exitosamente');
     }
@@ -54,5 +55,25 @@ class PlaylistController extends Controller
         }
 
         return view("playlists.show", compact('playlist'));
+    }
+
+    public function addSong(Request $request)
+    {
+
+        $request->validate([
+            'song_id' => 'required|exists:songs,id',
+            'playlist_id' => 'required|exists:playlists,id',
+        ]);
+
+        $song = Song::findOrFail($request->song_id);
+        $playlist = Playlist::findOrFail($request->playlist_id);
+
+        if ($playlist->songs()->where('song_id', $song->id)->exists()) {
+            return redirect()->back()->with('error', 'La canción ya está en la playlist.');
+        }
+
+        $playlist->songs()->attach($song);
+
+        return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
     }
 }

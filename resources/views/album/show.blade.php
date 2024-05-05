@@ -134,7 +134,9 @@
                         <td>
                             {{ $song->reproductions }}
                         </td>
-                        <td><a href="#">Añadir</a></td>
+                        <td>
+                            AQUI VA EL BOTON Y EL MODAL PARA AGREGAR UNA CANCION A UNA PLAYLIST    
+                        </td>
                         <td>
                             @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))
                                 <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
@@ -152,6 +154,8 @@
     <script>
         var csrfToken = '{{ csrf_token() }}';
     </script>
+
+
 
 @endsection
 
