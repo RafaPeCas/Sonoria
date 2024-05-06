@@ -34,6 +34,52 @@
                     <p class="m-0 mx-2">
                         Nombre del grupo - Fecha del album - Canciones: {{ $totalSongs }}, duración total
                     </p>
+                    <!-- Botón para abrir el modal de actualización y eliminación del álbum -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#updateAlbumModal">
+                        Actualizar y Eliminar Álbum
+                    </button>
+
+                   <!-- Modal -->
+<div class="modal fade" id="updateAlbumModal" tabindex="-1" aria-labelledby="updateAlbumModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content glass-morphism">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateAlbumModalLabel">Actualizar Álbum</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="text-white" action="{{ route('albums.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!-- Campo oculto para pasar la ID del álbum -->
+                    <input type="hidden" name="album_id" value="{{ $album->id }}">
+                    <div class="">
+                        <label for="name" class="form-label">Nombre del Álbum:</label>
+                        <input type="text" id="name" name="name" class="form-control" value="{{ $album->name }}" required>
+                    </div>
+
+                    <div class="">
+                        <label for="image" class="form-label">Imagen del Álbum:</label>
+                        <input type="file" id="image" name="image" class="form-control">
+                    </div>
+
+
+                     <button type="submit" class="btn btn-primary mt-2">Actualizar Álbum</button>
+
+                    </form>
+                     <!-- Botón para Eliminar Álbum -->
+                     <form action="{{ route('albums.delete') }}" method="POST">
+                        @csrf
+                        <!-- Campo oculto para enviar la ID del álbum -->
+                        <input type="hidden" name="album_id" value="{{ $album->id }}">
+                        <button type="submit" class="btn btn-danger mt-2">Eliminar Álbum</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
                 </div>
             </div>
         </div>
@@ -135,7 +181,7 @@
                             {{ $song->reproductions }}
                         </td>
                         <td>
-                            AQUI VA EL BOTON Y EL MODAL PARA AGREGAR UNA CANCION A UNA PLAYLIST    
+                            AQUI VA EL BOTON Y EL MODAL PARA AGREGAR UNA CANCION A UNA PLAYLIST
                         </td>
                         <td>
                             @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))
