@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         // Realiza la validación de los campos
         $validator = Validator::make($request->all(), [
-            'name' => ['nullable', 'string', 'min:2', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/'],
+            'name' => ['nullable', 'string', 'min:2'],
             'email' => ['nullable', 'string', 'email', 'max:255', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i'],
 
             'name.min' => 'El nombre debe tener mínimo :min letras.',
@@ -45,7 +45,7 @@ class UserController extends Controller
                     $user->gender = $request->gender;
 
                     $user->save();
-                    return redirect('/')->with('success', 'Usuario actualizado exitosamente');
+                    return redirect('/home')->with('success', 'Usuario actualizado exitosamente');
                 } catch (QueryException $exception) {
                     //Si introduce email  existente le salta el mensaje de error
                     if ($exception->errorInfo[1] === 1062) {
@@ -59,7 +59,7 @@ class UserController extends Controller
                 }
             } else {
                 // Si el usuario no ha realizado cambios, redirigir a la página principal
-                return redirect('/')->with('info', 'No se han realizado cambios');
+                return redirect('/home')->with('info', 'No se han realizado cambios');
             }
         } else {
             return redirect()->route('login')->with('success', '');
@@ -71,7 +71,7 @@ class UserController extends Controller
         $user = Auth::user();
 
 
-        return view("user/userEditData", compact("user"));
+        return view("user.userEditData", compact("user"));
     }
 
     public function seeData()

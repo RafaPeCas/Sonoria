@@ -24,8 +24,13 @@
 
         <section id="content">
             <div class="contentHeader d-flex align-items-center">
-                <div>
-                    <img src="{{ asset('img/userPictures/default.png') }}" alt="" class="userIcon">
+                <div class="navMenu">
+                    <a href="">Tu biblioteca</a>
+                    <a href="">Inicio</a>
+                    <a href="">Recomendaciones</a>
+                    <a href="{{route("user.profile", Auth::user()->id)}}">Tu perfil</a>
+                    <a href="{{ route('logout') }}">Cerrar sesión</a>
+
                 </div>
             </div>
             <div class="contentBody">

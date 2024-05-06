@@ -11,17 +11,33 @@
 
 @section('content')
 
-    <section class="albumHeader p-5 w-100 text-white">
-        <div class="d-flex gap-3 w-100">
-            <img src="" id='base64image' class="bigAlbumImage">
-            <div class="albumInfo">
-                <p class="m-0">Álbum</p>
-                <h1 class="albumName"></h1>
-                <div class="d-flex justify-center align-items-center">
-                    <img src="{{ $user->image }}" alt="imagen" class="groupImage">
-                    <p class="m-0 mx-2">
-                        {{ $user->name }}
+    @if ($user->role === 'artist')
+        <h1>Hola artista</h1>
+    @else
+        <div class="userHeader">
+            <div class="userData">
+                <div class="userImage">
+                    <img src="{{ asset('img/userPictures/default.png') }}" alt="userPicture">
+                    <div class="d-flex mt-3 justify-content-center"> <a href="{{ route('user.edit', $user->id) }}" class="btn  btn-primary">Editar perfil</a></div>
+                </div>
+                <div class="userName">
+                    <h2>{{ $user->name }}</h2>
+                    <hr>
+                    
+                    <p>
+                        <img src="{{asset('img/logos/email-svgrepo-com.svg')}}" alt="icono email" height="30" >
+                        <span class="spaceIcon">{{ $user->email }}</span>
                     </p>
+                    <p>
+                        @if($user->birth)
+                        <img src="{{asset('img/logos/birthdate-svgrepo-com.svg')}}" alt="icono tarta"> {{ $user->birth }}
+                        @else
+                        <img src="{{asset('img/logos/birthdate-svgrepo-com.svg')}}" alt="icono tarta" height="30"> Fecha no disponible
+                        @endif
+                    </p>
+                    <p><img src="{{asset('img/logos/gender-svgrepo-com.svg')}}" alt="icono genero" height="34" >    <span class="mr-3">{{ trans($user->gender) }}</span></p>
+                    <p><img src="{{asset('img/logos/profile-svgrepo-com.svg')}}" alt="icono perfil" height="36">  <span class="spaceIcon">{{ trans($user->role->name) }}</span></p>
+                  
                 </div>
             </div>
         </div>
