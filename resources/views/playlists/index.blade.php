@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-    <h1>TUS PLAYLISTS</h1>
-    <div class="container">
+    <h1 class="text-white">TUS PLAYLISTS</h1>
+    <div class="container text-white">
         <h1>Playlists</h1>
         <div class="row">
             @foreach ($playlists as $playlist)
@@ -30,7 +30,7 @@
             @endforeach
         </div>
     </div>
-    <div class="container">
+    <div class="container text-white">
         <h2>Create Playlist</h2>
         <form method="POST" action="{{ route('playlist.store') }}">
             @csrf

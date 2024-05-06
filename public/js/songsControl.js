@@ -12,6 +12,7 @@ let prevSongButton = document.querySelector('.prev-song-btn');
 let nextSongButton = document.querySelector('.next-song-btn');
 let randomModeButton = document.querySelector('.random-mode-btn');
 let isRandomMode = false;
+let songTitle;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento <audio>
@@ -27,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Si existe la cookie, obtener el título almacenado
         const songTitle = songTitleCookie.split('=')[1];
 
-        // Actualizar el título de la canción en la interfaz
     }
 
     if (songIdCookie) {
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener todos los enlaces de canción
     const songLinks = document.querySelectorAll('.song-link');
 
+    console.log("Link titulos", songLinks);
     // Verificar si existe una cookie para currentTime
     const currentTimeCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('currentTime='));
     let initialTime = 0; // Tiempo inicial predeterminado si no hay cookie
