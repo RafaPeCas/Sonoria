@@ -7,7 +7,8 @@
 }
 
 .songTitle {
-    width: 200px;
+    margin-left: 20px;
+    width: 300px;
     white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -16,9 +17,14 @@
 .songTitle h2 {
     display: inline-block;
     margin: 0;
+    margin-bottom: 8px;
 }
 
+#albumNameRepro{
+    margin-left: 20px;
+}
 .coverImg {
+    margin-left: 20px;
     width: 100px;
     height: 100px;
 }
@@ -69,4 +75,12 @@
     height: 100%;
     background-color: #4CAF50;
     border-radius: 5px;
+}
+
+.active{
+    color: #4CAF50 !important;
+}
+
+.noDecoration{
+    text-decoration: none !important;
 }

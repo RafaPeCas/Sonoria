@@ -8,12 +8,12 @@
                 <div>
                     <div class="songTitle">
                         <div>
-                            <h2>{{ $lastSong->name }}</h2>
+                            <h2></h2>
                         </div>
+                        <p id="albumNameRepro"></p>
 
                     </div>
-                    <p>{{ $lastSong->album->name }}</p>
-                    {{ dd($lastSong) }}
+
                 </div>
             </div>
         </div>
@@ -32,15 +32,15 @@
         <div id="songInfo">
             <div class="d-flex custom align-items-center h-100 pl-2">
                 <div>
-                    <img class="coverImg" src="{{ asset('img/cover/test.jpg') }}" alt="">
+                <img class="coverImg" src="{{ $album->image ? 'data:image/jpeg;base64,'.$album->image : asset('img/cover/test.jpg') }}" alt="{{ $album->name }}">
                 </div>
                 <div>
                     <div class="songTitle">
                         <div>
-                            <h2>Time is runnig out</h2>
+                            <h2></h2>
                         </div>
                     </div>
-                    <a href="#">Absolution</a>
+                    <p id="albumNameRepro"></p>
                 </div>
             </div>
         </div>

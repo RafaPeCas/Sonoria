@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserReproductionController;
+use App\Http\Controllers\PlaylistController;
+use App\Models\Playlist;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,9 +53,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/{id}/unfollow', [UserController::class, 'unfollow'])->name('user.unfollow');
 
     Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
-    Route::get('editaData', [UserController::class, 'edit'])->name('user.edit');
     
     Route::get("personal/profile", [UserController::class, "view"])->name("profile");
+    
+    Route::get('editaData', [UserController::class, 'edit'])->name('user.edit');
+    
+
 
     /*Rutas para search */
     Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -60,9 +66,16 @@ Route::middleware(['auth'])->group(function () {
 
     /*Ruta para las reproducciones */
     Route::post('/song/{songId}/reproduction', [UserReproductionController::class, 'addReproduction'])->name('song.addReproduction');
+
+    /*Ruta para las playlists */
+    Route::get("/playlists", [PlaylistController::class, "index"])->name("playlist.index");
+    Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
+    Route::get("/playlists/{id}/{name?}", [PlaylistController::class, "show"])->name("playlist.show");
+    Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/');
     });
+    
 });
 

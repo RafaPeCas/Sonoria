@@ -1,7 +1,7 @@
 .userHeader {
     width: 100%;
     background-color: #535353ab;
-    height: 320px;
+    height: 300px;
     color: white;
     display: flex;
 }
@@ -26,7 +26,7 @@
 }
 
 .userName {
-    padding-left: 25px;
+    padding-left: 20px;
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -40,9 +40,8 @@
 .recentlyPlayed {
     flex-grow: 1;
     background-color: white;
-    margin: 10px 50px 10px 70px;
+    margin: 10px 0px 10px 50px;
     border-radius: 30px;
-
 }
 
 .tabs {
@@ -51,46 +50,87 @@
 }
 
 .tabs button {
-    background-color: #535353ab;
-    border: none;
+    background-color: #535353ab !important;
+    border: none !important;
     width: 100%;
     height: 100px;
-    color: white;
+    color: white !important;
 }
 
-.shadow {
-    border: 1px black solid;
-    border-top: none;
-  
-}
-
-.tabContent{
-    width: 100%;
-    flex-grow: 1;
-}
-
-.tabContent div{
-    background-color: white;
-    width: 100%;
-    height: 100%;
-}
-
-.tabContainer{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-main{
-    display: flex;
-    flex-direction: column;
-}
-
-.shown{
+.tab-button.shadow {
+    border: 1px black solid !important;
+    border-top: none !important;
     background-color: white !important;
     color: black !important;
 }
 
-.hidden{
+.tabContent {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.tabContent div {
+    width: 100%;
+    height: 100%;
+}
+
+.tabContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
     display: none !important;
+}
+
+.glass-morphism {
+    background-color: rgba(184, 19, 206, 0.413) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(55, 0, 255, 0.2) !important;
+}
+
+.glass-morphism .modal-header,
+.glass-morphism .modal-footer {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.glass-morphism .modal-title {
+    color: #fff !important;
+}
+
+.glass-morphism .modal-body {
+    color: #fff !important;
+    padding: 20px !important;
+}
+
+.glass-morphism .modal-body input[type="text"],
+.glass-morphism .modal-body input[type="file"],
+.glass-morphism .modal-body input[type="checkbox"] {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+}
+
+.modal-content {
+    height: auto !important;
+}
+
+
+
+.modal-header {
+    padding: 15px !important;
+}
+
+.modal-footer {
+    padding: 15px !important;
 }

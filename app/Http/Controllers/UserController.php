@@ -94,38 +94,35 @@ class UserController extends Controller
             abort(404, 'Usuario no encontrado');
         }
 
-        // Obtener el número de seguidores
-        $followersCount = DB::table('follows')
-            ->where('followed_id', $id)
-            ->count();
-
-        // Obtener la lista de seguidores
+        // Obtener los IDs y nombres de los seguidores
         $followers = DB::table('follows')
             ->join('users', 'follows.follower_id', '=', 'users.id')
-            ->select('users.*')
+            ->select('users.id', 'users.name')
             ->where('follows.followed_id', $id)
             ->get();
 
-        // Verificar si el usuario autenticado está siguiendo al usuario actual
+        // Obtener los IDs y nombres de los usuarios seguidos
+        $following = DB::table('follows')
+            ->join('users', 'follows.followed_id', '=', 'users.id')
+            ->select('users.id', 'users.name')
+            ->where('follows.follower_id', $id)
+            ->get();
+
+        // Obtener los IDs y nombres de los álbumes
+        $albums = $user->albums()->pluck('name', 'id');
+
+        // Verificar si el usuario autentic ado está siguiendo al usuario actual
+
         $isFollowing = DB::table('follows')
             ->where('follower_id', auth()->id())
             ->where('followed_id', $id)
             ->exists();
 
-        // Obtener el número de usuarios a los que sigue
-        $followingCount = DB::table('follows')
-            ->where('follower_id', $id)
-            ->count();
-
-        // Obtener la lista de usuarios a los que sigue
-        $following = DB::table('follows')
-            ->join('users', 'follows.followed_id', '=', 'users.id')
-            ->select('users.*')
-            ->where('follows.follower_id', $id)
-            ->get();
-
-        return view('user.show', compact('user', 'followersCount', 'isFollowing', 'followers', 'followingCount', 'following'));
+        return view('user.show', compact('user', 'followers', 'following', 'albums', 'isFollowing'));
     }
+
+
+
 
     public function follow($id)
     {
@@ -178,6 +175,4 @@ class UserController extends Controller
             return back()->with('error', 'No estás siguiendo a ' . $user->name);
         }
     }
-
-
 }

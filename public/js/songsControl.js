@@ -1,17 +1,18 @@
 "use strict";
 
-var audioPlayer = document.getElementById('audio-player');
-var playPauseButton = document.querySelector('.play-pause');
-var seekBackwardButton = document.querySelector('.seek-backward');
-var seekForwardButton = document.querySelector('.seek-forward');
-var volumeSlider = document.querySelector('.volume-slider');
-var progressBar = document.querySelector('.progress-bar');
-var progressContainer = document.querySelector('.progress-container');
-var isDragging = false;
-var prevSongButton = document.querySelector('.prev-song-btn');
-var nextSongButton = document.querySelector('.next-song-btn');
-var randomModeButton = document.querySelector('.random-mode-btn');
-var isRandomMode = false;
+let audioPlayer = document.getElementById('audio-player');
+let playPauseButton = document.querySelector('.play-pause');
+let seekBackwardButton = document.querySelector('.seek-backward');
+let seekForwardButton = document.querySelector('.seek-forward');
+let volumeSlider = document.querySelector('.volume-slider');
+let progressBar = document.querySelector('.progress-bar');
+let progressContainer = document.querySelector('.progress-container');
+let isDragging = false;
+let prevSongButton = document.querySelector('.prev-song-btn');
+let nextSongButton = document.querySelector('.next-song-btn');
+let randomModeButton = document.querySelector('.random-mode-btn');
+let isRandomMode = false;
+let songTitle;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento <audio>
@@ -19,6 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Verificar si existe una cookie para songId
     const songIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songId='));
+
+    const songTitleCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songTitle='));
+    updateAlbumName();
+
+    if (songTitleCookie) {
+        // Si existe la cookie, obtener el título almacenado
+        const songTitle = songTitleCookie.split('=')[1];
+
+    }
 
     if (songIdCookie) {
         // Si existe la cookie, obtener la ID de la canción almacenada
@@ -35,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Establecer el atributo src del elemento <audio> con la URL de la canción seleccionada
             audioPlayer.src = songSrc;
+            updateSongInfo(songTitle);
 
             // Verificar si hay una cookie para currentTime
             const currentTimeCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('currentTime='));
@@ -58,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener todos los enlaces de canción
     const songLinks = document.querySelectorAll('.song-link');
 
+    console.log("Link titulos", songLinks);
     // Verificar si existe una cookie para currentTime
     const currentTimeCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('currentTime='));
     let initialTime = 0; // Tiempo inicial predeterminado si no hay cookie
@@ -88,6 +100,15 @@ document.addEventListener('DOMContentLoaded', function () {
             // Establecer el currentTime del audioPlayer
             audioPlayer.currentTime = 0;
 
+            const songTitle = this.textContent.trim();
+            document.cookie = `songTitle=${songTitle}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+
+            updateSongInfo(songTitle);
+            // Restablecer el resaltado de todas las canciones
+            resetSongHighlights();
+
+            // Resaltar la canción actual
+            highlightCurrentSong(this);
             // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
             registerReproduction(songId);
 
@@ -109,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.delete-song-btn').forEach(function (button) {
         button.addEventListener('click', function () {
-            var songId = this.getAttribute('data-id');
+            let songId = this.getAttribute('data-id');
             deleteSongById(songId);
         });
     });
@@ -126,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (!data.err) {
 
-                    var row = document.getElementById('song_' + id);
+                    let row = document.getElementById('song_' + id);
                     if (row) {
                         row.remove();
                     }
@@ -180,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     audioPlayer.addEventListener('timeupdate', function () {
-        var progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        let progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progressBar.style.width = progress + '%';
     });
 
@@ -208,11 +229,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    progressContainer.addEventListener('click', function(event) {
-        var rect = progressContainer.getBoundingClientRect();
-        var offsetX = event.clientX - rect.left;
-        var width = rect.right - rect.left;
-        var percentage = (offsetX / width) * 100;
+    progressContainer.addEventListener('click', function (event) {
+        let rect = progressContainer.getBoundingClientRect();
+        let offsetX = event.clientX - rect.left;
+        let width = rect.right - rect.left;
+        let percentage = (offsetX / width) * 100;
 
         if (percentage >= 0 && percentage <= 100) {
             progressBar.style.width = percentage + '%';
@@ -221,121 +242,164 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // Función para actualizar la posición de reproducción del audio y la barra de progreso
     function updateProgress(event) {
-        var rect = progressContainer.getBoundingClientRect();
-        var offsetX = event.clientX - rect.left;
-        var width = rect.right - rect.left;
-        var percentage = (offsetX / width) * 100;
+        let rect = progressContainer.getBoundingClientRect();
+        let offsetX = event.clientX - rect.left;
+        let width = rect.right - rect.left;
+        let percentage = (offsetX / width) * 100;
 
         if (percentage >= 0 && percentage <= 100) {
             progressBar.style.width = percentage + '%';
         }
     }
 
-    audioPlayer.addEventListener('timeupdate', function() {
-        var progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    audioPlayer.addEventListener('timeupdate', function () {
+        let progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         progressBar.style.width = progress + '%';
     });
 
     // Manejar el clic en el botón de retroceso
-prevSongButton.addEventListener('click', function() {
-    // Obtener el índice actual de la canción reproducida
-    var currentSongIndex = getCurrentSongIndex();
+    prevSongButton.addEventListener('click', function () {
+        // Obtener el índice actual de la canción reproducida
+        let currentSongIndex = getCurrentSongIndex();
 
-    // Obtener el índice de la canción anterior
-    var prevSongIndex = currentSongIndex - 1;
+        // Obtener el índice de la canción anterior
+        let prevSongIndex = currentSongIndex - 1;
 
-    // Reproducir la canción anterior si existe
-    if (prevSongIndex >= 0) {
-        playSongByIndex(prevSongIndex);
-    }
-});
-
-// Manejar el clic en el botón de avance
-nextSongButton.addEventListener('click', function() {
-    if (isRandomMode) { // Verificar si el modo aleatorio está activado
-        var currentSongIndex = getCurrentSongIndex();
-        var randomIndex;
-
-        // Generar un índice aleatorio diferente al índice de la canción actual
-        do {
-            randomIndex = Math.floor(Math.random() * songLinks.length);
-        } while (randomIndex === currentSongIndex);
-
-        // Reproducir la canción aleatoria
-        playSongByIndex(randomIndex);
-    } else {
-        // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
-        var nextSongIndex = getCurrentSongIndex() + 1;
-        if (nextSongIndex < songLinks.length) {
-            playSongByIndex(nextSongIndex);
+        // Reproducir la canción anterior si existe
+        if (prevSongIndex >= 0) {
+            playSongByIndex(prevSongIndex);
         }
-    }
-});
+    });
 
-// Función para obtener el índice de la canción actualmente reproducida
-function getCurrentSongIndex() {
-    var currentSongSrc = audioPlayer.src;
-    for (var i = 0; i < songLinks.length; i++) {
-        if (songLinks[i].getAttribute('data-src') === currentSongSrc) {
-            return i;
+    // Manejar el clic en el botón de avance
+    nextSongButton.addEventListener('click', function () {
+        if (isRandomMode) { // Verificar si el modo aleatorio está activado
+            let currentSongIndex = getCurrentSongIndex();
+            let randomIndex;
+
+            // Generar un índice aleatorio diferente al índice de la canción actual
+            do {
+                randomIndex = Math.floor(Math.random() * songLinks.length);
+            } while (randomIndex === currentSongIndex);
+
+            // Reproducir la canción aleatoria
+            playSongByIndex(randomIndex);
+        } else {
+            // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
+            let nextSongIndex = getCurrentSongIndex() + 1;
+            if (nextSongIndex < songLinks.length) {
+                playSongByIndex(nextSongIndex);
+            }
         }
-    }
-    return -1;
-}
+    });
 
-audioPlayer.addEventListener('ended', function() {
-    if (isRandomMode) {
-        var currentSongIndex = getCurrentSongIndex();
-        var randomIndex;
-
-        // Generar un índice aleatorio diferente al índice de la canción actual
-        do {
-            randomIndex = Math.floor(Math.random() * songLinks.length);
-        } while (randomIndex === currentSongIndex);
-
-        // Reproducir la canción aleatoria
-        playSongByIndex(randomIndex);
-    } else {
-        // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
-        var nextSongIndex = getCurrentSongIndex() + 1;
-        if (nextSongIndex < songLinks.length) {
-            playSongByIndex(nextSongIndex);
+    // Función para obtener el índice de la canción actualmente reproducida
+    function getCurrentSongIndex() {
+        let currentSongSrc = audioPlayer.src;
+        for (let i = 0; i < songLinks.length; i++) {
+            if (songLinks[i].getAttribute('data-src') === currentSongSrc) {
+                return i;
+            }
         }
+        return -1;
     }
-});
+
+    audioPlayer.addEventListener('ended', function () {
+        if (isRandomMode) {
+            let currentSongIndex = getCurrentSongIndex();
+            let randomIndex;
+
+            // Generar un índice aleatorio diferente al índice de la canción actual
+            do {
+                randomIndex = Math.floor(Math.random() * songLinks.length);
+            } while (randomIndex === currentSongIndex);
+
+            // Reproducir la canción aleatoria
+            playSongByIndex(randomIndex);
+
+        } else {
+            // Si el modo aleatorio no está activado, reproducir la siguiente canción en la lista
+            let nextSongIndex = getCurrentSongIndex() + 1;
+            if (nextSongIndex < songLinks.length) {
+                playSongByIndex(nextSongIndex);
+            }else {
+                audioPlayer.pause();
+            }
+        }
+    });
 
 
-// Función para reproducir una canción por su índice en la lista de enlaces de canciones
-function playSongByIndex(index) {
-    var songLink = songLinks[index];
-    var songSrc = songLink.getAttribute('data-src');
-    var songId = songLink.getAttribute('data-id');
+    // Función para reproducir una canción por su índice en la lista de enlaces de canciones
+    function playSongByIndex(index) {
+        resetSongHighlights();
 
-    // Guardar la cookie songId
-    document.cookie = `songId=${songId}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+        let songLink = songLinks[index];
+        let songSrc = songLink.getAttribute('data-src');
+        let songId = songLink.getAttribute('data-id');
+        let songTitle = songLink.textContent.trim();
 
-    // Actualizar el atributo src del elemento <audio> con la URL de la nueva canción seleccionada
-    audioPlayer.src = songSrc;
+        // Guardar la cookie songId
+        document.cookie = `songId=${songId}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+        document.cookie = `songTitle=${songTitle}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+        // Actualizar el atributo src del elemento <audio> con la URL de la nueva canción seleccionada
+        audioPlayer.src = songSrc;
 
-    // Establecer el currentTime del audioPlayer
-    audioPlayer.currentTime = 0;
+        // Establecer el currentTime del audioPlayer
+        audioPlayer.currentTime = 0;
+        updateSongInfo(songTitle);
 
-    // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
-    registerReproduction(songId);
+        highlightCurrentSong(songLink);
+        // Reproducir la nueva canción automáticamente (si se desea) cuando el usuario haga clic
+        registerReproduction(songId);
 
-    audioPlayer.play();
-}
-
-randomModeButton.addEventListener('click', function() {
-    // Cambiar el estado del modo aleatorio
-    isRandomMode = !isRandomMode;
-
-    // Actualizar el texto del botón según el estado del modo aleatorio
-    if (isRandomMode) {
-        randomModeButton.textContent = 'Aleatorio (activado)';
-    } else {
-        randomModeButton.textContent = 'Aleatorio';
+        audioPlayer.play();
     }
-});
+
+    randomModeButton.addEventListener('click', function () {
+        // Cambiar el estado del modo aleatorio
+        isRandomMode = !isRandomMode;
+
+        // Actualizar el texto del botón según el estado del modo aleatorio
+        if (isRandomMode) {
+            randomModeButton.textContent = 'Aleatorio (activado)';
+        } else {
+            randomModeButton.textContent = 'Aleatorio';
+        }
+    });
+
+
+    function updateSongInfo(songTitle) {
+        let songTitleElement = document.querySelector('.songTitle h2'); // Elemento del título de la canción
+
+        songTitleElement.textContent = songTitle;
+    }
+
+    function updateAlbumName() {
+        // Obtener el elemento h1 con la clase albumName
+        let albumNameElement = document.querySelector('.albumName');
+
+        // Obtener el texto del nombre del álbum
+        let albumName = albumNameElement.textContent.trim();
+
+        // Obtener el elemento p con el id albumNameRepro
+        let albumNameReproElement = document.getElementById('albumNameRepro');
+
+        // Establecer el texto del nombre del álbum en el elemento p
+        albumNameReproElement.textContent = albumName;
+    }
+
+    function resetSongHighlights() {
+        console.log("SE LLAMA")
+        const songLinks = document.querySelectorAll('.song-link');
+        songLinks.forEach(function (link) {
+            link.classList.remove('active'); // Quita la clase 'active' de todos los enlaces de canciones
+        });
+    }
+
+    function highlightCurrentSong(link) {
+        console.log("SE LLAMA 2")
+        link.classList.add('active'); // Agrega la clase 'active' al enlace de la canción actual
+    }
+
 
 });

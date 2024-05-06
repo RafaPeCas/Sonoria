@@ -35,8 +35,10 @@ class AlbumController extends Controller
             'user_id' => $userId,
 
         ]);
+      
+        $totalSongs = 0;
 
-        return view('album/show')->with('album', $album);
+        return view('album.show', compact('album', 'totalSongs'));
     }
 
     public function update(Request $request, $id){
