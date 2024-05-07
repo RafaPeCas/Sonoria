@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('styles/home.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/songs/reproductionPanel.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="{{asset("js/spotify.js")}}"></script>  
 @endsection
 
 @section('content')
@@ -72,7 +73,7 @@
             <div class="contentHeader d-flex align-items-center">
                 <div class="navMenu">
                     <a href="{{ route('playlist.index') }}">Tus playlists</a>
-                    <a href="{{ route('spotify') }}">Conectar con Spotify</a>
+                    <a onclick="userLoginRequest()">Conectar con Spotify</a>
                     <a href="{{ route('user.profile', Auth::user()->id) }}">Tu perfil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
