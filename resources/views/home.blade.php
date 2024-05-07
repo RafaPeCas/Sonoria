@@ -75,7 +75,7 @@
                     <a href="{{ route('playlist.index') }}">Tus playlists</a>
                     <a href="{{route("spotify")}}">Conectar con Spotify</a>
                     <a href="{{ route('user.profile', Auth::user()->id) }}">Tu perfil</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <a class="dropdown-item bg-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
                         Cerrar sesión
