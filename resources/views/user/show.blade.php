@@ -57,7 +57,9 @@
                 <button class="tab-button" data-tab="followers">Seguidores</button>
                 <button class="tab-button" data-tab="following">Siguiendo</button>
                 <button class="tab-button" data-tab="albums">Álbums</button>
-                <button class="tab-button" data-tab="statistics">Estadísticas</button>
+                @if (auth::user()->id === $user->id)
+                    <button class="tab-button" data-tab="statistics">Mis datos de spotify</button>
+                @endif
             </div>
             <div class="tabContent">
                 <div id="followers" class="hidden text-white tab">
@@ -139,11 +141,68 @@
                         @endif
                     </div>
                 </div>
-                <div id="statistics" class="hidden tab">
-                    <div>
+                @if (auth::user()->id === $user->id)
+                    <div id="statistics" class="hidden tab text-white">
+                        <div>
+                            <div id="sData" hidden>
+                                <p class="trigger" hidden></p>
+                                <h1>Nombre de usuario en Spotify</h1>
+                                <h3 id="sName"></h3>
 
+                                <h1>Región</h1>
+                                <h3 id="sCountry"></h3>
+
+                                <h1>Correo asociado</h1>
+                                <h3 id="sEmail"></h3>
+
+                                <h1>Filtro de contenido explicito</h1>
+                                <h3 id="sExplicit"></h3>
+
+                                <a id="sProfile">Link a tu perfil</a>
+
+                                <h1>Seguidores</h1>
+                                <h3 id="sFollowers"></h3>
+
+                                <h1>Id de tu cuenta</h1>
+                                <h3 id="sId"></h3>
+
+                                <h1>Imágen de tu perfil</h1>
+                                <img id="sImage"></img>
+
+                                <h1>Tipo de cuenta</h1>
+                                <h3 id="sPremium"></h3>
+
+                                <h1>Tipo de usuario</h1>
+                                <h3 id="sType"></h3>
+
+                                <a id="sUri">Abrir tu aplicación localmente</a>
+                            </div>
+                            <div id="SpotifyNotConnected" hidden>
+                                <a href="{{route("spotify")}}">Conectar con Spotify</a>
+                            </div>
+                            <script>
+                                if (localStorage.getItem("user")) {
+                                    document.querySelector("#sData").removeAttribute("hidden")
+
+                                    const userInfo = JSON.parse(localStorage.getItem("user"))
+                                    document.querySelector("#sName").innerHTML = userInfo.display_name
+                                    document.querySelector("#sCountry").innerHTML = userInfo.country
+                                    document.querySelector("#sEmail").innerHTML = userInfo.email
+                                    document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" : "Desactivado";
+                                    document.querySelector("#sProfile").setAttribute("href", userInfo.external_urls.spotify);
+                                    document.querySelector("#sFollowers").innerHTML = userInfo.followers.total;
+                                    document.querySelector("#sid").innerHTML = userInfo.id;
+                                    document.querySelector("#sImage").setAttribute("src", userInfo.images[0].url)
+                                    document.querySelector("#sPremium").innerHTML = userInfo.product
+                                    document.querySelector("#sType").innerHTML = userInfo.type
+                                    document.querySelector("#sUri").setAttribute("href", userInfo.uri);
+                                } else {
+                                    document.querySelector("#SpotifyNotConnected").removeAttribute("hidden")
+                                }
+                            </script>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     @endif

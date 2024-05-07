@@ -66,12 +66,13 @@
 
 .tabContent {
     width: 100%;
-    flex-grow: 1;
+    height: 100%;
 }
 
 .tabContent div {
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
 
 .tabContainer {
@@ -124,8 +125,6 @@ main {
 .modal-content {
     height: auto !important;
 }
-
-
 
 .modal-header {
     padding: 15px !important;
