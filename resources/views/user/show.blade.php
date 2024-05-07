@@ -88,7 +88,7 @@
                     <div>
                         @if (Auth::check() && (Auth::user()->id === $user->id || Auth::user()->id === 1))
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary mt-3 mb-3" data-bs-toggle="modal"
                                 data-bs-target="#addAlbumModal">
                                 Agregar Álbum
                             </button>
@@ -126,17 +126,23 @@
                                 </div>
                             </div>
                         @endif
+                        
+                        @if (empty($albums))
+    <h1>No hay álbumes en este momento.</h1>
+@else
+    @foreach ($albums as $album)
+        <a href="{{ route('album.show', ['id' => $album['id']]) }}" class="imagencita link-no-style mt-3 mb-3">
+            @if (!empty($album['image']))
+                <img src="data:image/jpeg;base64,{{ $album['image'] }}" alt="{{ $album['name'] }}" class="bigAlbumImage mt-3 mb-3">
+            @else
+                <img src="{{ asset('img/cover/test.jpg') }}" alt="{{ $album['name'] }}" class="bigAlbumImage mt-3 mb-3">
+            @endif
+            <h3 behavior="" direction="left" class="album-name">{{ $album['name'] }}</h3>
+        </a>
+    @endforeach
+@endif
 
-                        @if ($albums->isEmpty())
-                            <h1>No hay álbumes en este momento.</h1>
-                        @else
-                            @foreach ($albums as $albumId => $albumName)
-                                <a href="{{ route('album.show', ['id' => $albumId]) }}" class="imagencita"
-                                    style="background-color: red">
-                                    <h5 behavior="" direction="left" class="album-name">{{ $albumName }}</h5>
-                                </a>
-                            @endforeach
-                        @endif
+
                     </div>
                 </div>
                 <div id="statistics" class="hidden tab">
