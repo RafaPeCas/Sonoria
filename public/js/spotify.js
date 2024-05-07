@@ -1,4 +1,4 @@
-"use strict"
+"use"
 
 function userLoginRequest() {
     let clientId = "e1ccac91ae2f4f3c8534f5f9b00d729c"
