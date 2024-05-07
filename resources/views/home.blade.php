@@ -71,8 +71,8 @@
         <section id="content">
             <div class="contentHeader d-flex align-items-center">
                 <div class="navMenu">
-                    <a href="{{route("playlist.index")}}">Tus playlists</a>
-                    <a href="#">Recomendaciones</a>
+                    <a href="{{ route('playlist.index') }}">Tus playlists</a>
+                    <a href="{{ route('spotify') }}">Conectar con Spotify</a>
                     <a href="{{ route('user.profile', Auth::user()->id) }}">Tu perfil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

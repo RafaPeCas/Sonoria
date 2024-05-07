@@ -68,4 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
     Route::get("/playlists/{id}/{name?}", [PlaylistController::class, "show"])->name("playlist.show");
     Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
+    Route::get('/spotify', function () {
+        return view('spotify.connection');
+    })->name("spotify");
 });
