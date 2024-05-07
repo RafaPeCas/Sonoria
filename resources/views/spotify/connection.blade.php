@@ -17,7 +17,6 @@
 
     async function handleAuthentication(clientId, code) {
         if (!code) {
-
             await redirectToAuthCodeFlow(clientId);
         } else {
 
@@ -25,6 +24,7 @@
                 const accessToken = await getAccessToken(clientId, code);
                 const profile = await fetchProfile(accessToken);
                 localStorage.setItem("user", JSON.stringify(profile))
+                location.href ='/user/'+document.querySelector("#userId").innerHTML;
             } catch (error) {
                 console.error('Error en la autenticación:', error);
             }
@@ -40,8 +40,8 @@
         const params = new URLSearchParams();
         params.append("client_id", clientId);
         params.append("response_type", "code");
-        params.append("redirect_uri", "http://localhost:8000/home");
-        params.append("scope", "user-read-private user-read-email user-library-read");
+        params.append("redirect_uri", "http://localhost:8000/spotify");
+        params.append("scope", "user-read-private user-read-email user-library-read playlist-read-private");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
 
@@ -74,7 +74,7 @@
         params.append("client_id", clientId);
         params.append("grant_type", "authorization_code");
         params.append("code", code);
-        params.append("redirect_uri", "http://localhost:8000/home");
+        params.append("redirect_uri", "http://localhost:8000/spotify");
         params.append("code_verifier", verifier);
 
         const result = await fetch("https://accounts.spotify.com/api/token", {
