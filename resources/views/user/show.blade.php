@@ -29,20 +29,25 @@
                     </p>
                     <p>
                         @if($user->birth)
-                        <img src="{{asset('img/logos/birthdate-svgrepo-com.svg')}}" alt="icono tarta"> {{ $user->birth }}
+                        <img src="{{asset('img/logos/birthdate-svgrepo-com.svg')}}" alt="icono tarta" height="30"> {{ $user->birth }}
                         @else
                         <img src="{{asset('img/logos/birthdate-svgrepo-com.svg')}}" alt="icono tarta" height="30"> Fecha no disponible
                         @endif
                     </p>
                     <p><img src="{{asset('img/logos/gender-svgrepo-com.svg')}}" alt="icono genero" height="34" >    <span class="mr-3">{{ trans($user->gender) }}</span></p>
-                    <p><img src="{{asset('img/logos/profile-svgrepo-com.svg')}}" alt="icono perfil" height="36">  <span class="spaceIcon">{{ trans($user->role->name) }}</span></p>
+                  
+                        @if($user->role) 
+                         <p><img src="{{asset('img/logos/profile-svgrepo-com.svg')}}" alt="icono perfil" height="36"> 
+                         <span class="spaceIcon">{{ trans($user->role->name) }}</span></p>
+                        @else
+                         <p><img src="{{asset('img/logos/profile-svgrepo-com.svg')}}" alt="icono perfil" height="36"> 
+                            <span class="spaceIcon">Rol no disponible</span></p>
+                        @endif
+        
                   
                 </div>
                 <div class="userName">
-                    <h2>{{ $user->name }}</h2>
-                    <hr>
-                    <p>{{ $user->email }} (icono de correo)</p>
-                    <p>{{ $user->birth }} (icono de tarta)</p>
+                   
 
                     @if (Auth::check() && Auth::user()->id !== $user->id)
 
