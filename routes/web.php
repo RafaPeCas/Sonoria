@@ -43,7 +43,8 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::post('/album', [AlbumController::class, 'store'])->name('albums.store');
     Route::get('/album/{id}', [AlbumController::class, 'getAlbumById'])->name('album.show');
-    Route::get('/album/{id}/update', [AlbumController::class, 'update'])->name('album.update');
+    Route::post('/album/update', [AlbumController::class, 'update'])->name('albums.update');
+    Route::post('/album/delete', [AlbumController::class, 'delete'])->name('albums.delete');
 
 
     /* Rutas para usuarios*/

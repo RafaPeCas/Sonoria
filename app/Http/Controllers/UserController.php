@@ -108,8 +108,9 @@ class UserController extends Controller
             ->where('follows.follower_id', $id)
             ->get();
 
-        // Obtener los IDs y nombres de los álbumes
-        $albums = $user->albums()->pluck('name', 'id');
+      // Obtener los álbumes del usuario con sus IDs, nombres e imágenes
+    $albums = $user->albums()->select('id', 'name', 'image')->get()->toArray();
+
 
         // Verificar si el usuario autentic ado está siguiendo al usuario actual
 
