@@ -1,21 +1,21 @@
 .userHeader {
     width: 100%;
     background-color: #535353ab;
-    height: 300px;
     color: white;
     display: flex;
+    justify-content: space-between;
 }
 
 .userImage img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .userImage {
     background-color: white;
     border-radius: 100%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .userData {
@@ -29,7 +29,6 @@
     padding-left: 20px;
     flex-grow: 1;
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -47,6 +46,10 @@
 .tabs {
     display: flex;
     justify-content: space-around;
+}
+
+.tab{
+    max-height: 509px;
 }
 
 .tabs button {
@@ -133,6 +136,7 @@ main {
 .modal-footer {
     padding: 15px !important;
 }
+
 .link-no-style{
     text-decoration: none!important;
     color: white !important;

@@ -20,7 +20,6 @@
                 </div>
                 <div class="userName">
                     <h2>{{ $user->name }}</h2>
-                    <hr>
                     <p>{{ $user->email }} (icono de correo)</p>
                     <p>{{ $user->birth }} (icono de tarta)</p>
 
@@ -41,8 +40,6 @@
                     @endif
 
                 </div>
-            </div>
-            <div class="recentlyPlayed">
             </div>
             <div class="mt-5 me-3 ms-3">
                 <a href="{{ route('home') }}"
