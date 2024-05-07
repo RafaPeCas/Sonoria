@@ -3,11 +3,12 @@
 @section('title', 'spotify')
 
 @section('content')
-   <h1>Estamos recogiendo tus datos, espera un momento...</h1>
+    <h1>Estamos recogiendo tus datos, espera un momento...</h1>
 @endsection
 
-
+<h1 id="userId" hidden>{{ Auth::user()->id }}</h1>
 <script>
+    localStorage.setItem("userId", document.querySelector("#userId").innerHTML)
     const clientId = "e1ccac91ae2f4f3c8534f5f9b00d729c"; // Replace with your client id
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
@@ -26,7 +27,6 @@
                 localStorage.setItem("user", JSON.stringify(profile))
             } catch (error) {
                 console.error('Error en la autenticación:', error);
-
             }
         }
     }
@@ -101,6 +101,4 @@
 
         return await result.json();
     }
-
-
 </script>

@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-
+<p id="userId" hidden>{{ Auth::user()->id }}</p>
     @if ($user->role === 'artist')
         <h1>Hola artista</h1>
     @else
@@ -25,7 +25,7 @@
                     <p>{{ $user->birth }} (icono de tarta)</p>
 
                     @if (Auth::check() && Auth::user()->id !== $user->id)
-
+                        
                         @if ($isFollowing)
                             <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
                                 @csrf
@@ -178,17 +178,18 @@
                                 <a id="sUri">Abrir tu aplicación localmente</a>
                             </div>
                             <div id="SpotifyNotConnected" hidden>
-                                <a href="{{route("spotify")}}">Conectar con Spotify</a>
+                                <a href="{{ route('spotify') }}">Conectar con Spotify</a>
                             </div>
                             <script>
-                                if (localStorage.getItem("user")) {
+                                if (localStorage.getItem("user") && localStorage.getItem("userId") == document.querySelector("#userId").innerHTML) {
                                     document.querySelector("#sData").removeAttribute("hidden")
 
                                     const userInfo = JSON.parse(localStorage.getItem("user"))
                                     document.querySelector("#sName").innerHTML = userInfo.display_name
                                     document.querySelector("#sCountry").innerHTML = userInfo.country
                                     document.querySelector("#sEmail").innerHTML = userInfo.email
-                                    document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" : "Desactivado";
+                                    document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" :
+                                        "Desactivado";
                                     document.querySelector("#sProfile").setAttribute("href", userInfo.external_urls.spotify);
                                     document.querySelector("#sFollowers").innerHTML = userInfo.followers.total;
                                     document.querySelector("#sid").innerHTML = userInfo.id;
