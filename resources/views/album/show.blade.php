@@ -205,7 +205,11 @@
                                                 action="{{ route('playlist.addSong') }}">
                                                 @csrf
                                                 <input type="hidden" name="songId" value="{{ $song->id }}">
-                                                <input type="hidden" name="playlistId" value="2">
+                                                <select name="playlistId" id="playlistId">
+                                                    @foreach (Auth::user()->playlists as $playlist)
+                                                        <option value="{{$playlist->id}}">{{$playlist->name}}</option>
+                                                    @endforeach
+                                                </select>
                                                 <button type="submit" class="btn btn-primary mt-2">Añadir</button>
                                             </form>
                                         </div>

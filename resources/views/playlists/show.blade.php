@@ -15,12 +15,12 @@
     <div class="d-flex gap-3 w-100">
         {{-- <img src="data:image/jpeg;base64,{{ $album->image }}" alt="{{ $album->name }} cover" id='base64image'
         class="bigAlbumImage"> --}}
-        <img src="{{ asset('img/cover/test.jpg') }}" alt="{{ $playlist->name }} cover" id='base64image' class="bigAlbumImage">
+        <img src="data:image/jpeg;base64,{{$playlist->image}}" alt="{{ $playlist->name }} cover" id='base64image' class="bigAlbumImage">
         <div class="albumInfo">
             <p class="m-0">Álbum</p>
             <h1 class="albumName">{{ $playlist->name }}</h1>
             <div class="d-flex justify-center align-items-center">
-                <img src="{{ asset('img/cover/test.jpg') }}" alt="imagen" class="groupImage">
+                <img src="data:image/jpeg;base64,{{Auth::user()->image}}" alt="imagen" class="groupImage">
                 <p class="m-0 mx-2">
                     Nombre del grupo - Fecha del playlist - Canciones: X, duración total
                 </p>
