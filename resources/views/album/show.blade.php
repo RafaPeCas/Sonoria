@@ -169,7 +169,12 @@
                 {{ $song->reproductions }}
             </td>
             <td>
-                AQUI VA EL BOTON Y EL MODAL PARA AGREGAR UNA CANCION A UNA PLAYLIST
+                <form method="POST" action="{{ route('playlist.addSong') }}">
+                    @csrf
+                    <input type="hidden" name="songId" value="{{ $song->id }}">
+                    <input type="hidden" name="playlistId" value="2">
+                    <button type="submit">Añadir</button>
+                </form>
             </td>
             <td>
                 @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))

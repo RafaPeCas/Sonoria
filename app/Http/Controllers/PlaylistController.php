@@ -68,14 +68,8 @@ class PlaylistController extends Controller
 
     public function addSong(Request $request)
     {
-
-        $request->validate([
-            'song_id' => 'required|exists:songs,id',
-            'playlist_id' => 'required|exists:playlists,id',
-        ]);
-
-        $song = Song::findOrFail($request->song_id);
-        $playlist = Playlist::findOrFail($request->playlist_id);
+        $song = Song::findOrFail($request->input('songId'));
+        $playlist = Playlist::findOrFail($request->input('playlistId'));
 
         if ($playlist->songs()->where('song_id', $song->id)->exists()) {
             return redirect()->back()->with('error', 'La canción ya está en la playlist.');

@@ -34,8 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Si existe la cookie, obtener la ID de la canción almacenada
         const songId = songIdCookie.split('=')[1];
 
-        console.log(`Canción reproducida automáticamente con ID: ${songId}`);
-
         // Obtener el enlace de la canción correspondiente a partir de la ID
         const songLink = document.querySelector(`.song-link[data-id="${songId}"]`);
 
@@ -53,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (currentTimeCookie) {
                 // Si existe la cookie, obtener el tiempo almacenado
                 const currentTime = parseFloat(currentTimeCookie.split('=')[1]);
-                console.log("1");
+
 
                 // Establecer el currentTime del audioPlayer
                 audioPlayer.currentTime = currentTime;
             } else {
-                console.log("2");
+
             }
             // Reproducir la canción automáticamente
             audioPlayer.play();
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener todos los enlaces de canción
     const songLinks = document.querySelectorAll('.song-link');
 
-    console.log("Link titulos", songLinks);
     // Verificar si existe una cookie para currentTime
     const currentTimeCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('currentTime='));
     let initialTime = 0; // Tiempo inicial predeterminado si no hay cookie
@@ -124,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentTime = audioPlayer.currentTime;
 
         document.cookie = `currentTime=${currentTime}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
-        console.log("Cookie de tiempo guardada:", currentTime);
     });
 
 
@@ -389,7 +385,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function resetSongHighlights() {
-        console.log("SE LLAMA")
         const songLinks = document.querySelectorAll('.song-link');
         songLinks.forEach(function (link) {
             link.classList.remove('active'); // Quita la clase 'active' de todos los enlaces de canciones
@@ -397,9 +392,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function highlightCurrentSong(link) {
-        console.log("SE LLAMA 2")
         link.classList.add('active'); // Agrega la clase 'active' al enlace de la canción actual
     }
 
 
 });
+

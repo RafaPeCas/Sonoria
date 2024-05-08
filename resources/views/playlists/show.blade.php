@@ -40,25 +40,30 @@
         <th>#</th>
         <th>Título</th>
         <th>Reproducciones</th>
-        <th>Playlist</th>
         <th>
-
+        @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $playlist->user()->first()->id))
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 30 30" fill="white">
+                <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z">
+                </path>
+            </svg>
+            @endif
         </th>
 
     </thead>
     <tbody>
-        @foreach ($album->songs as $index => $song)
+        @foreach ($playlist->songs as $index => $song)
         <tr id="song_{{ $song->id }}">
+
+            <td hidden id="image{{$song->id}}">{{$song->album->image}}</td>
             <td>{{ $index + 1 }}</td>
             <td>
-                <a href="#" class="song-link noDecoration" data-id="{{ $song->id }}" data-src="data:audio/wav;base64,{{ $song->file }}" style="color: inherit;">
+                <a href="#" class="song-link noDecoration" data-id="{{ $song->id }}" data-src="data:audio/wav;base64,{{ $song->file }}" style="color: inherit;" onclick="getSongId(this)">
                     {{ $song->name }}
                 </a>
             </td>
             <td>
                 {{ $song->reproductions }}
             </td>
-            <td><a href="#">Añadir</a></td>
             <td>
                 @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))
                 <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
@@ -78,7 +83,7 @@
     <div id="songInfo">
         <div class="d-flex custom align-items-center h-100 pl-2">
             <div>
-                <img class="coverImg" src="">
+                <img class="coverImg" id="coverImage" src="data:image/jpeg;base64,{{$playlist->image}}">
             </div>
             <div>
                 <div class="songTitle">
@@ -101,12 +106,11 @@
                     <button class="play-pause">Play/Pause</button>
                     <button class="seek-backward">«</button>
                     <button class="seek-forward">»</button>
-                    <button class="prev-song-btn">
-                        << /button>
-                            <button class="next-song-btn">></button>
-                            <button class="random-mode-btn">Aleatorio</button>
+                    <button class="prev-song-btn"><</button>
+                    <button class="next-song-btn">></button>
+                    <button class="random-mode-btn">Aleatorio</button>
 
-                            <input type="range" class="volume-slider" min="0" max="100" value="100">
+                    <input type="range" class="volume-slider" min="0" max="100" value="100">
                 </div>
 
                 <div class="progress-container">
@@ -124,6 +128,11 @@
 
 <script>
     var csrfToken = '{{ csrf_token() }}';
+    function getSongId(e){
+    var actualSongId = e.getAttribute("data-id")
+    var reproducionImage = document.querySelector("#image"+actualSongId).innerHTML
+    document.querySelector("#coverImage").src = "data:image/jpeg;base64,"+ reproducionImage;
+}
 </script>
 @endsection
 
