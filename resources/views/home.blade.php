@@ -12,8 +12,6 @@
 @section('content')
 
     <div id="home">
-
-
         <aside>
             <div class="display">
                 <h1 class="d-flex justify-content-center pt-3 pb-2">Buscar artista</h1>
@@ -73,8 +71,8 @@
             <div class="contentHeader d-flex align-items-center">
                 <div class="navMenu">
                     <a href="{{ route('playlist.index') }}">Tus playlists</a>
-                    <a id="sLink" href="{{route("spotify")}}">Conectar con Spotify</a>
                     <a href="{{ route('user.profile', Auth::user()->id) }}">Tu perfil</a>
+                    <a id="sLink" href="{{route("spotify")}}">Conectar con Spotify</a>
                     <a class="dropdown-item bg-danger" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
@@ -111,7 +109,7 @@
                                         </h5>
                                         <a href="{{ route('album.show', ['id' => $album->id]) }}" class="imagencita"
                                             style="background-color: red">
-                                            <img src="{{ $album->image }}" alt="" class="imagencita img-fluid">
+                                            <img src="data:image/jpeg;base64,{{ $album->image }}" alt="" class="imagencita img-fluid">
                                         </a>
                                     </div>
                                 @endforeach

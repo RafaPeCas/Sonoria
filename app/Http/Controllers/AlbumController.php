@@ -33,7 +33,6 @@ class AlbumController extends Controller
             'name' => $request['name'],
             'image' => $imageFile,
             'user_id' => $userId,
-
         ]);
 
         $totalSongs = 0;
