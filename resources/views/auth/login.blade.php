@@ -45,10 +45,6 @@
                                     {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
                             </div>
-                            @if (Route::has('password.request'))
-                                <a class="btn color"
-                                    href="{{ route('password.request') }}">{{ __('¿Olvidaste tu contraseña?') }}</a>
-                            @endif
                         </div>
                     </div>
                     <div class="d-flex justify-content-center ml-2">
