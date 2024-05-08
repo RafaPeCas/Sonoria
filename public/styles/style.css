@@ -30,3 +30,21 @@ body {
 main {
     height: 100%;
 }
+
+/* Cambiar el estilo del scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Ancho del scrollbar */
+    height: 10px;
+}
+
+/* Cambiar el estilo del thumb (el mango del scrollbar) */
+::-webkit-scrollbar-thumb {
+    background-color: #622d7a; /* Color del thumb */
+    border-radius: 5px; /* Radio de borde del thumb */
+}
+
+/* Cambiar el estilo del track (el riel del scrollbar) */
+::-webkit-scrollbar-track {
+    background-color: #c5c5c5; /* Color del track */
+    border-radius: 6px; 
+}

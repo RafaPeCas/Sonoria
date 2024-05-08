@@ -22,9 +22,9 @@
                 <a href="{{ route('playlist.show', ['id' => $playlist->id]) }}">
                     <div class="singleWrap">
                         <div class="singlePlaylist">
-                            <img class="" src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }}" class="">
+                            <img style="box-shadow: 1px 1px 10px 1px black; border-radius:20px" src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }}" >
                             <div class="textWrap">
-                                <p class="m-0">{{ $playlist->name }}</p>
+                                <p class="m-0" style="font-weight:bolder; font-size: 1.2em">{{ $playlist->name }}</p>
                                 <hr>
                                 <p class="m-0">{{ $playlist->description }}</p>
                             </div>

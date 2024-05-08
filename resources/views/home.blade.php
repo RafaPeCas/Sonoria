@@ -90,8 +90,7 @@
                     <h1>Playlists que sigues</h1>
                     <hr class="mb-0">
                 </div>
-
-                <div class="d-flex gap-5 lo-odio flex-row">
+                <div class="d-flex gap-5 lo-odio flex-row playlistContainer">
                     @foreach ($playlists as $playlist)
                     <div class="d-flex gap-5 @if ($loop->last) last-artist @endif">
                         <a href="{{ route('playlist.show', ['id' => $playlist->id]) }}" class="text-decoration-none text-white">
@@ -105,7 +104,6 @@
                         </a>
                     </div>
                     @endforeach
-
                 </div>
 
             </div>
@@ -115,7 +113,7 @@
                     <hr class="mb-0">
                 </div>
 
-                <div class="d-flex gap-5 lo-odio">
+                <div class="d-flex gap-5 lo-odio playlistContainer">
                     @foreach ($users as $user)
                     <div class="d-flex gap-5 align-items-end @if ($loop->last) last-artist @endif">
                         <a href="{{ route('user.profile', ['id' => $user->id]) }}" class="text-decoration-none text-white">

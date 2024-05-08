@@ -189,3 +189,8 @@ ul {
     flex-grow: 1;
     overflow: auto;
 }
+
+.playlistContainer{
+    width: 100%;
+    overflow: auto;
+}
