@@ -234,24 +234,28 @@
     <div id="mediaPlayer">
         <div class="d-flex custom align-items-center h-100 pl-2">
             <div class="custom-audio-player">
-                <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay" id="audio-player">
-                    <!-- Aquí puedes colocar la fuente de audio -->
+                <audio controls="controls" autobuffer="autobuffer" autoplay="autoplay" id="audio-player" hidden>
                     Tu navegador no soporta audio.
                 </audio>
-                <div class="audio-controls">
-                    <button class="play-pause">Play/Pause</button>
-                    <button class="seek-backward">«</button>
-                    <button class="seek-forward">»</button>
-                    <button class="prev-song-btn">
-                        << /button>
-                            <button class="next-song-btn">></button>
-                            <button class="random-mode-btn">Aleatorio</button>
-
-                            <input type="range" class="volume-slider" min="0" max="100" value="100">
+                <div class=" d-flex justify-content-center align-items-center">
+                    <div class="audio-controls">
+                        <button class="seek-backward p-0" style="width: 20px;">«</button>
+                        <button class="prev-song-btn p-0" style="width: 20px;"><</button>
+                    </div>
+                    <div class="progress-container mt-0 mb-0">
+                        <div class="progress-bar">
+                        </div>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="next-song-btn p-0" style="width: 20px;">></button>
+                        <button class="seek-forward p-0" style="width: 20px;">»</button>
+                    </div>
                 </div>
 
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
+                <div class="audio-controls d-flex justify-content-around mt-2">
+                    <button class="play-pause">Play/Pause</button>
+                    <button class="random-mode-btn">Aleatorio</button>
+                    <input type="range" class="volume-slider" min="0" max="100" value="100">
                 </div>
             </div>
 

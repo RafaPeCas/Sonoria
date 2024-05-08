@@ -85,6 +85,7 @@
             </div>
         </div>
         <div class="contentBody">
+            @if (count($playlists)>0)
             <div class="d-flex flex-column gap-5">
                 <div>
                     <h1>Playlists que sigues</h1>
@@ -105,8 +106,8 @@
                     </div>
                     @endforeach
                 </div>
-
             </div>
+            @endif
             <div class="d-flex flex-column gap-5">
                 <div>
                     <h1>Artistas destacados</h1>
