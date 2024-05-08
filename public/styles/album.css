@@ -1,0 +1,107 @@
+.albumHeader {
+    background-color: #3f3f3f7b;
+    box-shadow: 5px 5px 5px black;
+}
+
+.bigAlbumImage {
+    width: 260px;
+    height: 260px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.albumInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+}
+
+.albumName {
+    font-size: 1.5em;
+    max-width: 350px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.albumDescription {
+    font-size: 1em;
+    max-width: 650px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.groupImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.songsList {
+    background-color: #3f3f3fbd;
+}
+
+table {
+}
+
+.playButton {
+    border: none;
+    background-color: rgb(0, 183, 0);
+    color: black;
+    font-weight: bolder;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.playButton:hover{
+    background-color: green;
+}
+
+
+
+/* Estilos personalizados para el modal con efecto glass morphism */
+.glass-morphism {
+    background-color: rgba(184, 19, 206, 0.413); /* Color de fondo con transparencia */
+    backdrop-filter: blur(10px); /* Aplicar desenfoque al fondo */
+    border-radius: 15px; /* Bordes redondeados */
+    border: 1px solid rgba(55, 0, 255, 0.2); /* Borde con transparencia */
+}
+
+.glass-morphism .modal-header,
+.glass-morphism .modal-footer {
+    background-color: transparent; /* Fondo transparente para encabezado y pie de página */
+    border: none; /* Sin bordes */
+}
+
+.glass-morphism .modal-title {
+    color: #fff; /* Color del título */
+}
+
+.glass-morphism .modal-body {
+    color: #fff; /* Color del texto del cuerpo */
+}
+
+.glass-morphism .modal-body input[type="text"],
+.glass-morphism .modal-body input[type="checkbox"] {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para input de texto y checkbox */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.glass-morphism .modal-body input[type="text"]:focus,
+.glass-morphism .modal-body input[type="checkbox"]:focus {
+    outline: none; /* Sin contorno al enfocar */
+}
+
+.glass-morphism .modal-body label {
+    color: #fff; /* Color del texto de las etiquetas */
+}
+
+.glass-morphism .modal-body .form-check-label {
+    color: #fff; /* Color del texto de las etiquetas de checkbox */
+}

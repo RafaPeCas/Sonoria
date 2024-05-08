@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'birth',
+        'image',
     ];
 
     /**
@@ -42,4 +45,53 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+    public function paymentMethod()
+    {
+        return $this->hasOne(PayMethod::class);
+    }
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+    public function searches()
+    {
+        return $this->hasMany(Search::class);
+    }
+
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class, 'user_playlist', 'user_id', 'playlist_id')->withPivot('role');
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
+
+    public function reproductions()
+    {
+        return $this->hasMany(UserReproduction::class);
+    }
+    public function songs()
+    {
+        return $this->hasMany(UserSong::class);
+    }
+    public function lastSong()
+    {
+        return $this->hasOne(Song::class);
+    }
 }

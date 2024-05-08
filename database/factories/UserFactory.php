@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Song;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -27,8 +28,11 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'gender' => $this->faker->randomElement(['Hombre', 'Mujer', 'travesti de esos']),
+            'birth' => fake()->date(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'last_song' => $this->faker->randomNumber(1, 40)
         ];
     }
 

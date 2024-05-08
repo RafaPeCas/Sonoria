@@ -1,0 +1,153 @@
+.userHeader {
+    width: 100%;
+    background-color: #535353ab;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userImage img {
+    width: 150px;
+    height: 150px;
+}
+
+.userImage {
+    background-color: white;
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.userData {
+    display: flex;
+    padding-top: 50px;
+    padding-left: 50px;
+    max-width: 550px;
+}
+
+.userName {
+    padding-left: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.userName hr {
+    color: white;
+}
+
+.recentlyPlayed {
+    flex-grow: 1;
+    background-color: white;
+    margin: 10px 0px 10px 50px;
+    border-radius: 30px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tab{
+    max-height: 509px;
+}
+
+.tabs button {
+    background-color: #535353ab !important;
+    border: none !important;
+    width: 100%;
+    height: 100px;
+    color: white !important;
+}
+
+.tab-button.shadow {
+    border: 1px black solid !important;
+    border-top: none !important;
+    background-color: white !important;
+    color: black !important;
+}
+
+.tabContent {
+    width: 100%;
+    height: 100%;
+}
+
+.tabContent div {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.tabContainer {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.glass-morphism {
+    background-color: rgba(184, 19, 206, 0.413) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(55, 0, 255, 0.2) !important;
+}
+
+.glass-morphism .modal-header,
+.glass-morphism .modal-footer {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.glass-morphism .modal-title {
+    color: #fff !important;
+}
+
+.glass-morphism .modal-body {
+    color: #fff !important;
+    padding: 20px !important;
+}
+
+.glass-morphism .modal-body input[type="text"],
+.glass-morphism .modal-body input[type="file"],
+.glass-morphism .modal-body input[type="checkbox"] {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+}
+
+.modal-content {
+    height: auto !important;
+}
+
+.modal-header {
+    padding: 15px !important;
+}
+
+.modal-footer {
+    padding: 15px !important;
+}
+
+.link-no-style{
+    text-decoration: none!important;
+    color: white !important;
+}
+
+.link-no-style:hover{
+    color: rgb(0, 113, 206)!important;
+}
+
+.bigAlbumImage {
+    width: 150px;
+    height: 150px;
+    box-shadow: 5px 5px 5px black;
+}
