@@ -17,19 +17,17 @@
         class="bigAlbumImage"> --}}
         <img src="data:image/jpeg;base64,{{$playlist->image}}" alt="{{ $playlist->name }} cover" id='base64image' class="bigAlbumImage">
         <div class="albumInfo">
-            <p class="m-0">Álbum</p>
+            <p class="m-0">Playlist</p>
             <h1 class="albumName">{{ $playlist->name }}</h1>
-            <div class="d-flex justify-center align-items-center">
-                <img src="data:image/jpeg;base64,{{Auth::user()->image}}" alt="imagen" class="groupImage">
-                <p class="m-0 mx-2">
-                    Nombre del grupo - Fecha del playlist - Canciones: X, duración total
-                </p>
-            </div>
+
         </div>
     </div>
     <div class="">
         <a href="{{ route('home') }}" onmouseover="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/homeHover.png') }}'" onmouseleave="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/home.png') }}'">
-            <img src="{{ asset('img/assets/home.png') }}" alt="">
+        <img src="http://127.0.0.1:8000/img/assets/home.png" alt="" style="
+    width: 50px;
+    margin-top: -20px;
+">
         </a>
     </div>
 </section>

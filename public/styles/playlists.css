@@ -1,0 +1,46 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.playlistsContainer {}
+
+.formContainer {}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.playlistWrap {
+    display: flex;
+    justify-content: space-around;
+}
+
+.singlePlaylist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #8b8b8b7b;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px black;
+    max-width: 220px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+
+.singlePlaylist:hover {
+    transform: scale(1.2);
+    background-color: #d9d9d97b;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+a:hover{
+    color: white;
+}
