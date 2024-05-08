@@ -68,7 +68,9 @@ Route::middleware(['auth'])->group(function () {
     /*Ruta para las playlists */
     Route::get("/playlists", [PlaylistController::class, "index"])->name("playlist.index");
     Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
-    Route::get("/playlists/{id}/{name?}", [PlaylistController::class, "show"])->name("playlist.show");
+    Route::get("/playlists/{id}", [PlaylistController::class, "show"])->name("playlist.show");
     Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
+
+    /* Rutas para la API de Spotify */
     Route::get("/spotify", [SpotifyController::class, "getUser"])->name("spotify");
 });
