@@ -17,7 +17,7 @@
         <div class="display">
             <h1 class="d-flex justify-content-center pt-3 pb-2">Buscar artista</h1>
             <form id="searchForm">
-                <input type="text" id="searchInput" name="term" placeholder="Ingrese el nombre del artista...">
+                <input style="box-shadow: 5px 5px 15px 2px black;" type="text" id="searchInput" name="term" placeholder="Ingrese el nombre del artista...">
             </form>
 
             <div id="searchResults">
