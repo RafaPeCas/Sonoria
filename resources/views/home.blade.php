@@ -95,7 +95,7 @@
                     <div class="d-flex gap-5 @if ($loop->last) last-artist @endif">
                         <a href="{{ route('playlist.show', ['id' => $playlist->id]) }}" class="text-decoration-none text-white">
                             <div class="d-flex lo-odio">
-                                <h5 behavior="" direction="left" class="artist-name">{{ $playlist->name }}
+                                <h5 class="artist-name">{{ $playlist->name }}
                                 </h5>
                                 <button class="mixButton p-0">
                                     <img src="data:image/jpeg;base64,{{ $playlist->image }}" class="img-fluid">

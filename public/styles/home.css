@@ -63,6 +63,10 @@ aside {
     padding: 25px;
 }
 
+.mixButton img{
+    border-radius: 14px;
+}
+
 hr {
     margin-top: 0;
 }
@@ -99,15 +103,17 @@ hr {
 .artist-name {
     width: 200px;
     height: 30px;
-    text-wrap: nowrap;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .album-name {
     width: 150px;
     height: 30px;
-    text-wrap: nowrap;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .navMenu {

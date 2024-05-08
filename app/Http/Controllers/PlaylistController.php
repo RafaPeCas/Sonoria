@@ -25,7 +25,7 @@ class PlaylistController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:50',
             'visibility' => 'required|string|max:20',
-            'description' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:150',
             'image' => 'required|image',
         ]);
 

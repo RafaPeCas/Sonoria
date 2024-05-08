@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.playlistsContainer {}
-
-.formContainer {}
-
 img {
     width: 200px;
     height: 200px;
@@ -26,10 +22,18 @@ img {
     border-radius: 20px;
     box-shadow: 2px 2px 2px 2px black;
     max-width: 220px;
-    overflow: hidden;
     padding: 10px;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
+.textWrap{
+    width: 100%;
+    text-overflow: clip;
+    display: flex;
+    flex-direction: column;
+}
 
 .singlePlaylist:hover {
     transform: scale(1.2);

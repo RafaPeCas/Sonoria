@@ -17,9 +17,11 @@
         class="bigAlbumImage"> --}}
         <img src="data:image/jpeg;base64,{{$playlist->image}}" alt="{{ $playlist->name }} cover" id='base64image' class="bigAlbumImage">
         <div class="albumInfo">
-            <p class="m-0">Playlist</p>
-            <h1 class="albumName">{{ $playlist->name }}</h1>
-
+            <p class="m-0 fw-bolder" style="font-size: 4em;">Playlist</p>
+            <p class="m-0 fw-bolder">Nombre:</p>
+            <p class="m-0 albumName">{{ $playlist->name }}</p>
+            <p class="m-0 fw-bolder">Descripción:</p>
+            <p class="m-0 albumDescription">{{$playlist->description}}</p>
         </div>
     </div>
     <div class="">

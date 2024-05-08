@@ -24,7 +24,7 @@
                     @if ($playlist->image)
                     <img class="" src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }}" class="">
                     @endif
-                    <div class="">
+                    <div class="textWrap">
                         <h3>{{ $playlist->name }}</h3>
                         <hr>
                         <p>{{ $playlist->description }}</p>
@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" required  maxlength="50">
             </div>
 
             <div class="form-group">
@@ -56,7 +56,7 @@
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea class="form-control" id="description" name="description"></textarea>
+                <textarea class="form-control" id="description" name="description" maxlength="150" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">
