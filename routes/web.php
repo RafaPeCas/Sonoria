@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AlbumController;
+use App\Models\Playlist;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserReproductionController;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SpotifyController;
 use App\Http\Controllers\PlaylistController;
-use App\Models\Playlist;
+use App\Http\Controllers\UserReproductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,8 +70,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
     Route::get("/playlists/{id}/{name?}", [PlaylistController::class, "show"])->name("playlist.show");
     Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
+    Route::get("/spotify", [SpotifyController::class, "getUser"])->name("spotify");
 });
-
-Route::get('/spotify', function () {
-    return view('spotify.connection');
-})->name("spotify");

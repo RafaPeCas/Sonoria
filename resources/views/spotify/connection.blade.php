@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Estamos recogiendo tus datos, espera un momento...</h1>
-    <h1 id="userId" hidden>{{ Auth::user()->id }}</h1>
+    <h1 id="userId" hidden>{{ $user }}</h1>
     <script>
         localStorage.setItem("userId", document.querySelector("#userId").innerHTML)
         const clientId = "e1ccac91ae2f4f3c8534f5f9b00d729c";
