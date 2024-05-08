@@ -65,7 +65,7 @@
                 {{ $song->reproductions }}
             </td>
             <td>
-                @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))
+                @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->playlist->user_id))
                 <button class="delete-song-btn" data-id="{{ $song->id }}">Eliminar</button>
                 @endif
             </td>

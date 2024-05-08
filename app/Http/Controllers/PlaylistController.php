@@ -79,4 +79,17 @@ class PlaylistController extends Controller
 
         return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
     }
+
+    public function removeSong(Request $request)
+    {
+        $song = Song::findOrFail($request->input('songId'));
+        $playlist = Playlist::findOrFail($request->input('playlistId'));
+
+        if ($playlist->songs()->where('song_id', $song->id)->exists()) {
+            $playlist->songs()->detach($song);
+            return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
+        }
+
+        return redirect()->back()->with('error', 'Canción no encontrada');
+    }
 }
