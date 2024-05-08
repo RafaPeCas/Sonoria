@@ -12,7 +12,7 @@
     <h1>Playlists</h1>
     <div class="row">
         @foreach ($playlists as $playlist)
-        <a href="{{ route('playlist.show', ['id' => $playlist->id, 'name' => $playlist->name]) }}">
+        <a href="{{ route('playlist.show', ['id' => $playlist->id]) }}">
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     @if ($playlist->image)
