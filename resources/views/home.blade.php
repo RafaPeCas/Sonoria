@@ -12,6 +12,7 @@
 @section('content')
 
 <div id="home">
+    <p hidden id="userId">{{Auth::user()->id}}</p>
     <aside>
         <div class="display">
             <h1 class="d-flex justify-content-center pt-3 pb-2">Buscar artista</h1>
