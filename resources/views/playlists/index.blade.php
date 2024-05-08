@@ -31,7 +31,7 @@
 </div>
 <div class="container text-white">
     <h2>Create Playlist</h2>
-    <form method="POST" action="{{ route('playlist.store') }}">
+    <form method="POST" action="{{ route('playlist.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
