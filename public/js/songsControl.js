@@ -131,6 +131,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    document.querySelectorAll('.delete-song').forEach(function (button) {
+        button.addEventListener('click', function () {
+            let songId = this.getAttribute('data-id');
+            let playlistId = this.getAttribute('data-playlist-id'); // Asumiendo que tienes un atributo data-playlist-id en tus botones
+            deleteSongById2(songId, playlistId);
+        });
+    });
+    
+    function deleteSongById2(songId, playlistId) {
+        fetch('/playlist/' + playlistId + {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.err) {
+                    let row = document.getElementById('song_' + songId);
+                    if (row) {
+                        row.remove();
+                    }
+                } else {
+                    alert('Error al eliminar la canción: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar la canción:', error);
+            });
+    }
+
     function deleteSongById(id) {
         fetch('/song/' + id + '/delete', {
             method: 'GET',
@@ -318,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let nextSongIndex = getCurrentSongIndex() + 1;
             if (nextSongIndex < songLinks.length) {
                 playSongByIndex(nextSongIndex);
-            }else {
+            } else {
                 audioPlayer.pause();
             }
         }
