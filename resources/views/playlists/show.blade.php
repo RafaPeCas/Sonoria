@@ -16,13 +16,12 @@
                 <img src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }} cover" id='base64image'
                     class="bigAlbumImage">
                 <div class="albumInfo">
-                    <p class="m-0 fw-bolder" style="font-size: 4em;">Playlist</p>
+                    <p class="m-0 fw-bolder" style="font-size: 1.5em;">Playlist de <a class="userLink" href="{{route("user.profile", ['id' =>$playlist->user()->first()->id]) }}">{{$playlist->user()->first()->name}}</a><div id="mediaPlayer">
+            </div></a></p>
                     <p class="m-0 fw-bolder">Nombre:</p>
                     <p class="m-0 albumName">{{ $playlist->name }}</p>
                     <p class="m-0 fw-bolder">Descripción:</p>
                     <p class="m-0 albumDescription">{{ $playlist->description }}</p>
-                    <p class="m-0 fw-bolder">Dueño:</p>
-                    <p class="m-0 albumName">{{ $playlist->user()->first()->name }}</p>
                 </div>
             </div>
             <div class="">

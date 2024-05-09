@@ -44,6 +44,15 @@
     overflow: auto;
 }
 
+.userLink{
+    color:rgb(255, 0, 34); 
+    text-decoration: none;
+}
+
+.userLink:hover{
+    color: blueviolet;
+}
+
 .cobadonga {
     max-height: 300px;
     overflow: auto;
