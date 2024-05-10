@@ -33,7 +33,7 @@ class PlaylistController extends Controller
             dd($validator->errors());
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageFile = base64_encode(file_get_contents($image));
