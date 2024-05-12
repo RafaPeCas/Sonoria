@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento <audio>
     const audioPlayer = document.querySelector('audio');
 
+    loadVolumeSliderState();
+
     // Verificar si existe una cookie para songId
     const songIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songId='));
 
@@ -59,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             }
             // Reproducir la canción automáticamente
-            audioPlayer.play();
         }
 
     }
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteSongById2(songId, playlistId);
         });
     });
-    
+
     function deleteSongById2(songId, playlistId) {
         fetch('/playlist/' + playlistId + {
             method: 'GET',
@@ -426,6 +427,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function highlightCurrentSong(link) {
         link.classList.add('active'); // Agrega la clase 'active' al enlace de la canción actual
     }
+
+    function loadVolumeSliderState() {
+        // Obtener la cookie que contiene el valor anterior del control deslizante de volumen
+        const volumeSliderValueCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('volumeSliderValue='));
+
+        if (volumeSliderValueCookie) {
+            // Si la cookie existe, obtener el valor almacenado del control deslizante de volumen
+            const volumeValue = parseFloat(volumeSliderValueCookie.split('=')[1]);
+
+            // Establecer el valor del control deslizante de volumen en el valor almacenado
+            volumeSlider.value = volumeValue;
+        }
+    }
+
+    function saveVolumeSliderState() {
+        // Obtener el valor actual del control deslizante de volumen
+        const volumeValue = volumeSlider.value;
+
+        // Guardar el valor del control deslizante de volumen en una cookie
+        document.cookie = `volumeSliderValue=${volumeValue}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+    }
+
+    volumeSlider.addEventListener('input', saveVolumeSliderState);
 
 
 });

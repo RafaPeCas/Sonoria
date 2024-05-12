@@ -35,6 +35,9 @@
                             {{ $album->user->name }} - {{ date('Y', strtotime($album->created_at)) }} - Canciones:
                             {{ $totalSongs }}
                         </p>
+
+                        @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $album->user_id))
+
                         <!-- Botón para abrir el modal de actualización y eliminación del álbum -->
                         <button type="button" class="tableButton" data-bs-toggle="modal"
                             data-bs-target="#updateAlbumModal">
@@ -83,6 +86,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
 
                     </div>
@@ -93,10 +97,11 @@
                     onmouseover="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/homeHover.png') }}'"
                     onmouseleave="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/home.png') }}'">
                     <img src="http://127.0.0.1:8000/img/assets/home.png" alt=""
-                        style="
-    width: 50px;
-    margin-top: -20px;
-">
+    style="
+        width: 50px;
+        margin-top: -20px;
+        filter: invert(100%);
+    ">
                 </a>
             </div>
         </section>
@@ -209,7 +214,7 @@
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('POST')
-                                                                ´
+
                                                                 <div class="mb-3">
                                                                     <label for="edit_name" class="form-label">Nombre de la
                                                                         canción:</label>
@@ -359,8 +364,7 @@
                         <div class=" d-flex justify-content-center align-items-center">
                             <div class="audio-controls">
                                 <button class="seek-backward p-0" style="width: 20px;">«</button>
-                                <button class="prev-song-btn p-0" style="width: 20px;">
-                                    <</button>
+                                <button class="prev-song-btn p-0" style="width: 20px;"><</button>
                             </div>
                             <div class="progress-container mt-0 mb-0">
                                 <div class="progress-bar">
