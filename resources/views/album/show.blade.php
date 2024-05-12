@@ -140,16 +140,19 @@
                                     </td>
                                     <td>
                                         <button type="button" class="tableButton" data-bs-toggle="modal"
-                                            data-bs-target="#addSongToPlaylistModal{{$index}}">
+                                            data-bs-target="#addSongToPlaylistModal{{ $index }}">
                                             Añadir a Playlist
                                         </button>
 
-                                        <div class="modal fade" id="addSongToPlaylistModal{{$index}}" tabindex="-1"
-                                            aria-labelledby="addSongToPlaylistModalLabel{{$index}}" aria-hidden="true">
+                                        <div class="modal fade" id="addSongToPlaylistModal{{ $index }}"
+                                            tabindex="-1"
+                                            aria-labelledby="addSongToPlaylistModalLabel{{ $index }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content glass-morphism">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="addSongToPlaylistModalLabel{{$index}}">Añadir
+                                                        <h5 class="modal-title"
+                                                            id="addSongToPlaylistModalLabel{{ $index }}">Añadir
                                                             Canción a
                                                             la
                                                             Playlist</h5>
@@ -180,10 +183,87 @@
                                     </td>
                                     <td>
                                         @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $song->album->user_id))
+                                            <button type="button" class="tableButton" data-bs-toggle="modal"
+                                                data-bs-target="#editSongModal{{ $index }}">
+                                                Editar
+                                            </button>
+
+                                            <!-- Modal de edición -->
+                                            <div class="modal fade" id="editSongModal{{ $index }}" tabindex="-1"
+                                                aria-labelledby="editSongModalLabel{{ $index }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content glass-morphism">
+                                                        <!-- Contenido del modal de edición -->
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="editSongModalLabel{{ $index }}">Editar Canción
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Formulario para editar la canción -->
+                                                            <form class="text-white" method="POST"
+                                                                action="{{ route('song.update', ['id' => $song->id]) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('POST')
+                                                                ´
+                                                                <div class="mb-3">
+                                                                    <label for="edit_name" class="form-label">Nombre de la
+                                                                        canción:</label>
+                                                                    <input type="text" id="edit_name" name="name"
+                                                                        class="form-control" value="{{ $song->name }}">
+                                                                </div>
+
+                                                                <!-- Aquí deberías incluir los campos que deseas editar -->
+                                                                <div class="mb-3">
+                                                                    <label for="edit_file" class="form-label">Archivo de
+                                                                        canción:</label>
+                                                                    <input type="file" id="edit_file" name="file"
+                                                                        class="form-control">
+                                                                </div>
+
+                                                                <div class="mb-3 form-check">
+                                                                    <input type="checkbox" id="edit_explicit"
+                                                                        name="explicit" value="1"
+                                                                        class="form-check-input">
+                                                                    <label for="edit_explicit"
+                                                                        class="form-check-label">Explícita</label>
+                                                                </div>
+
+                                                                <div class="mb-3 form-check">
+                                                                    <input type="checkbox" id="edit_active"
+                                                                        name="active" value="1"
+                                                                        class="form-check-input">
+                                                                    <label for="edit_active"
+                                                                        class="form-check-label">Activa</label>
+                                                                </div>
+
+                                                                <div class="mb-3 form-check">
+                                                                    <input type="checkbox" id="edit_hidden"
+                                                                        name="hidden" value="1"
+                                                                        class="form-check-input">
+                                                                    <label for="edit_hidden"
+                                                                        class="form-check-label">Oculta</label>
+                                                                </div>
+
+
+
+                                                                <button type="submit" class="btn btn-primary">Guardar
+                                                                    Cambios</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <button class="delete-song-btn tableButton"
                                                 data-id="{{ $song->id }}">Eliminar</button>
                                         @endif
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

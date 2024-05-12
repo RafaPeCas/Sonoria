@@ -62,6 +62,47 @@ class SongController extends Controller
         return Redirect::route('album.show', ['id' => $request['album_id']]);
     }
 
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'file',
+            'explicit' => 'boolean',
+            'active' => 'boolean',
+            'hidden' => 'boolean',
+            'name' => 'string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        $song = Song::findOrFail($id);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $song->file = base64_encode(file_get_contents($file));
+        }
+
+        if ($request->has('name')) {
+            $song->name = $request->name;
+        }
+
+        if ($request->has('explicit')) {
+            $song->explicit = $request->explicit;
+        }
+
+        if ($request->has('active')) {
+            $song->active = $request->active;
+        }
+
+        if ($request->has('hidden')) {
+            $song->hidden = $request->hidden;
+        }
+
+        $song->save();
+
+        return redirect()->route('album.show', ['id' => $song->album_id]);
+    }
 
 
     public function getSongById($id)

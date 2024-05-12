@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/song', [SongController::class, 'store'])->name('songs.store');
     Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
     Route::get('/song/{id}/delete', [SongController::class, 'deleteSongById'])->name('songs.deleteSongById');
+    Route::post('/songs/{id}', [SongController::class, 'update'])->name('song.update');
+
 
     /* Rutas para albums */
     Route::get("/albumForm", function () {
