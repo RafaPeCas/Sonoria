@@ -80,15 +80,15 @@
                         @enderror
                     </div>
                 </div>
-                
+
               <div class="d-flex justify-content-center ml-2">
-                    <button type="submit" class="login-button rounded-circle"> <img src="{{ asset('img/assets/reproducir.png') }}" alt="boton de reproduccion"  height="50" width="50"></button>
+                    <button type="submit" class="login-button rounded-circle"> <img src="{{ asset('img/assets/reproducir.png') }}" alt="boton de reproduccion"  height="50" width="50" style="filter: invert(100%); margin-left: 10px;"></button>
                 </div>
 
-               
+
                 </div>
 
-                
+
             </form>
         </div>
     </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Playlist;
 use App\Models\Song;
+use App\Models\Playlist;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PlaylistController extends Controller
 {
@@ -21,22 +22,30 @@ class PlaylistController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:50',
             'visibility' => 'required|string|max:20',
-            'description' => 'nullable|string|max:255',
-            'image' => 'nullable|string|max:300',
-            'fav' => 'boolean',
+            'description' => 'nullable|string|max:150',
+            'image' => 'required|image',
         ]);
+
+        if ($validator->fails()) {
+            dd($validator->errors());
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageFile = base64_encode(file_get_contents($image));
+        }
 
         $user = auth()->user();
 
-        // Crear la nueva playlist
         $playlist = new Playlist();
         $playlist->name = $request->name;
         $playlist->visibility = $request->visibility;
         $playlist->description = $request->description;
-        $playlist->image = $request->image;
+        $playlist->image = $imageFile;
         $playlist->fav = $request->has('fav');
         $playlist->save();
 
@@ -59,14 +68,8 @@ class PlaylistController extends Controller
 
     public function addSong(Request $request)
     {
-
-        $request->validate([
-            'song_id' => 'required|exists:songs,id',
-            'playlist_id' => 'required|exists:playlists,id',
-        ]);
-
-        $song = Song::findOrFail($request->song_id);
-        $playlist = Playlist::findOrFail($request->playlist_id);
+        $song = Song::findOrFail($request->input('songId'));
+        $playlist = Playlist::findOrFail($request->input('playlistId'));
 
         if ($playlist->songs()->where('song_id', $song->id)->exists()) {
             return redirect()->back()->with('error', 'La canción ya está en la playlist.');
@@ -75,5 +78,18 @@ class PlaylistController extends Controller
         $playlist->songs()->attach($song);
 
         return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
+    }
+
+    public function removeSong(Request $request)
+    {
+        $song = Song::findOrFail($request->input('songId'));
+        $playlist = Playlist::findOrFail($request->input('playlistId'));
+
+        if ($playlist->songs()->where('song_id', $song->id)->exists()) {
+            $playlist->songs()->detach($song);
+            return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
+        }
+
+        return redirect()->back()->with('error', 'Canción no encontrada');
     }
 }

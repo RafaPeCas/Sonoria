@@ -4,8 +4,8 @@
 }
 
 .bigAlbumImage {
-    width: 260px;
-    height: 260px;
+    width: 150px;
+    height: 150px;
     box-shadow: 5px 5px 5px black;
 }
 
@@ -17,7 +17,17 @@
 }
 
 .albumName {
-    font-size: 5em;
+    font-size: 1.5em;
+    max-width: 350px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.albumDescription {
+    font-size: 1em;
+    max-width: 650px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .groupImage {
@@ -26,11 +36,42 @@
     border-radius: 100%;
 }
 
-.songsList {
+.songsWrap {
     background-color: #3f3f3fbd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow: auto;
 }
 
-table {
+.userLink{
+    color:rgb(255, 0, 34); 
+    text-decoration: none;
+}
+
+.userLink:hover{
+    color: blueviolet;
+}
+
+.cobadonga {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.espacio {
+    width: 20px;
+}
+
+td a:hover {
+    color: #4caf50 !important;
+}
+
+th {
+    padding-bottom: 10px;
+}
+
+tbody tr:hover {
+    background-color: rgba(177, 177, 177, 0.411);
 }
 
 .playButton {
@@ -46,15 +87,55 @@ table {
     margin-bottom: 10px;
 }
 
-.playButton:hover{
+.playButton:hover {
     background-color: green;
 }
 
+.table{
+    border-collapse: collapse;
+}
 
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: rgb(89, 77, 97);
+}
+
+.tableButton {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(124, 16, 16, 1) 0%,
+        rgba(8, 0, 91, 1) 100%
+    );
+    border: #622d7a solid 2px;
+    color: white;
+    border-radius: 10px;
+}
+
+.tableButton:hover {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(8, 0, 91, 1) 0%,
+        rgba(124, 16, 16, 1) 100%
+    );
+}
+
+.wholeSection{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
 /* Estilos personalizados para el modal con efecto glass morphism */
 .glass-morphism {
-    background-color: rgba(184, 19, 206, 0.413); /* Color de fondo con transparencia */
+    background-color: rgba(
+        184,
+        19,
+        206,
+        0.413
+    ); /* Color de fondo con transparencia */
     backdrop-filter: blur(10px); /* Aplicar desenfoque al fondo */
     border-radius: 15px; /* Bordes redondeados */
     border: 1px solid rgba(55, 0, 255, 0.2); /* Borde con transparencia */
@@ -76,7 +157,12 @@ table {
 
 .glass-morphism .modal-body input[type="text"],
 .glass-morphism .modal-body input[type="checkbox"] {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para input de texto y checkbox */
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.8
+    ); /* Fondo semi-transparente para input de texto y checkbox */
     border: none; /* Sin bordes */
     border-radius: 5px; /* Bordes redondeados */
     padding: 8px; /* Espaciado interno */

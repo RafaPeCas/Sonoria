@@ -1,21 +1,21 @@
 .userHeader {
     width: 100%;
     background-color: #535353ab;
-    height: 300px;
     color: white;
     display: flex;
+    justify-content: space-between;
 }
 
 .userImage img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .userImage {
     background-color: white;
     border-radius: 100%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
 .userData {
@@ -29,7 +29,6 @@
     padding-left: 20px;
     flex-grow: 1;
     display: flex;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -49,6 +48,10 @@
     justify-content: space-around;
 }
 
+.tab{
+    max-height: 509px;
+}
+
 .tabs button {
     background-color: #535353ab !important;
     border: none !important;
@@ -66,12 +69,13 @@
 
 .tabContent {
     width: 100%;
-    flex-grow: 1;
+    height: 100%;
 }
 
 .tabContent div {
     width: 100%;
     height: 100%;
+    overflow: auto;
 }
 
 .tabContainer {
@@ -125,12 +129,25 @@ main {
     height: auto !important;
 }
 
-
-
 .modal-header {
     padding: 15px !important;
 }
 
 .modal-footer {
     padding: 15px !important;
+}
+
+.link-no-style{
+    text-decoration: none!important;
+    color: white !important;
+}
+
+.link-no-style:hover{
+    color: rgb(0, 113, 206)!important;
+}
+
+.bigAlbumImage {
+    width: 150px;
+    height: 150px;
+    box-shadow: 5px 5px 5px black;
 }
