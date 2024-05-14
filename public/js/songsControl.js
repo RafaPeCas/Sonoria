@@ -451,6 +451,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     volumeSlider.addEventListener('input', saveVolumeSliderState);
 
+    audioPlayer.pause();
+
 
 });
 
