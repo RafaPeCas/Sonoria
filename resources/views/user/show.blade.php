@@ -17,7 +17,29 @@
             <div class="userData">
                 <div class="userImage">
                     <img src="{{ asset('img/userPictures/default.png') }}" alt="userPicture">
-                    <div class="d-flex mt-3 justify-content-center"> <a href="{{ route('user.edit', $user->id) }}" class="btn  btn-primary">Editar perfil</a></div>
+                    
+                    <div class="d-flex mt-3 justify-content-center">@if (Auth::check() && Auth::user()->id === $user->id)  <button type="button" class="btn followButtom" data-bs-toggle="modal" data-bs-target="#editModal">
+                        Editar perfil
+                    </button>@endif</div>
+                    
+
+                    
+                 
+                    @if (Auth::check() && Auth::user()->id !== $user->id)
+
+                    @if ($isFollowing)
+                        <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
+                            @csrf
+                            <button class="followButtom justify-content-center follow2" type="submit">Dejar de Seguir</button>
+                        </form>
+                    @else
+                        <form action="{{ route('user.follow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="followButtom justify-content-center follow">Seguir</button>
+                        </form>
+                    @endif
+
+                @endif
                 </div>
                 <div class="userName">
                     <h2>{{ $user->name }}</h2>
@@ -44,28 +66,14 @@
                             <span class="spaceIcon">Rol no disponible</span>
                         </p>
                     @endif
-                </div>
 
-                <div class="userName">
+                   
 
 
-                    @if (Auth::check() && Auth::user()->id !== $user->id)
-
-                        @if ($isFollowing)
-                            <form action="{{ route('user.unfollow', $user->id) }}" method="POST">
-                                @csrf
-                                <button type="submit">Dejar de Seguir</button>
-                            </form>
-                        @else
-                            <form action="{{ route('user.follow', $user->id) }}" method="POST">
-                                @csrf
-                                <button type="submit">Seguir</button>
-                            </form>
-                        @endif
-
-                    @endif
 
                 </div>
+
+           
             </div>
             <div class="mt-5 me-3 ms-3">
                 <a href="{{ route('home') }}"
@@ -315,6 +323,72 @@
             </div>
         </div>
     @endif
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="addSongModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content glass-morphism">
+                <div class="modal-header">
+                    <h2 class="fw-light   name align-items-center">Editando perfil de: {{ $user->name }}</h2>
+                    
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                 
+                    <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        {{-- Cláusula para obtener un token de formulario al enviarlo --}}
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                         @endif
+                
+                        <div class="mb-3">
+                            <div class="">
+                                <img src="{{ asset('img/logos/profile-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3" height="40">
+                            </div>
+                            <input type="text" name="name" class="form-control mb-2 custom-input" value="{{ $user->name }}"
+                                placeholder='{{ $user->name }}' autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <div class="">
+                                <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40">
+                            </div>
+                            <input type="text" name="email" class="form-control mb-2 custom-input" value="{{ $user->email }}"
+                                placeholder='{{ $user->email }}' autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <div class="">
+                                <img src="{{ asset('img/logos/gender-svgrepo-com.svg') }}" alt="icono perfil"  height="40" class="mb-3" >
+                            </div>
+                            <select name="gender" class="form-control mb-2 custom-input" class="mb-3" autofocus>
+                                <option value="Masculino" @if($user->gender === 'Masculino') selected @endif>Masculino</option>
+                                <option value="Femenino" @if($user->gender === 'Femenino') selected @endif>Femenino</option>
+                                <option value="Otro" @if($user->gender === 'Otro') selected @endif>Otro</option>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <div class="">
+                                <img src="{{ asset('img/logos/profileImage-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="38">
+                            </div>
+                            <input type="file" name="image" class="form-control mb-2 custom-input" accept="image/*">
+                        </div>
+    
+                        <input type="number" name="id" value="{{ $user->id }}" hidden>
+                        <div class="d-flex mt-5 justify-content-center">
+                            <button class="btn followButtom" type="submit">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 @endsection
 

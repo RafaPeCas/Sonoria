@@ -3,5 +3,6 @@
     "male": "Male",
     "other": "Other",
     "artist": "artist",
-    "user": "user"
+    "user": "user",
+    "The name field must not be greater than 30 characters.":"The name field must not be greater than 30 characters."
 }

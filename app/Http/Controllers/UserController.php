@@ -18,11 +18,13 @@ class UserController extends Controller
     {
         // Realiza la validación de los campos
         $validator = Validator::make($request->all(), [
-            'name' => ['nullable', 'string', 'min:2'],
-            'email' => ['nullable', 'string', 'email', 'max:255', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i'],
+            'name' => ['nullable', 'string', 'min:2', 'max:30'],
+            'email' => ['nullable', 'string', 'email', 'max:60', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i'],
 
-            'name.min' => 'El nombre debe tener mínimo :min letras.',
+            'name.min' => 'El nombre debe tener mínimo :min caracteres.',
+            'name.max' => 'El nombre debe tener máximo :max caracteres.',
             'name.regex' => 'El nombre no puede contener números ni caracteres especiales.',
+            'email.max' => 'El E-mail debe tener como máximo :max caracteres.',
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.ends_with' => 'El email debe terminar en ".com, .net, .org, .edu, .gov".',
 
@@ -32,7 +34,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+        
         $user = Auth::user();
         if ($user) {
             // Verificar si el usuario ha actualizado algún campo

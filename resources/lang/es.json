@@ -4,8 +4,8 @@
     "other": "Otro",
 
  "artist": "Artista",
-    "user": "Usuario"
+    "user": "Usuario",
 
-
+    "The name field must not be greater than 30 characters.":"El nombre de usuario no puede tener mas de 30 caracteres"
 }
    

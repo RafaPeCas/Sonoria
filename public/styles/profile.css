@@ -4,6 +4,7 @@
     color: white;
     display: flex;
     justify-content: space-between;
+    height: 30%;
 }
 
 .userImage img {
@@ -46,6 +47,7 @@
 .tabs {
     display: flex;
     justify-content: space-around;
+
 }
 
 .tab{
@@ -150,4 +152,31 @@ main {
     width: 150px;
     height: 150px;
     box-shadow: 5px 5px 5px black;
+}
+
+.followButtom{
+    background: linear-gradient(to right, #834fa5,#9b1b30) !important;
+    border: 2px solid black !important;
+    border-radius: 20px !important;
+    padding: 10px 17px !important;
+    color: white !important;
+}
+.follow{
+    margin-left: 20%;
+    
+}
+.name{
+    color:aliceblue;
+}
+input[type="file"]::-webkit-file-upload-button {
+    margin-left: -1%;
+    background-color: #000000; 
+    color: white; 
+    padding: 8px 20px; 
+    border:0px; 
+    border-radius: 10px; 
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #ff0000; /* Cambia el color al pasar el cursor sobre el botón */
 }
