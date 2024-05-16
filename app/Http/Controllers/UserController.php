@@ -27,7 +27,7 @@ class UserController extends Controller
             'email.max' => 'El E-mail debe tener como máximo :max caracteres.',
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.ends_with' => 'El email debe terminar en ".com, .net, .org, .edu, .gov".',
-            'image' => 'required|image',
+            'image' => 'image',
 
         ]);
 

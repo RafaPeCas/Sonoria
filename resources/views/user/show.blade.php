@@ -85,7 +85,7 @@
                 <a href="{{ route('home') }}"
                     onmouseover="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/homeHover.png') }}'"
                     onmouseleave="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/home.png') }}'">
-                    <img src="{{ asset('img/assets/home.png') }}" alt="">
+                    <img src="{{ asset('img/assets/home.png') }}" alt="" style="filter: invert(1);">
                 </a>
             </div>
         </div>
@@ -358,22 +358,26 @@
                          @endif
                 
                         <div class="mb-3">
-                            <div class="">
-                                <img src="{{ asset('img/logos/profile-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3" height="40">
+                            <div class="d-flex">
+                                <img src="{{ asset('img/logos/profile-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3" height="40" style="filter: invert(1);">
+                                <h3 class="ms-3">Nombre</h3>
                             </div>
                             <input type="text" name="name" class="form-control mb-2 custom-input" value="{{ $user->name }}"
                                 placeholder='{{ $user->name }}' autofocus>
                         </div>
                         <div class="mb-3">
-                            <div class="">
-                                <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40">
+                            <div class="d-flex">
+                                <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40" style="filter: invert(1);">
+                                <h3 class="ms-3">Email</h3>
+
                             </div>
                             <input type="text" name="email" class="form-control mb-2 custom-input" value="{{ $user->email }}"
                                 placeholder='{{ $user->email }}' autofocus>
                         </div>
                         <div class="mb-3">
-                            <div class="">
-                                <img src="{{ asset('img/logos/gender-svgrepo-com.svg') }}" alt="icono perfil"  height="40" class="mb-3" >
+                            <div class="d-flex">
+                                <img src="{{ asset('img/logos/gender-svgrepo-com.svg') }}" alt="icono perfil"  height="40" class="mb-3" style="filter: invert(1);">
+                                <h3 class="ms-3">Género</h3>
                             </div>
                             <select name="gender" class="form-control mb-2 custom-input" class="mb-3" autofocus>
                                 <option value="Masculino" @if($user->gender === 'Masculino') selected @endif>Masculino</option>
@@ -383,8 +387,9 @@
                         </div>
     
                         <div class="mb-3">
-                            <div class="">
-                                <img src="{{ asset('img/logos/profileImage-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="38">
+                            <div class="d-flex">
+                                <img src="{{ asset('img/logos/profileImage-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="38" style="filter: invert(1);">
+                                <h3 class="ms-3">Avatar</h3>
                             </div>
                             <input type="file" name="image" class="form-control mb-2 custom-input" accept="image/*">
                         </div>
