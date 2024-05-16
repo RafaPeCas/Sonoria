@@ -27,6 +27,7 @@ class UserController extends Controller
             'email.max' => 'El E-mail debe tener como máximo :max caracteres.',
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.ends_with' => 'El email debe terminar en ".com, .net, .org, .edu, .gov".',
+            'image' => 'required|image',
 
         ]);
 
@@ -34,6 +35,8 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+      
         
         $user = Auth::user();
         if ($user) {
@@ -46,8 +49,13 @@ class UserController extends Controller
                     $user->email = $request->email;
                     $user->gender = $request->gender;
 
+                    if ($request->hasFile('image')) {
+                        $image = $request->file('image');
+                        $imageFile = base64_encode(file_get_contents($image));
+                        $user->avatar = $imageFile;
+                    }
                     $user->save();
-                    return redirect('/home')->with('success', 'Usuario actualizado exitosamente');
+                    return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
                 } catch (QueryException $exception) {
                     //Si introduce email  existente le salta el mensaje de error
                     if ($exception->errorInfo[1] === 1062) {
@@ -56,12 +64,12 @@ class UserController extends Controller
                     } else {
                         // Manejar otros errores de la base de datos
                         // Por ejemplo, podrías registrar el error o redirigir a una página de error general
-                        return redirect()->route('error')->with('error', 'Error en la base de datos');
+                        return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
                     }
                 }
             } else {
                 // Si el usuario no ha realizado cambios, redirigir a la página principal
-                return redirect('/home')->with('info', 'No se han realizado cambios');
+                return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
             }
         } else {
             return redirect()->route('login')->with('success', '');

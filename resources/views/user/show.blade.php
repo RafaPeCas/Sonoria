@@ -16,7 +16,13 @@
         <div class="userHeader">
             <div class="userData">
                 <div class="userImage">
+                @if ($user->avatar)
+                    {{-- Muestra el avatar en forma base64 si está definido --}}
+                    <img src="data:image/png;base64,{{ $user->avatar }}" alt="userPicture">
+                @else
+                    {{-- Si no está definido, muestra la imagen por defecto --}}
                     <img src="{{ asset('img/userPictures/default.png') }}" alt="userPicture">
+                @endif
                     
                     <div class="d-flex mt-3 justify-content-center">@if (Auth::check() && Auth::user()->id === $user->id)  <button type="button" class="btn followButtom" data-bs-toggle="modal" data-bs-target="#editModal">
                         Editar perfil
