@@ -15,7 +15,7 @@
     <p hidden id="userId">{{Auth::user()->id}}</p>
     <aside>
         <div class="display">
-            <h1 class="d-flex justify-content-center pt-3 pb-2">Buscar artista</h1>
+            <h1 class="d-flex justify-content-center pt-3 pb-2 text-white">Buscar artista</h1>
             <form id="searchForm">
                 <input style="box-shadow: 5px 5px 15px 2px black;" type="text" id="searchInput" name="term" placeholder="Ingrese el nombre del artista...">
             </form>

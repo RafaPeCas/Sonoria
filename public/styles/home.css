@@ -184,3 +184,24 @@ ul {
     width: 100%;
     overflow: auto;
 }
+
+.tableButton {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(124, 16, 16, 1) 0%,
+        rgba(8, 0, 91, 1) 100%
+    );
+    border: #622d7a solid 2px;
+    color: white;
+    border-radius: 10px;
+}
+
+.tableButton:hover {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(8, 0, 91, 1) 0%,
+        rgba(124, 16, 16, 1) 100%
+    );
+}
