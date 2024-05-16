@@ -32,6 +32,7 @@
                         style="
     width: 50px;
     margin-top: -20px;
+    filter: invert(100%);
 ">
                 </a>
             </div>

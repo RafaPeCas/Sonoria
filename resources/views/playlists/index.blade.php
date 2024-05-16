@@ -12,7 +12,7 @@
         <h1 style="margin-right: 10px; margin-top: 10px;" class="text-white">TUS PLAYLISTS</h1>
     </div>
     <a style="margin-left: 10px;" href="{{ route('home') }}" onmouseover="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/homeHover.png') }}'" onmouseleave="this.getElementsByTagName('img')[0].src='{{ asset('img/assets/home.png') }}'">
-        <img src="{{ asset('img/assets/home.png') }}" alt="" style="width: 50px; height: 50px; margin-top: -90px;">
+        <img src="{{ asset('img/assets/home.png') }}" alt="" style="width: 50px; height: 50px; margin-top: -90px; filter: invert(100%);">
     </a>
 
     <div class="mainContainer">

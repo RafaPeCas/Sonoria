@@ -25,8 +25,8 @@
                     <p class="m-0">Álbum</p>
                     <h1 class="albumName">{{ $album->name }}</h1>
                     <div class="d-flex justify-center align-items-center">
-                        @if ($album->image)
-                            <img src="data:image/jpeg;base64,{{ $album->user->image }}" alt="imagen" class="groupImage">
+                        @if ($album->user->avatar )
+                            <img src="data:image/jpeg;base64,{{ $album->user->avatar }}" alt="imagen" class="groupImage">
                         @else
                             <img src="{{ asset('img/cover/test.jpg') }}" alt="imagen" class="groupImage">
                         @endif

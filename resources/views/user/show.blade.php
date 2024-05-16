@@ -265,7 +265,19 @@
                 </div>
                 @if (auth::user()->id === $user->id)
                     <div id="statistics" class="hidden tab text-white">
-                        <div>
+                    <h1 class="text-center mt-3 mb-3">Hemos creado esto para tí</h1>
+                    <iframe id="spotifyPlaylist" style="border-radius:12px" src="" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+<script>
+    // Obtener la ID de la playlist del localStorage
+    const playlistId = localStorage.getItem("playlistId");
+
+    // Construir la URL de la playlist con la ID obtenida
+    const playlistUrl = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`;
+
+    // Cambiar el atributo src del iframe con la URL construida
+    document.getElementById("spotifyPlaylist").src = playlistUrl;
+</script>                        <div>
                             <div id="sData" hidden>
                                 <p class="trigger" hidden></p>
                                 <h1>Nombre de usuario en Spotify</h1>
