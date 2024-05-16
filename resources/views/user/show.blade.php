@@ -292,31 +292,35 @@
                                 <h3 id="sType"></h3>
 
                                 <a id="sUri">Abrir tu aplicación localmente</a>
+
+                                
                             </div>
                             <div id="SpotifyNotConnected" hidden>
                                 <a href="{{ route('spotify') }}">Conectar con Spotify</a>
                             </div>
                             <script>
-                                if (localStorage.getItem("user") && localStorage.getItem("userId") == document.querySelector("#userId").innerHTML) {
-                                    document.querySelector("#sData").removeAttribute("hidden")
+    if (localStorage.getItem("user") && localStorage.getItem("userId") == document.querySelector("#userId").innerHTML) {
+        document.querySelector("#sData").removeAttribute("hidden")
 
-                                    const userInfo = JSON.parse(localStorage.getItem("user"))
-                                    document.querySelector("#sName").innerHTML = userInfo.display_name
-                                    document.querySelector("#sCountry").innerHTML = userInfo.country
-                                    document.querySelector("#sEmail").innerHTML = userInfo.email
-                                    document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" :
-                                        "Desactivado";
-                                    document.querySelector("#sProfile").setAttribute("href", userInfo.external_urls.spotify);
-                                    document.querySelector("#sFollowers").innerHTML = userInfo.followers.total;
-                                    document.querySelector("#sid").innerHTML = userInfo.id;
-                                    document.querySelector("#sImage").setAttribute("src", userInfo.images[0].url)
-                                    document.querySelector("#sPremium").innerHTML = userInfo.product
-                                    document.querySelector("#sType").innerHTML = userInfo.type
-                                    document.querySelector("#sUri").setAttribute("href", userInfo.uri);
-                                } else {
-                                    document.querySelector("#SpotifyNotConnected").removeAttribute("hidden")
-                                }
-                            </script>
+        const userInfo = JSON.parse(localStorage.getItem("user"));
+        document.querySelector("#sName").innerHTML = userInfo.display_name;
+        document.querySelector("#sCountry").innerHTML = userInfo.country;
+        document.querySelector("#sEmail").innerHTML = userInfo.email;
+        document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" : "Desactivado";
+        document.querySelector("#sProfile").setAttribute("href", userInfo.external_urls.spotify);
+        document.querySelector("#sFollowers").innerHTML = userInfo.followers.total;
+        document.querySelector("#sid").innerHTML = userInfo.id;
+        if (userInfo.images && userInfo.images.length > 0 && userInfo.images[0].url) {
+    document.querySelector("#sImage").setAttribute("src", userInfo.images[0].url);
+}
+        document.querySelector("#sPremium").innerHTML = userInfo.product;
+        document.querySelector("#sType").innerHTML = userInfo.type;
+        document.querySelector("#sUri").setAttribute("href", userInfo.uri);
+    } else {
+        document.querySelector("#SpotifyNotConnected").removeAttribute("hidden")
+    }
+</script>
+
                         </div>
                     </div>
                 @endif

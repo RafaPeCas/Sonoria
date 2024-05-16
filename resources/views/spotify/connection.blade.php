@@ -49,6 +49,19 @@
                 const accessToken = await getAccessToken(clientId, code);
                 const profile = await fetchProfile(accessToken);
                 localStorage.setItem("user", JSON.stringify(profile))
+
+                const topTracks = await fetchTopTracks(accessToken);
+                const topTracksIds = topTracks.items.map(track => track.id);
+
+                const recommendations = await getRecommendations(accessToken, topTracksIds);
+                const tracksUri = recommendations.tracks.map(track => track.uri);
+
+                const user_id = profile.id;
+                const playlist = await createPlaylist(accessToken, user_id, tracksUri);
+                if (playlist) {
+                localStorage.setItem("playlistId", playlist.id);
+            }
+            
                 location.href = '/user/' + document.querySelector("#userId").innerHTML;
             } catch (error) {
                 console.error('Error en la autenticación:', error);
@@ -66,7 +79,7 @@
         params.append("client_id", clientId);
         params.append("response_type", "code");
         params.append("redirect_uri", "http://localhost:8000/spotify");
-        params.append("scope", "user-read-private user-read-email");
+        params.append("scope", "user-read-private user-read-email user-top-read playlist-modify-public playlist-modify-private");
         params.append("code_challenge_method", "S256");
         params.append("code_challenge", challenge);
 
@@ -126,5 +139,66 @@
 
         return await result.json();
     }
+
+    async function fetchTopTracks(token) {
+        const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return await result.json();
+    }
+
+    async function getRecommendations(token, topTracksIds) { 
+    const result = await fetch(`https://api.spotify.com/v1/recommendations?limit=50&seed_tracks=${topTracksIds.join(',')}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return await result.json();
+}
+
+async function createPlaylist(token, user_id, tracksUri) {
+    try {
+        const result = await fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": "Esta playlist es de 10",
+                "description": "OLE OLE QUE BUENA LA PLAYLIST - MIRA COMO USO LA API OLGUI OLGUI",
+                "public": false
+            })
+        });
+
+        if (!result.ok) {
+            throw new Error('Error al crear la playlist');
+        }
+
+        const playlist = await result.json();
+
+        const addTracksResult = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks?uris=${tracksUri.join(',')}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!addTracksResult.ok) {
+            throw new Error('Error al agregar pistas a la playlist');
+        }
+
+        return playlist;
+    } catch (error) {
+        console.error('Error al crear la playlist:', error);
+        return null;
+    }
+}
+
+
 </script>
 @endsection
