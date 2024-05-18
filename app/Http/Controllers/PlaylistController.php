@@ -82,14 +82,19 @@ class PlaylistController extends Controller
 
     public function removeSong(Request $request)
     {
-        $song = Song::findOrFail($request->input('songId'));
-        $playlist = Playlist::findOrFail($request->input('playlistId'));
+        try {
+            $song = Song::findOrFail($request->input('songId'));
+            $playlist = Playlist::findOrFail($request->input('playlistId'));
 
-        if ($playlist->songs()->where('song_id', $song->id)->exists()) {
-            $playlist->songs()->detach($song);
-            return redirect()->back()->with('success', 'Canción agregada a la playlist exitosamente.');
+            if ($playlist->songs()->where('song_id', $song->id)->exists()) {
+                $playlist->songs()->detach($song);
+                return response()->json(['err' => false, 'message' => 'Canción eliminada de la playlist exitosamente.']);
+            }
+
+            return response()->json(['err' => true, 'message' => 'Canción no encontrada en la playlist.']);
+        } catch (\Exception $e) {
+            return response()->json(['err' => true, 'message' => 'Error al eliminar la canción: ' . $e->getMessage()]);
         }
-
-        return redirect()->back()->with('error', 'Canción no encontrada');
     }
+
 }

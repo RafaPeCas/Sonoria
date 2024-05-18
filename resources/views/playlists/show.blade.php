@@ -87,7 +87,7 @@
                 </table>
             </div>
         @else
-            <p class="text-white">No hay canciones en esta palylist.</p>
+            <p class="text-white">No hay canciones en esta playlist.</p>
         @endif
 
         <section id="reproductionPanel">

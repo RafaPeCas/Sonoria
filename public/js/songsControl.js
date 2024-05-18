@@ -143,27 +143,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function deleteSongById2(songId, playlistId) {
-        fetch('/playlist/' + playlistId + {
-            method: 'GET',
+        fetch('/playlist/remove-song', {
+            method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'X-CSRF-TOKEN': csrfToken,
                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                songId: songId,
+                playlistId: playlistId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.err) {
+                let row = document.getElementById('song_' + songId);
+                if (row) {
+                    row.remove();
+                }
+            } else {
+                alert('Error al eliminar la canción: ' + data.message);
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.err) {
-                    let row = document.getElementById('song_' + songId);
-                    if (row) {
-                        row.remove();
-                    }
-                } else {
-                    alert('Error al eliminar la canción: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error al eliminar la canción:', error);
-            });
+        .catch(error => {
+            console.error('Error al eliminar la canción:', error);
+        });
     }
 
     function deleteSongById(id) {

@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
     Route::get("/playlists/{id}", [PlaylistController::class, "show"])->name("playlist.show");
     Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
+    Route::post('/playlist/remove-song', [PlaylistController::class, 'removeSong'])->name('playlist.removeSong');
 
     /* Rutas para la API de Spotify */
     Route::get("/spotify", [SpotifyController::class, "getUser"])->name("spotify");
