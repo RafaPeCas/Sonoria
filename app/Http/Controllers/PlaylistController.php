@@ -97,4 +97,30 @@ class PlaylistController extends Controller
         }
     }
 
+       public function update(Request $request)
+    {
+        $playlistId = $request->input('playlist_id'); // Obtener la ID de la platlist del request
+
+        $playlist = Playlist::findOrFail($playlistId);
+
+        if ($request->has('name') && !is_null($request->input('name'))) {
+            $playlist->name = $request->input('name');
+        }
+
+        if ($request->has('description') && !is_null($request->input('description'))) {
+            $playlist->description = $request->input('description');
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageFile = base64_encode(file_get_contents($image));
+            $playlist->image = $imageFile;
+        }
+
+        $playlist->save();
+
+        // Redireccionar a la ruta album.show con la ID del álbum actualizado
+        return redirect()->route('playlist.show', ['id' => $playlist->id]);
+    }
+
 }

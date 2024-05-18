@@ -22,6 +22,61 @@
                     <p class="m-0 albumName">{{ $playlist->name }}</p>
                     <p class="m-0 fw-bolder">Descripción:</p>
                     <p class="m-0 albumDescription">{{ $playlist->description }}</p>
+                    @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $playlist->user()->first()->id))
+                <!-- Button trigger modal -->
+                <button type="button" class="btn tableButton mt-3 mb-3" data-bs-toggle="modal"
+                    data-bs-target="#updatePlaylistModal">
+                    Actualizar PLaylist
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="updatePlaylistModal" tabindex="-1" aria-labelledby="updatePlaylistModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content glass-morphism">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updatePlaylistModalLabel">Actualizar Playlist</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ route('playlist.update') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+
+                                    <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+
+                                    <div class="form-group">
+                                        <label for="name">Nombre:</label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                             maxlength="50" value="{{ $playlist->name }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="visibility">Visibilidad:</label>
+                                        <select class="form-control" id="visibility" name="visibility" >
+                                            <option value="public">Pública</option>
+                                            <option value="private">Privada</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="description">Descripción:</label>
+                                        <textarea class="form-control" id="description" name="description" maxlength="150" style="resize: none;">{{ $playlist->description }}</textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="image" class="form-label">Imagen de la playlist:</label>
+                                        <input type="file" id="image" name="image" class="form-control"
+                                            >
+                                    </div>
+
+                                    <button type="submit" class="btn tableButton mt-3">Actualizar Playlist</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
                 </div>
             </div>
             <div class="">
