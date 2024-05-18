@@ -45,7 +45,7 @@
 }
 
 .userLink{
-    color:rgb(255, 0, 34); 
+    color:rgb(255, 0, 34);
     text-decoration: none;
 }
 
@@ -63,7 +63,7 @@
 }
 
 td a:hover {
-    color: #4caf50 !important;
+    color: #b96ef7 !important;
 }
 
 th {
@@ -181,3 +181,4 @@ thead th {
 .glass-morphism .modal-body .form-check-label {
     color: #fff; /* Color del texto de las etiquetas de checkbox */
 }
+

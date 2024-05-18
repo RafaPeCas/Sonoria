@@ -111,6 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
             registerReproduction(songId);
 
             audioPlayer.play();
+            changeIconClass("icon-play", "fa-solid fa-pause large-icon")
+
         });
     });
 
@@ -212,8 +214,12 @@ document.addEventListener('DOMContentLoaded', function () {
     playPauseButton.addEventListener('click', function () {
         if (audioPlayer.paused) {
             audioPlayer.play();
+            changeIconClass("icon-play", "fa-solid fa-pause large-icon")
+
         } else {
             audioPlayer.pause();
+            changeIconClass("icon-play", "fa-solid fa-play large-icon")
+
         }
     });
 
@@ -382,6 +388,8 @@ document.addEventListener('DOMContentLoaded', function () {
         registerReproduction(songId);
 
         audioPlayer.play();
+
+        changeIconClass("icon-play", "fa-solid fa-pause large-icon")
     }
 
     randomModeButton.addEventListener('click', function () {
@@ -390,9 +398,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Actualizar el texto del botón según el estado del modo aleatorio
         if (isRandomMode) {
-            randomModeButton.textContent = 'Aleatorio (activado)';
+            changeIconClass("icon-random", "fa-solid fa-shuffle large-icon", "grey");
         } else {
-            randomModeButton.textContent = 'Aleatorio';
+            changeIconClass("icon-random", "fa-solid fa-shuffle large-icon", "white");
         }
     });
 
@@ -448,6 +456,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Guardar el valor del control deslizante de volumen en una cookie
         document.cookie = `volumeSliderValue=${volumeValue}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
     }
+
+    function changeIconClass(id, newClass, color) {
+        // Selecciona el elemento <i> por su id
+        const icon = document.getElementById(id);
+
+        // Cambia la clase del elemento <i> a la nueva clase pasada como parámetro
+        icon.className = newClass;
+
+        // Cambia el color del elemento <i> usando el atributo style
+        if (color) {
+            icon.style.color = color;
+        }
+    }
+
 
     volumeSlider.addEventListener('input', saveVolumeSliderState);
 

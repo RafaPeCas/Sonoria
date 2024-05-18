@@ -72,7 +72,7 @@
                                             </div>
 
 
-                                            <button type="submit" class="btn btn-primary mt-2">Actualizar Álbum</button>
+                                            <button type="submit" class="btn tableButton mt-2">Actualizar Álbum</button>
 
                                         </form>
                                         <!-- Botón para Eliminar Álbum -->
@@ -80,7 +80,7 @@
                                             @csrf
                                             <!-- Campo oculto para enviar la ID del álbum -->
                                             <input type="hidden" name="album_id" value="{{ $album->id }}">
-                                            <button type="submit" class="btn btn-danger mt-2">Eliminar Álbum</button>
+                                            <button type="submit" class="btn tableButton mt-2">Eliminar Álbum</button>
                                         </form>
                                     </div>
                                 </div>
@@ -256,7 +256,7 @@
 
 
 
-                                                                <button type="submit" class="btn btn-primary">Guardar
+                                                                <button type="submit" class="btn tableButton">Guardar
                                                                     Cambios</button>
                                                             </form>
                                                         </div>
@@ -329,7 +329,7 @@
                                     <input type="text" id="name" name="name" class="form-control" required>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Agregar Canción</button>
+                                <button type="submit" class="btn tableButton">Agregar Canción</button>
                             </form>
                         </div>
                     </div>
@@ -363,22 +363,23 @@
                         </audio>
                         <div class=" d-flex justify-content-center align-items-center">
                             <div class="audio-controls">
-                                <button class="seek-backward p-0" style="width: 20px;">«</button>
-                                <button class="prev-song-btn p-0" style="width: 20px;"><</button>
+                                <button class="prev-song-btn p-0" style="width: 30px;"><i class="fa-solid fa-backward-step large-icon"></i></button>
+                                <button class="seek-backward p-0" style="width: 40px;"><i class="fa-solid fa-backward large-icon"></i></button>
                             </div>
                             <div class="progress-container mt-0 mb-0">
                                 <div class="progress-bar">
                                 </div>
                             </div>
                             <div class="audio-controls">
-                                <button class="next-song-btn p-0" style="width: 20px;">></button>
-                                <button class="seek-forward p-0" style="width: 20px;">»</button>
+                                <button class="seek-forward p-0" style="width: 40px;"><i class="fa-solid fa-forward large-icon"></i></button>
+                                <button class="next-song-btn p-0" style="width: 30px;"><i class="fa-solid fa-forward-step large-icon"></i></button>
+
                             </div>
                         </div>
 
-                        <div class="audio-controls d-flex justify-content-around mt-2">
-                            <button class="play-pause">Play/Pause</button>
-                            <button class="random-mode-btn">Aleatorio</button>
+                        <div class="audio-controls d-flex justify-content-center mt-2">
+                            <button class="random-mode-btn"><i id="icon-random" class="fa-solid fa-shuffle large-icon"></i></button>
+                            <button class="play-pause"><i id="icon-play" class="fa-solid fa-play large-icon"></i></button>
                             <input type="range" class="volume-slider" min="0" max="100" value="100">
                         </div>
                     </div>

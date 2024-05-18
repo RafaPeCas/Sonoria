@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{{ asset('styles/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
     <script defer src="{{ asset('js/bootstrap.bundle.js') }}"></script>
-    
+    <script src="https://kit.fontawesome.com/f9a29f74f0.js" crossorigin="anonymous"></script>
+
     @yield('links')
 </head>
 
