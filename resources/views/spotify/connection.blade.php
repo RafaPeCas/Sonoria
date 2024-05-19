@@ -124,7 +124,7 @@
                 client_id: clientId,
                 grant_type: "authorization_code",
                 code,
-                redirect_uri: "http://localhost:8000/spotify",
+                redirect_uri: "https://sonoria.fly.dev/spotify",
                 code_verifier: verifier
             });
 
