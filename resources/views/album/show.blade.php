@@ -32,7 +32,7 @@
                         @endif
 
                         <p class="m-0 mx-2">
-                            {{ $album->user->name }} - {{ date('Y', strtotime($album->created_at)) }} - Canciones:
+                            <a class="userLink" href="{{route("user.profile", ['id' =>$album->user->id]) }}">{{ $album->user->name }}</a> - {{ date('Y', strtotime($album->created_at)) }} - Canciones:
                             {{ $totalSongs }}
                         </p>
 

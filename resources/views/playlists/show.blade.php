@@ -16,8 +16,10 @@
                 <img src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }} cover" id='base64image'
                     class="bigAlbumImage">
                 <div class="albumInfo">
-                    <p class="m-0 fw-bolder" style="font-size: 1.5em;">Playlist de <a class="userLink" href="{{route("user.profile", ['id' =>$playlist->user()->first()->id]) }}">{{$playlist->user()->first()->name}}</a><div id="mediaPlayer">
-            </div></a></p>
+                    <p class="m-0 fw-bolder" style="font-size: 1.5em;">Playlist de <a class="userLink"
+                            href="{{ route('user.profile', ['id' => $playlist->user()->first()->id]) }}">{{ $playlist->user()->first()->name }}</a>
+                    <div id="mediaPlayer">
+                    </div></a></p>
                     <p class="m-0 fw-bolder">Nombre:</p>
                     <p class="m-0 albumName">{{ $playlist->name }}</p>
                     <p class="m-0 fw-bolder">Descripción:</p>
@@ -120,7 +122,7 @@
                                 <td hidden id="image{{ $song->id }}">{{ $song->album->image }}</td>
                                 <td>{{ $index + 1 }}</td>
                                 <td>
-                                    <a href="#" class="song-link noDecoration" data-id="{{ $song->id }}"
+                                    <a href="#" class="song-link noDecoration" data-id="{{ $song->id }}" user-id="{{$song->album->user->id}}"
                                         data-src="data:audio/wav;base64,{{ $song->file }}" style="color: inherit;"
                                         onclick="getSongId(this)">
                                         {{ $song->name }}
@@ -131,7 +133,7 @@
                                 </td>
                                 <td>
                                     @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $playlist->user()->first()->id))
-                                        <button class="delete-song tableButton" data-id="{{ $song->id }}"
+                                        <button class="delete-song tableButton" data-id="{{ $song->id }}" 
                                             data-playlist-id="{{ $playlist->id }}">Eliminar</button>
                                     @endif
                                 </td>
@@ -150,7 +152,8 @@
             <div id="songInfo">
                 <div class="d-flex custom align-items-center h-100 pl-2">
                     <div>
-                        <img class="coverImg" id="coverImage" src="data:image/jpeg;base64,{{ $playlist->image }}">
+                        <a href=""> <img
+                                class="coverImg" id="coverImage" src="data:image/jpeg;base64,{{ $playlist->image }}"></a>
                     </div>
                     <div>
                         <div class="songTitle">
@@ -170,21 +173,26 @@
                         </audio>
                         <div class=" d-flex justify-content-center align-items-center">
                             <div class="audio-controls">
-                                <button class="prev-song-btn p-0" style="width: 30px;"><i class="fa-solid fa-backward-step large-icon"></i></button>
-                                <button class="seek-backward p-0" style="width: 40px;"><i class="fa-solid fa-backward large-icon"></i></button>
+                                <button class="prev-song-btn p-0" style="width: 30px;"><i
+                                        class="fa-solid fa-backward-step large-icon"></i></button>
+                                <button class="seek-backward p-0" style="width: 40px;"><i
+                                        class="fa-solid fa-backward large-icon"></i></button>
                             </div>
                             <div class="progress-container mt-0 mb-0">
                                 <div class="progress-bar">
                                 </div>
                             </div>
                             <div class="audio-controls">
-                                <button class="seek-forward p-0" style="width: 40px;"><i class="fa-solid fa-forward large-icon"></i></button>
-                                <button class="next-song-btn p-0" style="width: 30px;"><i class="fa-solid fa-forward-step large-icon"></i></button>
+                                <button class="seek-forward p-0" style="width: 40px;"><i
+                                        class="fa-solid fa-forward large-icon"></i></button>
+                                <button class="next-song-btn p-0" style="width: 30px;"><i
+                                        class="fa-solid fa-forward-step large-icon"></i></button>
                             </div>
                         </div>
 
                         <div class="audio-controls d-flex justify-content-center mt-2">
-                            <button class="random-mode-btn"><i id="icon-random" class="fa-solid fa-shuffle large-icon"></i></button>
+                            <button class="random-mode-btn"><i id="icon-random"
+                                    class="fa-solid fa-shuffle large-icon"></i></button>
                             <button class="play-pause"><i id="icon-play" class="fa-solid fa-play large-icon"></i></button>
                             <input type="range" class="volume-slider" min="0" max="100" value="100">
                         </div>
@@ -204,8 +212,10 @@
 
         function getSongId(e) {
             var actualSongId = e.getAttribute("data-id")
+            var actualUserId = e.getAttribute("user-id")
             var reproducionImage = document.querySelector("#image" + actualSongId).innerHTML
             document.querySelector("#coverImage").src = "data:image/jpeg;base64," + reproducionImage;
+            document.querySelector("#coverImage").parentNode.href= "/user/"+actualUserId;
         }
     </script>
 @endsection
