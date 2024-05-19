@@ -270,3 +270,23 @@ input[type="file"]::-webkit-file-upload-button:hover {
 .tableButton:hover {
     background-color: rgba(8, 0, 91) !important;
 }
+
+.iconox{
+    font-size: 1.5em;
+}
+
+.sporify a{
+    text-decoration: none;
+    padding: 20px;
+    background-color:#169c46   !important;
+    color: black !important;
+}
+
+.sporify a:hover{
+    transform: scale(1.2);
+    background-color: #1ed760 !important;
+}
+
+.sporify{
+    cursor: pointer;
+}

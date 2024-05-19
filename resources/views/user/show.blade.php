@@ -51,13 +51,13 @@
                 @endif
             </div>
             <div class="userName">
-                <h2>{{ $user->name }}</h2>
+                <h2 id="sName">{{ $user->name }}</h2>
                 <hr>
 
                 <p>
                     <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono email" height="30"
                         style="filter: invert(1);">
-                    <span class="spaceIcon">{{ $user->email }}</span>
+                    <span class="spaceIcon" id="sEmail">{{ $user->email }}</span>
                 </p>
 
                 <p>
@@ -299,23 +299,40 @@
 
             @if (auth::user()->id === $user->id)
                 <div id="statistics" class="hidden tab text-white">
-                    <h1 class="text-center mt-3 mb-3">Hemos creado esto para tí</h1>
-                    <iframe id="spotifyPlaylist" style="border-radius:12px" src="" width="100%"
-                        height="352" frameBorder="0" allowfullscreen=""
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"></iframe>
+                    <div class="px-5" id="palabra" hidden>
+                        <h1 class="text-center mt-3 mb-3">Hemos creado esto para tí</h1>
+                        <iframe id="spotifyPlaylist" style="border-radius:12px" src="" width="100%"
+                            height="352" frameBorder="0" allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"></iframe>
+                        <section class="d-flex justify-content-center align-items-center sporify mt-5 cursor-pointer">
+                            <a class="tableButton" onclick="desvincular()" >Desvincular cuenta <i
+                                    class='fa-brands fa-spotify iconox'></i></a>
+                        </section>
+                        <script>
+                            // Obtener la ID de la playlist del localStorage
+                            const playlistId = localStorage.getItem("playlistId");
 
-                    <script>
-                        // Obtener la ID de la playlist del localStorage
-                        const playlistId = localStorage.getItem("playlistId");
+                            // Construir la URL de la playlist con la ID obtenida
+                            const playlistUrl = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`;
 
-                        // Construir la URL de la playlist con la ID obtenida
-                        const playlistUrl = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`;
+                            // Cambiar el atributo src del iframe con la URL construida
+                            document.getElementById("spotifyPlaylist").src = playlistUrl;
 
-                        // Cambiar el atributo src del iframe con la URL construida
-                        document.getElementById("spotifyPlaylist").src = playlistUrl;
-                    </script>
-                    <div>
+                            function desvincular() {
+                                localStorage.clear();
+                                location.reload();
+                            }
+                        </script>
+                    </div>
+                    <div id="SpotifyNotConnected" hidden class="w-100 h-100">
+                        <div class="d-flex justify-content-center align-items-center sporify">
+                            <a class="tableButton" href="{{ route('spotify') }}">Conectar con Spotify <i
+                                    class='fa-brands fa-spotify iconox'></i></a>
+                        </div>
+                    </div>
+
+                    <div hidden>
                         <div id="sData" hidden>
                             <p class="trigger" hidden></p>
                             <h1>Nombre de usuario en Spotify</h1>
@@ -351,17 +368,17 @@
 
 
                         </div>
-                        <div id="SpotifyNotConnected" hidden>
-                            <a href="{{ route('spotify') }}">Conectar con Spotify</a>
-                        </div>
+
                         <script>
                             if (localStorage.getItem("user") && localStorage.getItem("userId") == document.querySelector("#userId").innerHTML) {
-                                document.querySelector("#sData").removeAttribute("hidden")
+                                document.querySelector("#palabra").removeAttribute("hidden");
 
                                 const userInfo = JSON.parse(localStorage.getItem("user"));
-                                document.querySelector("#sName").innerHTML = userInfo.display_name;
+                                document.querySelector("#sName").innerHTML += " // " + "<i class='fa-brands fa-spotify'></i>" + userInfo
+                                    .display_name;
                                 document.querySelector("#sCountry").innerHTML = userInfo.country;
-                                document.querySelector("#sEmail").innerHTML = userInfo.email;
+                                document.querySelector("#sEmail").innerHTML += " <br> " + "<i class='fa-brands fa-spotify iconox'></i>" +
+                                    userInfo.email;
                                 document.querySelector("#sExplicit").innerHTML = userInfo.explicit_content.filter_enabled ? "Activado" :
                                     "Desactivado";
                                 document.querySelector("#sProfile").setAttribute("href", userInfo.external_urls.spotify);
@@ -377,7 +394,6 @@
                                 document.querySelector("#SpotifyNotConnected").removeAttribute("hidden")
                             }
                         </script>
-
                     </div>
                 </div>
             @endif

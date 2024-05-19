@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<h1 id="userId" hidden>{{ $user }}</h1>
+<h1 id="userId" userName="{{$name}}" hidden>{{ $user }}</h1>
 <script>
     const clientId = "e1ccac91ae2f4f3c8534f5f9b00d729c";
     const params = new URLSearchParams(window.location.search);
@@ -189,6 +189,7 @@
 
     async function createPlaylist(token, userId, tracksUri) {
         try {
+            let name = document.querySelector("#userId").getAttribute("userName");
             const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
                 method: "POST",
                 headers: {
@@ -196,7 +197,7 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "name": "Esta playlist es de 10",
+                    "name": `Aquí está la playlist para ${name}`,
                     "description": "OLE OLE QUE BUENA LA PLAYLIST",
                     "public": false
                 })
