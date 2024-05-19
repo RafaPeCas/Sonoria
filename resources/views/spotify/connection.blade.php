@@ -85,7 +85,7 @@
             const params = new URLSearchParams({
                 client_id: clientId,
                 response_type: "code",
-                redirect_uri: "https://sonoria.fly.dev/spotify",
+                redirect_uri: "http://localhost:8000/spotify",
                 scope: "user-read-private user-read-email user-top-read playlist-modify-public playlist-modify-private",
                 code_challenge_method: "S256",
                 code_challenge: challenge
@@ -124,7 +124,7 @@
                 client_id: clientId,
                 grant_type: "authorization_code",
                 code,
-                redirect_uri: "https://sonoria.fly.dev/spotify",
+                redirect_uri: "http://localhost:8000/spotify",
                 code_verifier: verifier
             });
 
