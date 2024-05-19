@@ -123,4 +123,13 @@ class PlaylistController extends Controller
         return redirect()->route('playlist.show', ['id' => $playlist->id]);
     }
 
+    public function delete(Request $request)
+    {
+        $playlist = Playlist::findOrFail($request->playlist_id);
+        $user = auth()->user();
+
+        $playlist->delete();
+
+        return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Álbum eliminado exitosamente.');
+    }
 }

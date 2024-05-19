@@ -74,6 +74,12 @@
 
                                     <button type="submit" class="btn tableButton mt-3">Actualizar Playlist</button>
                                 </form>
+                                <form action="{{ route('playlist.delete') }}" method="POST">
+                                    @csrf
+                                    <!-- Campo oculto para enviar la ID del álbum -->
+                                    <input type="hidden" name="playlist_id" value="{{ $playlist->id }}">
+                                    <button type="submit" class="btn tableButton mt-2">Eliminar Playlist</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -133,7 +139,7 @@
                                 </td>
                                 <td>
                                     @if (Auth::check() && (Auth::user()->id === 1 || Auth::user()->id === $playlist->user()->first()->id))
-                                        <button class="delete-song tableButton" data-id="{{ $song->id }}" 
+                                        <button class="delete-song tableButton" data-id="{{ $song->id }}"
                                             data-playlist-id="{{ $playlist->id }}">Eliminar</button>
                                     @endif
                                 </td>

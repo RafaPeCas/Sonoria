@@ -183,18 +183,18 @@ main {
 }
 .follow{
     margin-left: 20%;
-    
+
 }
 .name{
     color:aliceblue;
 }
 input[type="file"]::-webkit-file-upload-button {
     margin-left: -1%;
-    background-color: #000000; 
-    color: white; 
-    padding: 8px 20px; 
-    border:0px; 
-    border-radius: 10px; 
+    background-color: #000000;
+    color: white;
+    padding: 8px 20px;
+    border:0px;
+    border-radius: 10px;
 }
 
 input[type="file"]::-webkit-file-upload-button:hover {
@@ -289,4 +289,27 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 .sporify{
     cursor: pointer;
+}
+
+.tableButton2 {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(124, 16, 16, 1) 0%,
+        rgba(8, 0, 91, 1) 100%
+    );
+    border: #622d7a solid 2px;
+    border-radius: 10px !important;
+    color: white !important;
+
+}
+
+.tableButton2:hover {
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgba(8, 0, 91, 1) 0%,
+        rgba(124, 16, 16, 1) 100%
+    );
+    color: white !important;
 }

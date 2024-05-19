@@ -174,21 +174,21 @@
                                             @csrf
 
                                             <div class="form-group">
-                                                <label for="name">Name:</label>
+                                                <label for="name">Nombre:</label>
                                                 <input type="text" class="form-control" id="name" name="name"
                                                     required maxlength="50">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="visibility">Visibility:</label>
+                                                <label for="visibility">Visibilidad:</label>
                                                 <select class="form-control" id="visibility" name="visibility" required>
-                                                    <option value="public">Public</option>
-                                                    <option value="private">Private</option>
+                                                    <option value="public">Pública</option>
+                                                    <option value="private">Privada</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="description">Description:</label>
+                                                <label for="description">Descripción:</label>
                                                 <textarea class="form-control" id="description" name="description" maxlength="150" style="resize: none;"></textarea>
                                             </div>
 
@@ -199,7 +199,7 @@
                                                     required>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Create Playlist</button>
+                                            <button type="submit" class="btn tableButton2">Crear Playlist</button>
                                         </form>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
                                                         class="form-control" required>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Agregar Álbum</button>
+                                                <button type="submit" class="btn tableButton2">Agregar Álbum</button>
                                             </form>
                                         </div>
                                     </div>
