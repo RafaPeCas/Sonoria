@@ -18,7 +18,7 @@
             <div class="userImage">
                 @if ($user->avatar)
                     {{-- Muestra el avatar en forma base64 si está definido --}}
-                    <img src="data:image/png;base64,{{ $user->avatar }}" alt="userPicture">
+                    <img class="rounded-pill" src="data:image/png;base64,{{ $user->avatar }}" alt="userPicture">
                 @else
                     {{-- Si no está definido, muestra la imagen por defecto --}}
                     <img src="{{ asset('img/userPictures/default.png') }}" alt="userPicture">
@@ -119,7 +119,10 @@
             <button class="tab-button" data-tab="followers">Seguidores</button>
             <button class="tab-button" data-tab="following">Siguiendo</button>
             <button class="tab-button" data-tab="playlists">Playlists</button>
-            <button class="tab-button" data-tab="albums">Álbums</button>
+            @if ($user->role->name === 'artist')
+                <button class="tab-button" data-tab="albums">Álbums</button>
+            @endif
+
             @if (auth::user()->id === $user->id)
                 <button class="tab-button" data-tab="statistics">Mis datos de spotify</button>
             @endif
@@ -128,6 +131,7 @@
             <div id="followers" class="hidden text-white tab">
                 <div class="followersContainer">
                     <h1 class="text-center">Este usuario tiene {{ $followers->count() }} seguidores</h1>
+                    <hr>
                     @foreach ($followers as $follower)
                         <a href="{{ route('user.profile', ['id' => $follower->id]) }}" class="followName">
                             {{ $follower->name }}
@@ -138,6 +142,7 @@
             <div id="following" class="hidden text-white tab">
                 <div class="followersContainer">
                     <h1 class="text-center">Este usuario sigue a {{ $following->count() }} usuarios</h1>
+                    <hr>
                     @foreach ($following as $followed)
                         <a href="{{ route('user.profile', ['id' => $followed->id]) }}" class="followName">
                             {{ $followed->name }}
@@ -149,7 +154,7 @@
                 <div class="d-flex flex-column">
                     @if (Auth::check() && (Auth::user()->id === $user->id || Auth::user()->id === 1))
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mt-3 mb-3" data-bs-toggle="modal"
+                        <button type="button" class="btn mt-3 mb-3 tableButton" data-bs-toggle="modal"
                             data-bs-target="#addPlaylistModal">
                             Agregar PLaylist
                         </button>
@@ -159,7 +164,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content glass-morphism">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addPlaylistModalLabel">Agregar Nuevo Álbum</h5>
+                                        <h5 class="modal-title" id="addPlaylistModalLabel">Agregar Nueva Playlist</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -209,12 +214,11 @@
                             @foreach ($user->playlists as $playlist)
                                 <a href="{{ route('playlist.show', ['id' => $playlist->id]) }}" class="linkaso">
 
-                                        <img style="box-shadow: 1px 1px 10px 1px black; border-radius:20px"
-                                            src="data:image/jpeg;base64,{{ $playlist->image }}"
-                                            alt="{{ $playlist->name }}">
+                                    <img style="box-shadow: 1px 1px 10px 1px black; border-radius:20px"
+                                        src="data:image/jpeg;base64,{{ $playlist->image }}" alt="{{ $playlist->name }}">
 
-                                        <p class="m-0" style="font-weight:bolder; font-size: 1.2em">
-                                            {{ $playlist->name }}</p>
+                                    <p class="m-0" style="font-weight:bolder; font-size: 1.2em">
+                                        {{ $playlist->name }}</p>
 
 
                                     <hr>
@@ -228,69 +232,71 @@
                     @endif
                 </div>
             </div>
-            <div id="albums" class="hidden text-white tab">
-                <div>
-                    @if (Auth::check() && (Auth::user()->id === $user->id || Auth::user()->id === 1))
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mt-3 mb-3" data-bs-toggle="modal"
-                            data-bs-target="#addAlbumModal">
-                            Agregar Álbum
-                        </button>
+            @if ($user->role->name === 'artist')
+                <div id="albums" class="hidden text-white tab">
+                    <div class="d-flex flex-column">
+                        @if (Auth::check() && (Auth::user()->id === $user->id || Auth::user()->id === 1))
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn tableButton mt-3 mb-3" data-bs-toggle="modal"
+                                data-bs-target="#addAlbumModal">
+                                Agregar Álbum
+                            </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="addAlbumModal" tabindex="-1" aria-labelledby="addAlbumModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content glass-morphism">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="addAlbumModalLabel">Agregar Nuevo Álbum</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="text-white" action="{{ route('albums.store') }}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="">
-                                                <label for="name" class="form-label">Nombre del Álbum:</label>
-                                                <input type="text" id="name" name="name" class="form-control"
-                                                    required>
-                                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="addAlbumModal" tabindex="-1"
+                                aria-labelledby="addAlbumModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content glass-morphism">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addAlbumModalLabel">Agregar Nuevo Álbum</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="text-white" action="{{ route('albums.store') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="">
+                                                    <label for="name" class="form-label">Nombre del Álbum:</label>
+                                                    <input type="text" id="name" name="name"
+                                                        class="form-control" required>
+                                                </div>
 
-                                            <div class="">
-                                                <label for="image" class="form-label">Imagen del Álbum:</label>
-                                                <input type="file" id="image" name="image" class="form-control"
-                                                    required>
-                                            </div>
+                                                <div class="">
+                                                    <label for="image" class="form-label">Imagen del Álbum:</label>
+                                                    <input type="file" id="image" name="image"
+                                                        class="form-control" required>
+                                                </div>
 
-                                            <button type="submit" class="btn btn-primary">Agregar Álbum</button>
-                                        </form>
+                                                <button type="submit" class="btn btn-primary">Agregar Álbum</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    @if (empty($albums))
-                        <h1>No hay álbumes en este momento.</h1>
-                    @else
-                    <div class="fullAlbumContainer">
-                        @foreach ($albums as $album)
-                            <a href="{{ route('album.show', ['id' => $album['id']]) }}" class="linkaso2">
+                        @if (empty($albums))
+                            <h1>No hay álbumes en este momento.</h1>
+                        @else
+                            <div class="fullAlbumContainer">
+                                @foreach ($albums as $album)
+                                    <a href="{{ route('album.show', ['id' => $album['id']]) }}" class="linkaso2">
 
-                                <img style="box-shadow: 1px 1px 10px 1px black; border-radius:20px"
-                                    src="data:image/jpeg;base64,{{ $album["image"] }}" alt="{{ $album["name"] }}">
+                                        <img style="box-shadow: 1px 1px 10px 1px black; border-radius:20px"
+                                            src="data:image/jpeg;base64,{{ $album['image'] }}"
+                                            alt="{{ $album['name'] }}">
 
-                                <p class="m-0" style="font-weight:bolder; font-size: 1.2em">
-                                    {{ $album["name"] }}</p>
-                            </a>
-                        @endforeach
+                                        <p class="m-0" style="font-weight:bolder; font-size: 1.2em">
+                                            {{ $album['name'] }}</p>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
-                @endif
-
-
                 </div>
-            </div>
+            @endif
+
             @if (auth::user()->id === $user->id)
                 <div id="statistics" class="hidden tab text-white">
                     <h1 class="text-center mt-3 mb-3">Hemos creado esto para tí</h1>
@@ -410,21 +416,23 @@
                                     class="mb-3" height="40" style="filter: invert(1);">
                                 <h3 class="ms-3">Nombre</h3>
                             </div>
-                            <input type="text" id="nameInput"   name="name" class="form-control mb-2 custom-input" value="{{ $user->name }}"
-                                placeholder='{{ $user->name }}' autofocus>
+                            <input type="text" id="nameInput" name="name" class="form-control mb-2 custom-input"
+                                value="{{ $user->name }}" placeholder='{{ $user->name }}' autofocus>
                         </div>
 
 
-                        
-                    <div class="mb-3">
-                        <span id="emailError" class="text-warning"></span>
-                        <span id="emailCorrect" class="text-success"></span>
-                        <div class="d-flex">
-                            <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40" style="filter: invert(1);">
-                            <h3 class="ms-3">Email</h3>
+
+                        <div class="mb-3">
+                            <span id="emailError" class="text-warning"></span>
+                            <span id="emailCorrect" class="text-success"></span>
+                            <div class="d-flex">
+                                <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil"
+                                    class="mb-3 " height="40" style="filter: invert(1);">
+                                <h3 class="ms-3">Email</h3>
+                            </div>
+                            <input type="text" name="email" id="emailInput" class="form-control mb-2 custom-input"
+                                value="{{ $user->email }}" placeholder='{{ $user->email }}' autofocus>
                         </div>
-                        <input type="text" name="email" id="emailInput" class="form-control mb-2 custom-input" value="{{ $user->email }}" placeholder='{{ $user->email }}' autofocus>
-                    </div>
 
                         <div class="mb-3">
                             <div class="d-flex">

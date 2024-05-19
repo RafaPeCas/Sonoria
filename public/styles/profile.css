@@ -260,3 +260,13 @@ input[type="file"]::-webkit-file-upload-button:hover {
     height: 200px;
 }
 
+.tableButton {
+    background-color: rgb(124, 16, 16) !important;
+    border: #622d7a solid 2px !important;
+    color: white !important;
+    border-radius: 10px;
+}
+
+.tableButton:hover {
+    background-color: rgba(8, 0, 91) !important;
+}

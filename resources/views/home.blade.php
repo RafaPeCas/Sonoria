@@ -125,7 +125,12 @@
                                     class="text-decoration-none text-white">
                                     <div class="d-flex lo-odio">
                                         <h5 class="artist-name">{{ $user->name }}</h5>
-                                        <img class="mixButton" src="{{ asset('img/cover/test.jpg') }}">
+                                            @if($user->avatar)
+                                            <img class="mixButton" src="data:image/jpeg;base64,{{ $user->avatar }}">
+                                            @else
+                                            <img class="mixButton" src="{{ asset('img/cover/test.jpg') }}">
+                                            @endif
+                                       
                                         </img>
                                     </div>
                                 </a>
