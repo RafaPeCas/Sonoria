@@ -374,7 +374,7 @@
                                 document.querySelector("#palabra").removeAttribute("hidden");
 
                                 const userInfo = JSON.parse(localStorage.getItem("user"));
-                                document.querySelector("#sName").innerHTML += " // " + "<i class='fa-brands fa-spotify'></i>" + userInfo
+                                document.querySelector("#sName").innerHTML += " <br> " + "<i class='fa-brands fa-spotify'></i>" + userInfo
                                     .display_name;
                                 document.querySelector("#sCountry").innerHTML = userInfo.country;
                                 document.querySelector("#sEmail").innerHTML += " <br> " + "<i class='fa-brands fa-spotify iconox'></i>" +
