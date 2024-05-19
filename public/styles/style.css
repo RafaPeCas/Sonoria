@@ -1,9 +1,15 @@
+@font-face{
+    font-family: "Verdana";
+    src: url("../fonts/Verdana.ttf")
+}
+
 html {
     width: 100%;
     height: 100%;
 }
 
 body {
+    font-family: "Verdana", sans-serif;
     height: 100%;
     margin: 0;
     background: rgb(124, 16, 16);
