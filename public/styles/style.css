@@ -3,6 +3,16 @@
     src: url("../fonts/Verdana.ttf")
 }
 
+@font-face{
+    font-family: "Gotham";
+    src: url("../fonts/GothamRegular.otf")
+}
+
+@font-face{
+    font-family: "Opal";
+    src: url("../fonts/OPALRegular.ttf")
+}
+
 html {
     width: 100%;
     height: 100%;
