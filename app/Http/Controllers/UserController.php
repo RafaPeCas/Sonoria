@@ -18,13 +18,16 @@ class UserController extends Controller
     {
         // Realiza la validación de los campos
         $validator = Validator::make($request->all(), [
-            'name' => ['nullable', 'string', 'min:2', 'regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/'],
-            'email' => ['nullable', 'string', 'email', 'max:255', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i'],
+            'name' => ['nullable', 'string', 'min:2', 'max:30'],
+            'email' => ['nullable', 'string', 'email', 'max:60', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i'],
 
-            'name.min' => 'El nombre debe tener mínimo :min letras.',
+            'name.min' => 'El nombre debe tener mínimo :min caracteres.',
+            'name.max' => 'El nombre debe tener máximo :max caracteres.',
             'name.regex' => 'El nombre no puede contener números ni caracteres especiales.',
+            'email.max' => 'El E-mail debe tener como máximo :max caracteres.',
             'email.email' => 'El email debe ser una dirección de correo válida.',
             'email.ends_with' => 'El email debe terminar en ".com, .net, .org, .edu, .gov".',
+            'image' => 'image',
 
         ]);
 
@@ -33,6 +36,8 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+      
+        
         $user = Auth::user();
         if ($user) {
             // Verificar si el usuario ha actualizado algún campo
@@ -44,8 +49,13 @@ class UserController extends Controller
                     $user->email = $request->email;
                     $user->gender = $request->gender;
 
+                    if ($request->hasFile('image')) {
+                        $image = $request->file('image');
+                        $imageFile = base64_encode(file_get_contents($image));
+                        $user->avatar = $imageFile;
+                    }
                     $user->save();
-                    return redirect('/')->with('success', 'Usuario actualizado exitosamente');
+                    return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
                 } catch (QueryException $exception) {
                     //Si introduce email  existente le salta el mensaje de error
                     if ($exception->errorInfo[1] === 1062) {
@@ -54,12 +64,12 @@ class UserController extends Controller
                     } else {
                         // Manejar otros errores de la base de datos
                         // Por ejemplo, podrías registrar el error o redirigir a una página de error general
-                        return redirect()->route('error')->with('error', 'Error en la base de datos');
+                        return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
                     }
                 }
             } else {
                 // Si el usuario no ha realizado cambios, redirigir a la página principal
-                return redirect('/')->with('info', 'No se han realizado cambios');
+                return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Usuario actualizado exitosamente');
             }
         } else {
             return redirect()->route('login')->with('success', '');
@@ -71,7 +81,7 @@ class UserController extends Controller
         $user = Auth::user();
 
 
-        return view("user/userEditData", compact("user"));
+        return view("user.userEditData", compact("user"));
     }
 
     public function seeData()

@@ -27,3 +27,42 @@ function switchTab(e) {
     // Agregar la clase "shadow" al botón clickeado
     e.target.classList.add("shadow");
 }
+$(document).ready(function() {
+   
+    $('#nameInput').on('input', function() {
+        var name = $(this).val();
+        var maxLength = 60;
+
+        if (name.length > maxLength || name.length<2) {
+            $('#nameCorrect').text('');
+            $('#nameError').text('El nombre no puede tener más de ' + maxLength + ' caracteres, ni menos de 2 caracteres');
+            
+        } else {
+            $('#nameError').text('');
+            $('#nameCorrect').text('El nombre es válido.');
+        }
+    });
+
+
+    $('#emailInput').on('input', function() {
+        var email = $(this).val();
+        var maxLength = 255;
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov)$/i;
+
+        if (email.length > maxLength) {
+            $('#emailError').text('El E-mail debe tener como máximo ' + maxLength + ' caracteres.');
+            $('#emailCorrect').text('');
+        } else if (!emailPattern.test(email)) {
+            $('#emailError').text('El email debe ser una dirección de correo válida y terminar en ".com, .net, .org, .edu, .gov".');
+            $('#emailCorrect').text('');
+        } else {
+            $('#emailError').text('');
+            $('#emailCorrect').text('El email es válido.');
+        }
+    });
+});
+
+  
+   
+
+

@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener el elemento <audio>
     const audioPlayer = document.querySelector('audio');
 
+    loadVolumeSliderState();
+
     // Verificar si existe una cookie para songId
     const songIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('songId='));
 
@@ -59,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             }
             // Reproducir la canción automáticamente
-            audioPlayer.play();
         }
 
     }
@@ -110,6 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
             registerReproduction(songId);
 
             audioPlayer.play();
+            changeIconClass("icon-play", "fa-solid fa-pause large-icon")
+
         });
     });
 
@@ -130,6 +133,42 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteSongById(songId);
         });
     });
+
+    document.querySelectorAll('.delete-song').forEach(function (button) {
+        button.addEventListener('click', function () {
+            let songId = this.getAttribute('data-id');
+            let playlistId = this.getAttribute('data-playlist-id'); // Asumiendo que tienes un atributo data-playlist-id en tus botones
+            deleteSongById2(songId, playlistId);
+        });
+    });
+
+    function deleteSongById2(songId, playlistId) {
+        fetch('/playlist/remove-song', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                songId: songId,
+                playlistId: playlistId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.err) {
+                let row = document.getElementById('song_' + songId);
+                if (row) {
+                    row.remove();
+                }
+            } else {
+                alert('Error al eliminar la canción: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al eliminar la canción:', error);
+        });
+    }
 
     function deleteSongById(id) {
         fetch('/song/' + id + '/delete', {
@@ -179,8 +218,12 @@ document.addEventListener('DOMContentLoaded', function () {
     playPauseButton.addEventListener('click', function () {
         if (audioPlayer.paused) {
             audioPlayer.play();
+            changeIconClass("icon-play", "fa-solid fa-pause large-icon")
+
         } else {
             audioPlayer.pause();
+            changeIconClass("icon-play", "fa-solid fa-play large-icon")
+
         }
     });
 
@@ -318,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let nextSongIndex = getCurrentSongIndex() + 1;
             if (nextSongIndex < songLinks.length) {
                 playSongByIndex(nextSongIndex);
-            }else {
+            } else {
                 audioPlayer.pause();
             }
         }
@@ -349,6 +392,8 @@ document.addEventListener('DOMContentLoaded', function () {
         registerReproduction(songId);
 
         audioPlayer.play();
+
+        changeIconClass("icon-play", "fa-solid fa-pause large-icon")
     }
 
     randomModeButton.addEventListener('click', function () {
@@ -357,9 +402,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Actualizar el texto del botón según el estado del modo aleatorio
         if (isRandomMode) {
-            randomModeButton.textContent = 'Aleatorio (activado)';
+            changeIconClass("icon-random", "fa-solid fa-shuffle large-icon", "grey");
         } else {
-            randomModeButton.textContent = 'Aleatorio';
+            changeIconClass("icon-random", "fa-solid fa-shuffle large-icon", "white");
         }
     });
 
@@ -394,6 +439,45 @@ document.addEventListener('DOMContentLoaded', function () {
     function highlightCurrentSong(link) {
         link.classList.add('active'); // Agrega la clase 'active' al enlace de la canción actual
     }
+
+    function loadVolumeSliderState() {
+        // Obtener la cookie que contiene el valor anterior del control deslizante de volumen
+        const volumeSliderValueCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('volumeSliderValue='));
+
+        if (volumeSliderValueCookie) {
+            // Si la cookie existe, obtener el valor almacenado del control deslizante de volumen
+            const volumeValue = parseFloat(volumeSliderValueCookie.split('=')[1]);
+
+            // Establecer el valor del control deslizante de volumen en el valor almacenado
+            volumeSlider.value = volumeValue;
+        }
+    }
+
+    function saveVolumeSliderState() {
+        // Obtener el valor actual del control deslizante de volumen
+        const volumeValue = volumeSlider.value;
+
+        // Guardar el valor del control deslizante de volumen en una cookie
+        document.cookie = `volumeSliderValue=${volumeValue}; expires=${new Date(Date.now() + (365 * 24 * 60 * 60 * 1000)).toUTCString()}; path=/`;
+    }
+
+    function changeIconClass(id, newClass, color) {
+        // Selecciona el elemento <i> por su id
+        const icon = document.getElementById(id);
+
+        // Cambia la clase del elemento <i> a la nueva clase pasada como parámetro
+        icon.className = newClass;
+
+        // Cambia el color del elemento <i> usando el atributo style
+        if (color) {
+            icon.style.color = color;
+        }
+    }
+
+
+    volumeSlider.addEventListener('input', saveVolumeSliderState);
+
+    audioPlayer.pause();
 
 
 });

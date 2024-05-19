@@ -1,3 +1,13 @@
+#reproductionPanel {
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #161616;
+    z-index: 1000;
+}
+
 #songInfo {
     width: 400px;
 }
@@ -18,15 +28,16 @@
     display: inline-block;
     margin: 0;
     margin-bottom: 8px;
+    font-size: 1.4rem;
 }
 
 #albumNameRepro{
     margin-left: 20px;
 }
 .coverImg {
-    margin-left: 20px;
-    width: 100px;
-    height: 100px;
+    margin-left: 30px;
+    width: 70px;
+    height: 70px;
 }
 
 .custom {
@@ -46,23 +57,27 @@
 }
 
 .custom-audio-player .audio-controls button {
-    background-color: #4CAF50;
-    border: none;
+    background: rgb(124, 16, 16);
+    background: linear-gradient(
+        145deg,
+        rgb(221, 36, 36) 0%,
+        rgb(59, 44, 223) 100%
+    );    border: none;
     color: white;
-    padding: 5px;
+    padding: 5px 5px 5px 5px;
     margin: 0 2px;
     cursor: pointer;
     border-radius: 3px;
 }
 
 .custom-audio-player .audio-controls input[type="range"] {
-    width: 100px;
+    width: 150px;
     margin: 0 5px;
 }
 
 /* Estilos para la barra de progreso */
 .custom-audio-player .progress-container {
-    width: 100%;
+    width: 300px;
     height: 10px;
     background-color: #ccc;
     border-radius: 5px;
@@ -73,14 +88,23 @@
 .custom-audio-player .progress-bar {
     width: 0%;
     height: 100%;
-    background-color: #4CAF50;
-    border-radius: 5px;
+    background: linear-gradient(
+        145deg,
+        rgb(221, 36, 36) 0%,
+        rgb(59, 44, 223) 100%
+    );
+     border: none; border-radius: 5px;
 }
 
 .active{
-    color: #4CAF50 !important;
+    color: #b96ef7 !important;
 }
 
 .noDecoration{
     text-decoration: none !important;
+}
+
+
+.large-icon {
+    font-size: 1.6em;
 }

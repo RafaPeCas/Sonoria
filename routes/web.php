@@ -2,6 +2,7 @@
 
 use App\Models\Playlist;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/song', [SongController::class, 'store'])->name('songs.store');
     Route::get('/song/{id}', [SongController::class, 'getSongById'])->name('songs.getSongById');
     Route::get('/song/{id}/delete', [SongController::class, 'deleteSongById'])->name('songs.deleteSongById');
+    Route::post('/songs/{id}', [SongController::class, 'update'])->name('song.update');
+
 
     /* Rutas para albums */
     Route::get("/albumForm", function () {
@@ -55,8 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/{id}/unfollow', [UserController::class, 'unfollow'])->name('user.unfollow');
 
     Route::post('profile_update', [UserController::class, 'update'])->name('user.update');
-    Route::get('user/profile', [UserController::class, 'edit'])->name('user.edit');
+
     Route::get("personal/profile", [UserController::class, "view"])->name("profile");
+
+    Route::get('editaData', [UserController::class, 'edit'])->name('user.edit');
+
+
 
     /*Rutas para search */
     Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -70,7 +77,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/playlists/store", [PlaylistController::class, "store"])->name("playlist.store");
     Route::get("/playlists/{id}", [PlaylistController::class, "show"])->name("playlist.show");
     Route::post('/playlist/add-song', [PlaylistController::class, 'addSong'])->name('playlist.addSong');
+    Route::post('/playlist/remove-song', [PlaylistController::class, 'removeSong'])->name('playlist.removeSong');
+    Route::post('/playlist/update', [PlaylistController::class, 'update'])->name('playlist.update');
+    Route::post('/playlist/delete', [PlaylistController::class, 'delete'])->name('playlist.delete');
 
     /* Rutas para la API de Spotify */
     Route::get("/spotify", [SpotifyController::class, "getUser"])->name("spotify");
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect('/');
+    });
+
 });
+

@@ -9,6 +9,7 @@ class SpotifyController extends Controller
 {
     public function getUser(){
         $user = Auth::user()->id;
-        return view("spotify.connection", compact("user"));
+        $name = Auth::user()->name;
+        return view("spotify.connection", compact("user", "name"));
     }
 }
