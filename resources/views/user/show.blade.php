@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
     <p id="userId" hidden>{{ Auth::user()->id }}</p>
     @if ($user->role === 'artist')
         <h1>Hola artista</h1>
@@ -370,22 +371,28 @@
                          @endif
                 
                         <div class="mb-3">
+                            <span id="nameError" class="text-warning"></span>
+                            <span id="nameCorrect" class="text-success"></span>
                             <div class="d-flex">
                                 <img src="{{ asset('img/logos/profile-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3" height="40" style="filter: invert(1);">
                                 <h3 class="ms-3">Nombre</h3>
                             </div>
-                            <input type="text" name="name" class="form-control mb-2 custom-input" value="{{ $user->name }}"
+                            <input type="text" id="nameInput"   name="name" class="form-control mb-2 custom-input" value="{{ $user->name }}"
                                 placeholder='{{ $user->name }}' autofocus>
                         </div>
-                        <div class="mb-3">
-                            <div class="d-flex">
-                                <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40" style="filter: invert(1);">
-                                <h3 class="ms-3">Email</h3>
 
-                            </div>
-                            <input type="text" name="email" class="form-control mb-2 custom-input" value="{{ $user->email }}"
-                                placeholder='{{ $user->email }}' autofocus>
+
+                        
+                    <div class="mb-3">
+                        <span id="emailError" class="text-warning"></span>
+                        <span id="emailCorrect" class="text-success"></span>
+                        <div class="d-flex">
+                            <img src="{{ asset('img/logos/email-svgrepo-com.svg') }}" alt="icono perfil" class="mb-3 " height="40" style="filter: invert(1);">
+                            <h3 class="ms-3">Email</h3>
                         </div>
+                        <input type="text" name="email" id="emailInput" class="form-control mb-2 custom-input" value="{{ $user->email }}" placeholder='{{ $user->email }}' autofocus>
+                    </div>
+
                         <div class="mb-3">
                             <div class="d-flex">
                                 <img src="{{ asset('img/logos/gender-svgrepo-com.svg') }}" alt="icono perfil"  height="40" class="mb-3" style="filter: invert(1);">
