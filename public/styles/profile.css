@@ -51,22 +51,24 @@
 }
 
 .tab{
-    max-height: 509px;
+    max-height: 627px;
 }
 
-.tabs button {
-    background-color: #535353ab !important;
-    border: none !important;
+.tab-button {
+    background-color: #535353ab;
+    border: none;
     width: 100%;
     height: 100px;
-    color: white !important;
+    color: white;
+}
+
+.tab-button:hover{
+    background-color: #9e9e9eab;
 }
 
 .tab-button.shadow {
-    border: 1px black solid !important;
-    border-top: none !important;
-    background-color: white !important;
-    color: black !important;
+    background-color: rgba(114, 114, 114, 0.623);
+    color: black;
 }
 
 .tabContent {
@@ -154,6 +156,24 @@ main {
     box-shadow: 5px 5px 5px black;
 }
 
+.bigAlbumImage:hover {
+    box-shadow: 5px 5px 5px rgb(255, 255, 255);
+}
+
+.followName{
+    font-size: 2em;
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.followName:hover{
+    color: #834fa5;
+}
+
 .followButtom{
     background: linear-gradient(to right, #834fa5,#9b1b30) !important;
     border: 2px solid black !important;
@@ -180,3 +200,63 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="file"]::-webkit-file-upload-button:hover {
     background: #ff0000; /* Cambia el color al pasar el cursor sobre el botón */
 }
+
+.followersContainer{
+    padding: 15px;
+}
+
+.fullAlbumContainer{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.linkaso{
+    margin-top: 20px;
+    flex: 0 0 calc(25% - 10px);
+    text-decoration: none;
+    color: white;
+    background-color: #8b8b8b7b;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 2px black;
+    width: 240px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: 95%;
+}
+
+.linkaso2{
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+    background-color: #8b8b8b7b;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 2px black;
+    height: 280px !important;
+}
+
+.linkaso:hover{
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgb(255, 255, 255);
+}
+
+.linkaso2:hover{
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgb(255, 255, 255);
+}
+
+
+.linkaso img{
+    width: 200px;
+    height: 200px;
+}
+
+.linkaso2 img{
+    width: 200px;
+    height: 200px;
+}
+
